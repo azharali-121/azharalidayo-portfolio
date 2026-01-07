@@ -1,13 +1,48 @@
-# Allow all search engines to crawl the site
+# Robots.txt for Azhar Ali Portfolio - Updated October 18, 2025
+# https://azhardayo.github.io/AzharAli-Portfolio/
+
+# Allow all major search engines
 User-agent: *
 Allow: /
+
+# Optimize crawling rate
+Crawl-delay: 2
+
+# Specific rules for Google bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /assets/images/
+
+# Mobile-specific crawler
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Rules for Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block specific directories
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /backup*/
+Disallow: /*backup*/
+Disallow: /deleted-files/
+Disallow: /private/
+Disallow: /temp/
+
+# Allow important files
+Allow: /sitemap.xml
+Allow: /.well-known/security.txt
+Allow: /google5e6fdfbdea55aee7.html
+Allow: /manifest.json
 
 # Point to sitemap
 Sitemap: https://azhardayo.github.io/AzharAli-Portfolio/sitemap.xml
 
-# Security file locations
-Allow: /.well-known/security.txt
-Allow: /google91c017841c27e224.html
-
-# Optimize crawling
-Crawl-delay: 1
+# Host directive
+Host: https://azhardayo.github.io

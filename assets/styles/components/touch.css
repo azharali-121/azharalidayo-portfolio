@@ -1,0 +1,32 @@
+/* Touch-friendly interactive elements */
+
+.touch-target {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Apply to social icons and interactive elements */
+.footer__social a,
+.project-link,
+.contact-btn,
+.nav-link {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure proper spacing on mobile */
+@media (max-width: 576px) {
+    .footer__social {
+        gap: 0.75rem;
+    }
+    
+    .project-links {
+        gap: 0.75rem;
+    }
+}

@@ -1,0 +1,198 @@
+/**
+ * Floating Action Button (FAB) Styles
+ * Message button that appears after hero section
+ */
+
+/* FAB Container */
+.fab-message {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 
+        0 4px 20px rgba(0, 234, 255, 0.4),
+        0 0 40px rgba(0, 234, 255, 0.2);
+    
+    /* Animation properties */
+    opacity: 0;
+    transform: scale(0) translateY(20px);
+    pointer-events: none;
+    transition: 
+        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.3s ease;
+    
+    /* Performance optimization */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+/* Visible state */
+.fab-message.fab-visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+}
+
+/* Icon styling */
+.fab-message i {
+    font-size: 24px;
+    color: var(--background-dark);
+    transition: transform 0.3s ease;
+}
+
+/* Hover effects */
+.fab-message:hover {
+    box-shadow: 
+        0 6px 30px rgba(0, 234, 255, 0.6),
+        0 0 60px rgba(0, 234, 255, 0.4);
+    transform: scale(1.1) translateY(-2px);
+}
+
+.fab-message:hover i {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Active state */
+.fab-message:active {
+    transform: scale(0.95) translateY(0);
+}
+
+/* Pulse animation for attention */
+@keyframes fab-pulse {
+    0%, 100% {
+        box-shadow: 
+            0 4px 20px rgba(0, 234, 255, 0.4),
+            0 0 40px rgba(0, 234, 255, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 4px 25px rgba(0, 234, 255, 0.6),
+            0 0 50px rgba(0, 234, 255, 0.4);
+    }
+}
+
+.fab-message.fab-visible {
+    animation: fab-pulse 2s ease-in-out infinite;
+}
+
+/* Ripple effect on click */
+.fab-message::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.fab-message:active::before {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 1;
+    transition: transform 0s, opacity 0s;
+}
+
+/* Tooltip */
+.fab-message::after {
+    content: 'Send Message';
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    background: var(--background-dark);
+    color: var(--primary-color);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    border: 1px solid rgba(0, 234, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: 
+        opacity 0.3s ease,
+        transform 0.3s ease;
+    z-index: -1;
+}
+
+.fab-message:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .fab-message {
+        width: 56px;
+        height: 56px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .fab-message i {
+        font-size: 22px;
+    }
+    
+    /* Hide tooltip on mobile */
+    .fab-message::after {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .fab-message {
+        width: 50px;
+        height: 50px;
+        bottom: 16px;
+        right: 16px;
+    }
+    
+    .fab-message i {
+        font-size: 20px;
+    }
+}
+
+/* Accessibility: Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .fab-message {
+        transition: opacity 0.2s ease;
+        animation: none !important;
+    }
+    
+    .fab-message:hover {
+        transform: scale(1);
+    }
+    
+    .fab-message::after {
+        transition: opacity 0.2s ease;
+    }
+}
+
+/* Dark mode optimization (already dark theme) */
+.fab-message {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Focus state for accessibility */
+.fab-message:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+}
+
+.fab-message:focus:not(:focus-visible) {
+    outline: none;
+}

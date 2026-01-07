@@ -1,0 +1,116 @@
+/* Dark Theme Responsive Overrides 
+   Ensures dark theme is maintained across all screen sizes and devices */
+
+/* === MOBILE SPECIFIC DARK THEME === */
+@media (max-width: 768px) {
+    /* Mobile navbar dark mode */
+    .navbar {
+        background-color: rgba(10, 15, 31, 0.98) !important;
+    }
+    
+    /* Darker mobile menu overlay */
+    .nav-menu.active {
+        background-color: rgba(10, 15, 31, 0.95) !important;
+        border-left: 1px solid rgba(0, 234, 255, 0.1) !important;
+    }
+    
+    /* Mobile hamburger menu */
+    .nav-toggle .bar {
+        background-color: #00eaff !important;
+    }
+    
+    /* Mobile skill cards more compact with consistent dark theme */
+    .skill-category {
+        background-color: rgba(12, 16, 32, 0.8) !important;
+    }
+    
+    /* Adjust dark theme card spacing for smaller screens */
+    .project-card {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4) !important;
+    }
+}
+
+/* === TABLET SPECIFIC DARK THEME === */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Tablet optimized dark backgrounds */
+    .section {
+        background-color: rgba(10, 15, 31, 0.9) !important;
+    }
+    
+    /* Stronger contrast for tablet reading */
+    .section-title, .project-title, .contact-card h3 {
+        color: #00eaff !important;
+        text-shadow: 0 0 8px rgba(0, 234, 255, 0.3) !important;
+    }
+}
+
+/* === PRINT DARK THEME === */
+@media print {
+    body {
+        background-color: #0a0f1f !important;
+        color: #d8faff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    /* Ensure all sections print with dark backgrounds */
+    section, .skill-category, .project-card, .contact-card {
+        background-color: #0a0f1f !important;
+        border: 1px solid rgba(0, 234, 255, 0.2) !important;
+        box-shadow: none !important;
+        page-break-inside: avoid !important;
+    }
+    
+    /* Enhance dark theme contrast for printed content */
+    h1, h2, h3, .section-title, .project-title {
+        color: #00eaff !important;
+    }
+    
+    p, li, .skill-name, .project-description {
+        color: #d8faff !important;
+    }
+}
+
+/* === HIGH CONTRAST MODE OVERRIDES === */
+@media (forced-colors: active) {
+    /* Force specific colors in high contrast mode */
+    :root {
+        --bg-color: #0a0f1f !important;
+        --text-color: #e2e8f0 !important;
+        --primary-color: #00eaff !important;
+    }
+    
+    /* Enhance button visibility in high contrast mode */
+    .btn-primary, .btn-secondary, .contact-btn {
+        border: 2px solid #00eaff !important;
+    }
+}
+
+/* === DARK THEME ANIMATIONS === */
+/* Add subtle glow to primary elements in dark mode */
+.section-title, .hero-title span, .project-title, .contact-card h3 {
+    animation: cyberpulse 3s infinite alternate;
+}
+
+@keyframes cyberpulse {
+    0% {
+        text-shadow: 0 0 5px rgba(0, 234, 255, 0.3);
+    }
+    100% {
+        text-shadow: 0 0 15px rgba(0, 234, 255, 0.7);
+    }
+}
+
+/* Skill level indicators cyber glow */
+.skill-level-expert, .skill-level-advanced {
+    animation: barglow 4s infinite alternate;
+}
+
+@keyframes barglow {
+    0% {
+        box-shadow: 0 0 3px rgba(0, 234, 255, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(0, 234, 255, 0.8);
+    }
+}

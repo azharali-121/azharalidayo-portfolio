@@ -1,0 +1,58 @@
+/* Header Spacing Fix for Name and Title Line */
+
+/* Adjust spacing between hero title and subtitle */
+.hero-title {
+  margin-bottom: 0.25rem !important; /* Reduced bottom margin since we increased tagline's top margin */
+}
+
+.hero-title-separator {
+  height: 0.3rem; /* Increased separator height for better visual spacing */
+}
+
+.professional-tagline {
+  margin-top: 0.75rem !important; /* Increased top margin on tagline */
+  margin-bottom: 1.5rem; /* Space between tagline and description */
+  line-height: 1.6;
+  letter-spacing: 0.03rem;
+  max-width: 600px;
+}
+
+/* Ensure consistent alignment for title components */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-title, .professional-tagline {
+  text-align: left;
+  display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-title {
+    margin-bottom: 0.2rem !important;
+  }
+  
+  .professional-tagline {
+    margin-top: 0.5rem !important; /* Slightly reduced on mobile but still keeping good spacing */
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+/* For the header name animate effect - ensure proper alignment */
+.header-name-animate {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+/* Add a little visual separator between title segments on mobile */
+@media (max-width: 480px) {
+  .tagline-highlight:not(:last-child)::after {
+    content: " ";
+    display: inline;
+    white-space: nowrap;
+  }
+}

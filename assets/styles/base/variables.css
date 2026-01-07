@@ -1,0 +1,92 @@
+/* Base variables for modern portfolio design system */
+
+:root {
+    /* Container */
+    --container-max: 1280px;
+    
+    /* Colors - Updated for cyber security theme */
+    --primary-color: #00eaff;
+    --primary-light: #33eeff;
+    --primary-dark: #00c6d9;
+    --secondary-color: #5effa1;
+    --secondary-light: #7fffb6;
+    --secondary-dark: #4adb87;
+    --accent-green: #5effa1;
+    --accent-blue: #00eaff;
+    
+    /* Background Colors */
+    --bg-primary: #0a0f1f;
+    --bg-secondary: #101626;
+    --bg-card: rgba(20, 25, 40, 0.8);
+    --bg-glass: rgba(255, 255, 255, 0.05);
+    
+    /* Text Colors */
+    --text-primary: #e0e6f5;
+    --text-secondary: #c8d2e8;
+    --text-tertiary: #94a3c8;
+    --text-muted: #64748b;
+    
+    /* Glow Effects for Cyber Aesthetic */
+    --glow-cyan: 0 0 10px rgba(0, 234, 255, 0.5), 0 0 20px rgba(0, 234, 255, 0.3), 0 0 30px rgba(0, 234, 255, 0.1);
+    --glow-green: 0 0 10px rgba(94, 255, 161, 0.5), 0 0 20px rgba(94, 255, 161, 0.3), 0 0 30px rgba(94, 255, 161, 0.1);
+    --glow-pulse: 0 0 15px rgba(0, 234, 255, 0.8), 0 0 30px rgba(0, 234, 255, 0.4);
+    
+    /* Border & Shadow */
+    --border-primary: rgba(255, 255, 255, 0.1);
+    --border-accent: rgba(0, 255, 136, 0.3);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
+    
+    /* Typography Scale (rem units for consistency) */
+    --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-secondary: 'Fira Code', monospace;
+    --font-code: 'Fira Code', 'Consolas', monospace;
+    --font-size-xs: 0.75rem;    /* 12px */
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-base: 1rem;     /* 16px */
+    --font-size-lg: 1.125rem;   /* 18px */
+    --font-size-xl: 1.25rem;    /* 20px */
+    --font-size-2xl: 1.5rem;    /* 24px */
+    --font-size-3xl: 1.875rem;  /* 30px */
+    --font-size-4xl: 2.25rem;   /* 36px */
+    --font-size-5xl: 3rem;      /* 48px */
+    --font-size-6xl: 3.75rem;   /* 60px */
+    
+    /* Spacing (rem units for consistency) */
+    --space-1: 0.25rem;  /* 4px */
+    --space-2: 0.5rem;   /* 8px */
+    --space-3: 0.75rem;  /* 12px */
+    --space-4: 1rem;     /* 16px */
+    --space-5: 1.5rem;   /* 24px */
+    --space-6: 2rem;     /* 32px */
+    --space-8: 3rem;     /* 48px */
+    --space-10: 4rem;    /* 64px */
+    --space-12: 5rem;    /* 80px */
+    --space-16: 8rem;    /* 128px */
+    
+    /* Border Radius */
+    --radius-sm: 0.125rem;  /* 2px */
+    --radius-base: 0.25rem; /* 4px */
+    --radius-md: 0.375rem;  /* 6px */
+    --radius-lg: 0.5rem;    /* 8px */
+    --radius-xl: 1rem;      /* 16px */
+    --radius-2xl: 1.5rem;   /* 24px */
+    --radius-full: 9999px;
+    
+    /* Transitions */
+    --transition-fast: all 0.2s ease;
+    --transition-normal: all 0.3s ease;
+    --transition-slow: all 0.5s ease;
+    
+    /* Z-index */
+    --z-negative: -1;
+    --z-elevate: 1;
+    --z-dropdown: 10;
+    --z-sticky: 100;
+    --z-fixed: 200;
+    --z-modal: 1000;
+    --z-popover: 1001;
+    --z-tooltip: 1100;
+}

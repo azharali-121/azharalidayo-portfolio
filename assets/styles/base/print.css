@@ -1,0 +1,69 @@
+/* Print Stylesheet - Optimize portfolio for printing */
+
+@media print {
+    /* General adjustments */
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+        background: #fff;
+    }
+    
+    /* Hide unnecessary sections */
+    nav, 
+    .hero-particles,
+    .hero::before,
+    .hero::after,
+    .footer,
+    .contact-form-wrapper,
+    .project-overlay,
+    button:not(.print-btn),
+    video, audio,
+    .nav-toggle {
+        display: none !important;
+    }
+    
+    /* Reset background & text colors */
+    .hero, section, div {
+        background: #fff !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    /* Link handling */
+    a {
+        color: #000 !important;
+        text-decoration: underline;
+    }
+    
+    a:after {
+        content: " (" attr(href) ")";
+        font-size: 80%;
+    }
+    
+    /* Improve readability */
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+        color: #000 !important;
+    }
+    
+    img, svg {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
+    
+    /* Show contact information prominently */
+    #contact .contact-info {
+        display: block !important;
+        page-break-inside: avoid;
+    }
+    
+    /* Ensure project cards print well */
+    .project-card {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        border: 1px solid #ccc;
+    }
+}

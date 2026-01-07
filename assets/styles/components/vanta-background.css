@@ -1,0 +1,48 @@
+/* Vanta.js Background Styling */
+#vanta-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--bg-color, #0a0f1f);
+    overflow: hidden;
+    pointer-events: none; /* Allow clicks to pass through */
+}
+
+/* Ensure content stays on top of the background */
+body {
+    position: relative;
+    z-index: 1; 
+}
+
+/* Enhance visibility of content over animated background */
+.section-header h2,
+.hero-title,
+.hero-subtitle {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Adjust background opacity for better readability */
+section:not(.hero) {
+    position: relative;
+}
+
+section:not(.hero):before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(10, 15, 31, 0.85);
+    z-index: -1;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    #vanta-bg {
+        height: 100vh;
+    }
+}

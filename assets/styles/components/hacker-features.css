@@ -1,0 +1,449 @@
+/**
+ * Hacker-Themed Interactive Features
+ * Styles for terminal, skill demos, and encryption UI
+ */
+
+/* ===========================
+   Hacker Terminal
+   =========================== */
+.hacker-terminal-container {
+    margin: 2rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 255, 65, 0.1);
+}
+
+.terminal-header {
+    background: linear-gradient(135deg, #0a0f1f 0%, #1a1f3f 100%);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27c93f; }
+
+.terminal-title {
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    margin-left: auto;
+}
+
+#hacker-terminal {
+    background: #000000;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    padding: 1.5rem;
+    min-height: 200px;
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.terminal-line {
+    margin-bottom: 0.5rem;
+    animation: terminalFadeIn 0.3s ease-out;
+}
+
+.terminal-prefix {
+    color: #0ff;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    background: #00ff41;
+    color: #000;
+    padding: 0 4px;
+    animation: cursorBlink 1s infinite;
+}
+
+@keyframes terminalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes cursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Custom scrollbar for terminal */
+#hacker-terminal::-webkit-scrollbar {
+    width: 8px;
+}
+
+#hacker-terminal::-webkit-scrollbar-track {
+    background: rgba(0, 255, 65, 0.1);
+}
+
+#hacker-terminal::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 65, 0.3);
+    border-radius: 4px;
+}
+
+#hacker-terminal::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 65, 0.5);
+}
+
+/* ===========================
+   Skill Demo Modal
+   =========================== */
+.skill-demo-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 1rem;
+}
+
+.skill-demo-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.skill-demo-content {
+    background: linear-gradient(135deg, #0a0f1f 0%, #1a1f3f 100%);
+    border: 2px solid var(--neon-blue);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalSlideUp 0.4s ease-out;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+@keyframes modalSlideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.skill-demo-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.skill-demo-close:hover {
+    color: var(--neon-blue);
+    background: rgba(0, 255, 255, 0.1);
+    transform: rotate(90deg);
+}
+
+.skill-demo-title {
+    color: var(--neon-blue);
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.skill-demo-description {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.skill-demo-code {
+    background: #000;
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.skill-demo-code code {
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    display: block;
+    white-space: pre;
+}
+
+.skill-demo-copy-btn {
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 auto;
+}
+
+.skill-demo-copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.skill-demo-copy-btn.copied {
+    background: linear-gradient(135deg, #00ff41, #00cc33);
+}
+
+/* Skill items with demos */
+.skill-item.has-demo {
+    position: relative;
+}
+
+.skill-item.has-demo::after {
+    content: '⚡';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.875rem;
+    opacity: 0.5;
+}
+
+.skill-item.has-demo:hover::after {
+    opacity: 1;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* ===========================
+   Message Encryption UI
+   =========================== */
+.encryption-controls {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+.encryption-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.encryption-toggle input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--neon-blue);
+}
+
+.encryption-label {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.encryption-label i {
+    color: var(--neon-blue);
+}
+
+.encryption-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid var(--neon-blue);
+    border-radius: 4px;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        max-height: 500px;
+        transform: translateY(0);
+    }
+}
+
+.encryption-info p {
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.encryption-info i {
+    color: var(--neon-blue);
+    margin-right: 0.5rem;
+}
+
+.encrypted-preview {
+    margin-top: 0.75rem;
+}
+
+.encrypted-preview strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.encrypted-preview code {
+    display: block;
+    background: #000;
+    color: #00ff41;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    word-break: break-all;
+    border: 1px solid rgba(0, 255, 65, 0.3);
+}
+
+.encryption-technical {
+    margin-top: 1rem;
+}
+
+.encryption-technical summary {
+    color: var(--neon-blue);
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.encryption-technical summary:hover {
+    background: rgba(0, 255, 255, 0.1);
+}
+
+.encryption-technical pre {
+    margin-top: 0.75rem;
+    background: #000;
+    color: #00ff41;
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    border: 1px solid rgba(0, 255, 65, 0.3);
+}
+
+.form-info {
+    background: rgba(0, 255, 255, 0.1);
+    border-left-color: var(--neon-blue);
+}
+
+.encryption-details {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.encryption-details p {
+    margin: 0.25rem 0;
+    color: var(--text-secondary);
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 768px) {
+    .skill-demo-content {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .skill-demo-title {
+        font-size: 1.5rem;
+        padding-right: 2rem;
+    }
+
+    .skill-demo-code {
+        padding: 1rem;
+    }
+
+    .skill-demo-code code {
+        font-size: 0.8rem;
+    }
+
+    #hacker-terminal {
+        font-size: 0.8rem;
+        padding: 1rem;
+    }
+
+    .encryption-controls {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .skill-demo-content {
+        padding: 1rem;
+    }
+
+    .terminal-header {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .terminal-title {
+        font-size: 0.75rem;
+    }
+}

@@ -1,0 +1,104 @@
+/* Permanent Dark Cyber Theme - No Light Theme Option */
+
+:root {
+    /* Force dark mode variables */
+    --bg-color: #0a0f1f;
+    --text-color: #e2e8f0;
+    --primary-color: #00eaff;
+    --secondary-color: #50fa7b;
+    --accent-color: #00eaff;
+    --border-color: rgba(0, 234, 255, 0.1);
+    --card-bg: rgba(12, 16, 32, 0.7);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --header-bg: rgba(10, 15, 31, 0.95);
+    --gradient-start: #0c1020;
+    --gradient-end: #141e36;
+    --card-glow: 0 5px 20px rgba(0, 234, 255, 0.15);
+    --text-shadow: 0 0 8px rgba(0, 234, 255, 0.3);
+    --input-bg: rgba(10, 15, 31, 0.8);
+    --scrollbar-track: #0a0f1f;
+    --scrollbar-thumb: rgba(0, 234, 255, 0.3);
+    --hover-glow: 0 0 15px rgba(0, 234, 255, 0.5);
+    
+    /* Override any attempt to change these values */
+    color-scheme: dark;
+}
+
+/* Override any data-theme or class-based theme attributes */
+[data-theme="light"],
+html.light,
+body.light,
+.light-theme,
+.light-mode {
+    --bg-color: #0a0f1f !important;
+    --text-color: #e2e8f0 !important;
+    --primary-color: #00eaff !important;
+    --secondary-color: #50fa7b !important;
+    --accent-color: #00eaff !important;
+    --border-color: rgba(0, 234, 255, 0.1) !important;
+    --card-bg: rgba(12, 16, 32, 0.7) !important;
+    --shadow-color: rgba(0, 0, 0, 0.3) !important;
+    --header-bg: rgba(10, 15, 31, 0.95) !important;
+    --gradient-start: #0c1020 !important;
+    --gradient-end: #141e36 !important;
+    --card-glow: 0 5px 20px rgba(0, 234, 255, 0.15) !important;
+    --text-shadow: 0 0 8px rgba(0, 234, 255, 0.3) !important;
+    --input-bg: rgba(10, 15, 31, 0.8) !important;
+    --scrollbar-track: #0a0f1f !important;
+    --scrollbar-thumb: rgba(0, 234, 255, 0.3) !important;
+    --hover-glow: 0 0 15px rgba(0, 234, 255, 0.5) !important;
+}
+
+/* Force dark theme for HTML and body */
+html, body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Force dark mode on vanta background */
+#vanta-bg {
+    background-color: var(--bg-color) !important;
+}
+
+/* Ensure all elements that might try to use light theme are overridden */
+.navbar,
+.hero,
+.about,
+.skills,
+.projects,
+.contact,
+.footer {
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+/* Force dark styling on cards */
+.project-card,
+.skill-category,
+.contact-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+/* Force dark styling on buttons */
+.btn {
+    background-color: var(--primary-color);
+    color: #0a0f1f;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* Remove any light mode specific styles */
+.light-theme-icon {
+    display: none !important;
+}
+
+/* Ensure footer is dark */
+.footer {
+    background-color: rgba(10, 15, 31, 0.95);
+}

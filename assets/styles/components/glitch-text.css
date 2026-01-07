@@ -1,0 +1,57 @@
+/**
+ * Glitch Text Effect Styles
+ * Enhances the scramble animation with visual effects
+ */
+
+/* Hero name glitch styles */
+.hero-name-glitch {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.1s ease;
+}
+
+/* Hover state for interactive feedback */
+.hero-name-glitch:hover {
+    color: var(--primary-color);
+    text-shadow: 
+        0 0 10px rgba(0, 234, 255, 0.5),
+        0 0 20px rgba(0, 234, 255, 0.3),
+        0 0 30px rgba(0, 234, 255, 0.2);
+}
+
+/* Prevent text selection during animation */
+.hero-name-glitch.is-animating {
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Optional: Add subtle RGB split effect during hover */
+@media (prefers-reduced-motion: no-preference) {
+    .hero-name-glitch:hover::before,
+    .hero-name-glitch:hover::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        opacity: 0.3;
+        z-index: -1;
+    }
+}
+
+/* Performance optimization */
+.hero-name-glitch {
+    will-change: text-shadow;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Ensure smooth animation on all devices */
+@media (prefers-reduced-motion: reduce) {
+    .hero-name-glitch {
+        transition: none;
+    }
+    
+    .hero-name-glitch:hover {
+        text-shadow: none;
+    }
+}

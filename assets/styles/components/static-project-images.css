@@ -1,0 +1,42 @@
+/* 
+ * Static Project Images
+ * This CSS disables all animations, transforms and transitions for project thumbnails
+ * while maintaining responsiveness and layout
+ */
+
+/* Disable hover scaling animation for project images */
+.project-card:hover .project-image img {
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Ensure project images appear immediately without fade-in */
+.projects .lazy-image {
+    opacity: 1 !important;
+    transition: none !important;
+    animation: none !important;
+}
+
+/* Maintain proper sizing and aspect ratio */
+.projects .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+/* Ensure no animations or transitions are inherited */
+.projects .project-image {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+}
+
+/* Remove any potential keyframe animations */
+@keyframes none {
+    0% { transform: none; }
+    100% { transform: none; }
+}

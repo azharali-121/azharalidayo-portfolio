@@ -1,0 +1,117 @@
+/* Glow Effects CSS - Enhanced Cyber Theme */
+
+/* Name glow effect - applies to all instances of the name */
+.logo-text,
+.hero-title span,
+.footer__logo h2,
+h1 strong:contains("Azhar Ali"),
+h2 strong:contains("Azhar Ali"),
+h3 strong:contains("Azhar Ali"),
+.profile-card::after,
+.name-glow {
+  text-shadow: 
+    0 0 5px rgba(0, 234, 255, 0.4),
+    0 0 10px rgba(0, 234, 255, 0.3),
+    0 0 15px rgba(0, 234, 255, 0.2),
+    0 0 20px rgba(0, 234, 255, 0.1);
+  animation: nameGlow 3s infinite alternate;
+}
+
+/* More intense glow for hero title name */
+.hero-title span {
+  text-shadow: 
+    0 0 5px rgba(0, 234, 255, 0.5),
+    0 0 10px rgba(0, 234, 255, 0.4),
+    0 0 20px rgba(0, 234, 255, 0.3),
+    0 0 30px rgba(0, 234, 255, 0.2);
+  animation: heroNameGlow 4s infinite alternate;
+  position: relative;
+  z-index: 2;
+  color: #ffffff; /* Ensuring good contrast */
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Name glow animation */
+@keyframes nameGlow {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+      0 0 5px rgba(0, 234, 255, 0.4),
+      0 0 10px rgba(0, 234, 255, 0.3),
+      0 0 15px rgba(0, 234, 255, 0.2),
+      0 0 20px rgba(0, 234, 255, 0.1);
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+/* Hero name glow animation with flicker effect */
+@keyframes heroNameGlow {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+      0 0 5px rgba(0, 234, 255, 0.5),
+      0 0 10px rgba(0, 234, 255, 0.4),
+      0 0 20px rgba(0, 234, 255, 0.3),
+      0 0 30px rgba(0, 234, 255, 0.2);
+  }
+  20%, 24%, 55% {
+    text-shadow: 
+      0 0 2px rgba(0, 234, 255, 0.2),
+      0 0 5px rgba(0, 234, 255, 0.1);
+  }
+}
+
+/* Footer logo name glow */
+.footer__logo h2 {
+  animation: footerNameGlow 4s infinite alternate;
+}
+
+@keyframes footerNameGlow {
+  0% {
+    text-shadow: 
+      0 0 5px rgba(0, 234, 255, 0.3),
+      0 0 10px rgba(0, 234, 255, 0.2);
+  }
+  100% {
+    text-shadow: 
+      0 0 7px rgba(0, 234, 255, 0.5),
+      0 0 14px rgba(0, 234, 255, 0.3),
+      0 0 21px rgba(0, 234, 255, 0.1);
+  }
+}
+
+/* Responsive adjustments for the glow effect */
+@media (max-width: 768px) {
+  .hero-title span {
+    text-shadow: 
+      0 0 5px rgba(0, 234, 255, 0.5),
+      0 0 10px rgba(0, 234, 255, 0.3);
+    animation: heroNameGlowMobile 4s infinite alternate;
+  }
+  
+  @keyframes heroNameGlowMobile {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+      text-shadow:
+        0 0 5px rgba(0, 234, 255, 0.5),
+        0 0 10px rgba(0, 234, 255, 0.3);
+    }
+    20%, 24%, 55% {
+      text-shadow: 
+        0 0 2px rgba(0, 234, 255, 0.2);
+    }
+  }
+}
+
+/* Print-friendly version - reduce the animation for printing */
+@media print {
+  .logo-text,
+  .hero-title span,
+  .footer__logo h2,
+  .name-glow {
+    text-shadow: none !important;
+    animation: none !important;
+    color: #00eaff !important;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,101 @@
+/* Custom Cursor Styles - Cyber Security Theme */
+
+/* Basic Cursor Styling */
+html, body {
+    cursor: url('../../assets/images/cursor/cursor-default.svg') 12 12, auto;
+}
+
+/* Link and Button Hover Cursor */
+a, button, .btn, .nav-link, .project-link, .social-link, .social-icon,
+.hamburger, .form-control, input[type="submit"], .submit-btn, 
+.logo, .project-card, .service-card, .skill-item, .faq-question {
+    cursor: url('../../assets/images/cursor/cursor-pointer.svg') 16 16, pointer;
+}
+
+/* Text Selection Cursor */
+p, h1, h2, h3, h4, h5, h6, span, div:not(.clickable) {
+    cursor: url('../../assets/images/cursor/cursor-text.svg') 14 14, text;
+}
+
+/* For input fields and textarea */
+input, textarea, select {
+    cursor: url('../../assets/images/cursor/cursor-text.svg') 14 14, text;
+}
+
+/* For draggable elements */
+.draggable {
+    cursor: url('../../assets/images/cursor/cursor-pointer.svg') 16 16, move;
+}
+
+/* For disabled elements */
+.disabled, [disabled], button:disabled {
+    cursor: not-allowed;
+}
+
+/* Enhanced hover effects with glowing cursor */
+a:hover, button:hover, .btn:hover, .nav-link:hover, .project-link:hover, 
+.social-link:hover, .social-icon:hover, .project-card:hover, 
+.service-card:hover, .skill-item:hover {
+    cursor: url('../../assets/images/cursor/cursor-pointer-glow.svg') 16 16, pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: scale(1.03);
+}
+
+/* Alternative cursor for webkit browsers */
+@supports (-webkit-appearance:none) {
+    html {
+        --cursor-default: url('../../assets/images/cursor/cursor-default.svg') 12 12, auto;
+        --cursor-pointer: url('../../assets/images/cursor/cursor-pointer.svg') 16 16, pointer;
+        --cursor-pointer-glow: url('../../assets/images/cursor/cursor-pointer-glow.svg') 16 16, pointer;
+        --cursor-text: url('../../assets/images/cursor/cursor-text.svg') 14 14, text;
+    }
+
+    html, body {
+        cursor: var(--cursor-default);
+    }
+
+    a, button, .btn, .nav-link, .project-link, .social-link, .social-icon, 
+    .hamburger, .form-control, input[type="submit"], .submit-btn, 
+    .logo, .project-card, .service-card, .skill-item, .faq-question {
+        cursor: var(--cursor-pointer);
+    }
+    
+    p, h1, h2, h3, h4, h5, h6, span, div:not(.clickable) {
+        cursor: var(--cursor-text);
+    }
+    
+    input, textarea, select {
+        cursor: var(--cursor-text);
+    }
+    
+    a:hover, button:hover, .btn:hover, .nav-link:hover, .project-link:hover, 
+    .social-link:hover, .social-icon:hover, .project-card:hover, 
+    .service-card:hover, .skill-item:hover {
+        cursor: var(--cursor-pointer-glow);
+    }
+}
+
+/* Animation for cursor highlight effect */
+@keyframes cursorPulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 234, 255, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 234, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 234, 255, 0); }
+}
+
+.cursor-highlight {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    animation: cursorPulse 1.5s infinite;
+    transition: opacity 0.3s ease;
+}
+
+.cursor-active .cursor-highlight {
+    opacity: 1;
+}

@@ -1,0 +1,43 @@
+/*
+ * Azhar Ali Portfolio - Main CSS File
+ * This file imports all component stylesheets
+ */
+
+/* Base Styles */
+@import url('./base/reset.css');
+@import url('./base/variables.css');
+@import url('./base/typography.css');
+@import url('./base/responsive.css');
+@import url('./base/dark-responsive.css');
+@import url('./base/permanent-dark.css');
+@import url('./base/lazy-loading.css');
+
+/* Layout */
+@import url('./layout/grid.css');
+@import url('./layout/header.css');
+@import url('./layout/sections.css');
+@import url('./layout/consistency-fixes.css');
+
+/* Components */
+@import url('./components/navigation.css');
+@import url('./components/buttons.css');
+@import url('./components/cards.css');
+@import url('./components/footer.css');
+@import url('./components/contact.css');
+@import url('./components/about.css');
+@import url('./components/skills.css');
+@import url('./components/modern-skills.css');
+@import url('./components/touch.css');
+@import url('./components/vanta-background.css');
+@import url('./components/skill-tooltips.css');
+@import url('./components/force-dark-theme.css');
+@import url('./components/glow-effects.css');
+@import url('./components/testimonials.css');
+@import url('./components/header-animation.css');
+@import url('./components/header-spacing-fix.css');
+@import url('./components/services.css');
+@import url('./components/enhanced-icons.css');
+@import url('./components/enhanced-micro-interactions.css');
+@import url('./components/glitch-text.css');
+@import url('./components/fab-message.css');
+@import url('./components/coming-soon-modal.css');

@@ -1,0 +1,157 @@
+/* Header Name Animation - Shining Lines Effect */
+
+/* Base styling for animated name with shining lines effect */
+.header-name-animate {
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  display: inline-block;
+  font-weight: 700;
+  padding: 0 5px;
+}
+
+/* Neon glow base for the text */
+.header-name-animate {
+  text-shadow: 
+    0 0 5px rgba(0, 234, 255, 0.4),
+    0 0 10px rgba(0, 234, 255, 0.3),
+    0 0 15px rgba(0, 234, 255, 0.2);
+  color: #fff;
+}
+
+/* The shining line animation */
+.header-name-animate::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 234, 255, 0.3),
+    transparent
+  );
+  transform: rotate(25deg);
+  pointer-events: none;
+  filter: blur(5px);
+  animation: shine-line 6s infinite;
+  will-change: transform; /* GPU acceleration hint */
+  transform-style: preserve-3d; /* Additional GPU acceleration */
+}
+
+/* The second shining line with offset timing */
+.header-name-animate::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 30%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 234, 255, 0.2),
+    transparent
+  );
+  transform: rotate(25deg);
+  pointer-events: none;
+  filter: blur(3px);
+  animation: shine-line 6s infinite 2s; /* 2s delay for second line */
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* The animation for the shining lines */
+@keyframes shine-line {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  20% {
+    left: -40%;
+    opacity: 0.4;
+  }
+  35% {
+    left: 100%;
+    opacity: 0;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* Professional tagline styling */
+.professional-tagline {
+  font-size: 1.1rem;
+  letter-spacing: 0.05rem;
+  color: rgba(216, 250, 255, 0.9);
+  margin-top: 0.5rem;
+  font-weight: 400;
+  max-width: 600px;
+  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Highlight important terms in the tagline */
+.tagline-highlight {
+  color: #00eaff;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header-name-animate::before,
+  .header-name-animate::after {
+    animation-duration: 4s; /* Slightly faster on mobile */
+  }
+  
+  .professional-tagline {
+    font-size: 0.95rem;
+    letter-spacing: 0.03rem;
+    line-height: 1.5;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .header-name-animate::before,
+  .header-name-animate::after {
+    animation: none;
+  }
+}
+
+/* Simplified animations for low-end devices */
+.header-name-simple {
+  position: relative;
+  color: #fff;
+  display: inline-block;
+  font-weight: 700;
+  padding: 0 5px;
+  text-shadow: 
+    0 0 5px rgba(0, 234, 255, 0.4),
+    0 0 10px rgba(0, 234, 255, 0.3);
+  animation: simple-pulse 3s infinite alternate;
+  will-change: text-shadow;
+}
+
+@keyframes simple-pulse {
+  0% {
+    text-shadow: 
+      0 0 5px rgba(0, 234, 255, 0.3),
+      0 0 10px rgba(0, 234, 255, 0.2);
+  }
+  100% {
+    text-shadow: 
+      0 0 7px rgba(0, 234, 255, 0.5),
+      0 0 14px rgba(0, 234, 255, 0.3);
+  }
+}
+
+/* Apply simpler animations when reduce-animations class is on body */
+body.reduce-animations .header-name-animate::before,
+body.reduce-animations .header-name-animate::after {
+  animation: none;
+}

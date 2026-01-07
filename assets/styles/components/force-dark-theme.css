@@ -1,0 +1,206 @@
+/* Cyber Dark Theme Component Overrides 
+   This file ensures all components maintain the dark cyber theme consistently */
+
+/* === GLOBAL COLOR OVERRIDES === */
+
+body {
+  background-color: #0a0f1f !important;
+  color: #d8faff !important;
+}
+
+/* === NAVBAR === */
+.navbar {
+  background-color: rgba(10, 15, 31, 0.95) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+  border-bottom: 1px solid rgba(0, 234, 255, 0.1) !important;
+}
+
+.nav-link {
+  color: #d8faff !important;
+}
+
+.nav-link:hover, 
+.nav-link.active {
+  color: #00eaff !important;
+}
+
+/* === HERO SECTION === */
+.hero {
+  background-color: transparent !important;
+}
+
+.hero-title {
+  color: #fff !important;
+}
+
+.hero-subtitle {
+  color: #00eaff !important;
+}
+
+.hero-description {
+  color: #d8faff !important;
+}
+
+/* === SECTIONS === */
+section {
+  background-color: transparent !important;
+}
+
+.section-title {
+  color: #00eaff !important;
+}
+
+.section-subtitle {
+  color: #d8faff !important;
+}
+
+/* === SKILLS === */
+.skills-legend {
+  background: rgba(12, 16, 32, 0.7) !important;
+  border: 1px solid rgba(0, 234, 255, 0.15) !important;
+}
+
+.legend-item {
+  color: #d8faff !important;
+}
+
+.skill-category {
+  background: rgba(12, 16, 32, 0.7) !important;
+  border: 1px solid rgba(0, 234, 255, 0.1) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+.skill-category-header h3 {
+  color: #00eaff !important;
+}
+
+.skill-item {
+  background: rgba(12, 20, 40, 0.4) !important;
+}
+
+.skill-name {
+  color: #fff !important;
+}
+
+/* === PROJECTS === */
+.project-card {
+  background: rgba(12, 16, 32, 0.7) !important;
+  border: 1px solid rgba(0, 234, 255, 0.1) !important;
+}
+
+.project-title {
+  color: #00eaff !important;
+}
+
+.project-description {
+  color: #d8faff !important;
+}
+
+.tech-tag {
+  background: rgba(0, 234, 255, 0.1) !important;
+  color: #00eaff !important;
+}
+
+/* === CONTACT === */
+.contact-card {
+  background: rgba(12, 16, 32, 0.7) !important;
+  border: 1px solid rgba(0, 234, 255, 0.1) !important;
+}
+
+.contact-form {
+  background: rgba(12, 16, 32, 0.7) !important;
+  border: 1px solid rgba(0, 234, 255, 0.1) !important;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background: rgba(10, 15, 31, 0.8) !important;
+  border: 1px solid rgba(0, 234, 255, 0.2) !important;
+  color: #d8faff !important;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(0, 234, 255, 0.5) !important;
+  box-shadow: 0 0 0 2px rgba(0, 234, 255, 0.2) !important;
+}
+
+/* === BUTTONS === */
+.btn-primary {
+  background: linear-gradient(135deg, #00eaff, #00c6d9) !important;
+  color: #0a0f1f !important;
+}
+
+.btn-secondary {
+  background: transparent !important;
+  border: 1px solid #00eaff !important;
+  color: #00eaff !important;
+}
+
+/* === FOOTER === */
+.footer {
+  background-color: rgba(10, 15, 31, 0.95) !important;
+  border-top: 1px solid rgba(0, 234, 255, 0.1) !important;
+}
+
+.footer__section h3 {
+  color: #00eaff !important;
+}
+
+.footer__links a {
+  color: #d8faff !important;
+}
+
+.footer__links a:hover {
+  color: #00eaff !important;
+}
+
+.footer__copyright {
+  color: #94a3c8 !important;
+  border-top: 1px solid rgba(0, 234, 255, 0.1) !important;
+}
+
+/* === FORM ELEMENTS === */
+input, textarea, select {
+  background-color: rgba(10, 15, 31, 0.8) !important;
+  color: #d8faff !important;
+  border: 1px solid rgba(0, 234, 255, 0.2) !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #00eaff !important;
+  box-shadow: 0 0 0 3px rgba(0, 234, 255, 0.2) !important;
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0f1f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 234, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 234, 255, 0.5);
+}
+
+/* === SELECTION === */
+::selection {
+  background-color: rgba(0, 234, 255, 0.3) !important;
+  color: #fff !important;
+}
+
+/* Ensure any future light theme elements are overridden */
+[class*="light"],
+[class*="day-mode"],
+.theme-light,
+[data-theme="light"] {
+  filter: brightness(0.8) hue-rotate(180deg) !important;
+}

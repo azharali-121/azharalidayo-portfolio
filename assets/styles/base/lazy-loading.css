@@ -1,0 +1,22 @@
+/* Image lazy loading styles */
+.lazy-image {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.lazy-image.loaded {
+  opacity: 1;
+}
+
+.image-placeholder {
+  background: linear-gradient(110deg, #0c1020 8%, #141e36 18%, #0c1020 33%);
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+  border-radius: inherit;
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}

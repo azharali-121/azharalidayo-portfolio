@@ -1,131 +1,121 @@
-# Azhar Ali - Software Developer Portfolio
+# Azhar Ali Portfolio
 
-## Overview
-A modern, responsive portfolio website showcasing my skills as a Software Developer and Mobile App Specialist. Built with clean HTML5, CSS3, and JavaScript.
+This is the official portfolio website for Azhar Ali, showcasing skills, projects, and professional information.
 
-## 🚀 Live Website Links
-🌐 **Click here to view my portfolio:** 
-- **Live Website**: [https://azhardayo.github.io/AzharAli-Portfolio/](https://azhardayo.github.io/AzharAli-Portfolio/)
-- **Standalone Version**: [https://azhardayo.github.io/AzharAli-Portfolio/portfolio-standalone.html](https://azhardayo.github.io/AzharAli-Portfolio/portfolio-standalone.html)
-- **GitHub Repository**: [https://github.com/AzharDayo/AzharAli-Portfolio](https://github.com/AzharDayo/AzharAli-Portfolio)
+## Features
 
-## 📁 Project Structure
+- Responsive design that works on all devices
+- Dark cyber theme with modern UI elements
+- Optimized performance with minified assets
+- Lazy loading for improved page load times
+- PWA capabilities through web app manifest
+- Organized file structure for easy maintenance
+- SEO optimized with appropriate meta tags
+
+## Folder Structure
+
+The portfolio follows a modern, organized structure:
+
 ```
-azhar-ali-portfolio/
-├── index.html                 # Main portfolio (modular structure)
-├── portfolio-standalone.html  # Self-contained portfolio version
-├── README.md                  # Project documentation
-├── css/
-│   └── style.css             # Main stylesheet with responsive design
-├── js/
-│   └── main.js              # Interactive functionality and animations
-└── images/
-    ├── back.jpg             # Hero background image
-    ├── logo.jpg             # Brand logo
-    ├── profile-placeholder.jpg  # Profile image
-    ├── project1-placeholder.jpg # Snake game placeholder
-    ├── project2-placeholder.jpg # Chess game placeholder
-    ├── project3-placeholder.jpg # Currency converter placeholder
-    ├── jobportal.jpg        # Job portal app screenshot
-    └── Instant-Messaging.jpg   # Messaging app screenshot
+/
+├── assets/
+│   ├── favicon/        # Favicon files
+│   ├── fonts/          # Custom font files
+│   ├── icons/          # Icon assets
+│   ├── images/         # All image assets
+│   │   ├── profile/    # Profile photos and branding
+│   │   ├── projects/   # Project-specific images
+│   │   ├── testimonials/ # Client photos
+│   │   ├── background/ # Background elements
+│   │   ├── cursor/     # Custom cursor SVGs
+│   │   └── ...         # Other image categories
+│   ├── styles/         # CSS files
+│   │   ├── main.css    # Main CSS file that imports all styles
+│   │   └── min/        # Minified CSS files
+│   │       └── main.min.css # Minified version of main.css
+│   └── scripts/        # JavaScript files
+│       ├── main.js     # Main JS file
+│       ├── force-dark-theme.js # Theme implementation
+│       ├── header-animations.js # Animation effects
+│       └── min/        # Minified JS files
+│           └── main.min.js # Minified version of main.js
+├── index.html          # Main portfolio page
+├── manifest.json       # Web app manifest for PWA support
+├── sitemap.xml         # Site map for SEO
+├── robots.txt          # Robots file for search engines
+└── .well-known/        # Well-known directory for services
 ```
 
-## 🛠️ Technologies Used
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Styling**: Custom CSS with Flexbox and Grid
-- **Icons**: Font Awesome 6.0 & Emoji Icons
-- **Design**: Responsive, Mobile-First Approach
+## Maintenance Instructions
 
-## ✨ Features
-- **Responsive Design** - Works on all devices
-- **Interactive Navigation** - Smooth scrolling and active states
-- **Dynamic Animations** - Scroll-triggered animations
-- **Typing Effect** - Animated hero text
-- **Contact Integration** - Direct email and WhatsApp links
-- **Mobile Menu** - Hamburger navigation for mobile
-- **Scroll to Top** - Convenient navigation button
-- **Dual Versions** - Modular and standalone versions available
+### Adding New Projects
 
-## 🎨 Sections
-1. **Hero** - Introduction with animated text and background image
-2. **About** - Personal background and multilingual capabilities
-3. **Skills** - Technical expertise with visual cards
-4. **Projects** - Portfolio of completed projects with screenshots
-5. **Contact** - Multiple contact methods and social links
-
-## 📱 Featured Projects
-- **Snake Game** - Java-based classic game implementation
-- **Chess Game** - Full-featured chess with complete rules
-- **Currency Converter** - Real-time currency conversion tool
-- **Job Portal App** - Comprehensive job matching platform
-- **Instant Messaging App** - Real-time communication platform
-
-## 📞 Contact Information
-- **Email**: azharalidayo10@gmail.com
-- **WhatsApp**: +92 313 3610 655
-- **LinkedIn**: [azhar-ali-994242330](https://www.linkedin.com/in/azhar-ali-994242330)
-- **GitHub**: [AzharDayo](https://github.com/AzharDayo)
-
-## 🌐 Languages Supported
-- English
-- Urdu (اردو)
-- Sindhi (سنڌي)
-
-## 🚀 Getting Started
-
-### Option 1: Quick Start (Standalone Version)
-1. Open `portfolio-standalone.html` directly in your browser
-2. All styles and scripts are embedded - no server needed
-
-### Option 2: Local Development Server
-1. Clone the repository
-2. Navigate to project directory:
-   ```bash
-   cd azhar-ali-portfolio
+1. Add project images to `assets/images/projects/`
+2. Copy an existing project card in `index.html` and update:
+   ```html
+   <div class="project-card">
+     <div class="project-image">
+       <img src="assets/images/projects/your-new-project.jpg" alt="Project Name" loading="lazy" width="400" height="220" class="lazy-image">
+       <!-- Update links and overlay -->
+     </div>
+     <div class="project-content">
+       <h3 class="project-title">Your Project Title</h3>
+       <p class="project-description">
+         Your project description goes here.
+       </p>
+       <div class="project-tech">
+         <span class="tech-tag">Technology 1</span>
+         <span class="tech-tag">Technology 2</span>
+       </div>
+     </div>
+   </div>
    ```
-3. Start a local server:
-   ```bash
-   python3 -m http.server 8000
+3. Remember to use the `loading="lazy"` attribute for all non-critical images
+
+### CSS Modifications
+
+All CSS is organized through `assets/styles/main.css`, which imports all necessary styles:
+
+1. Make changes to the CSS files in the `assets/styles/` directory
+2. After making changes, minify the updated CSS:
    ```
-4. Open browser to `http://localhost:8000`
+   npx clean-css-cli assets/styles/main.css -o assets/styles/min/main.min.css
+   ```
+3. The site uses CSS variables for colors and spacing, defined in `main.css`
 
-### Option 3: Direct File Access
-- Open `index.html` in your browser for the modular version
-- All assets are properly linked and organized
+### JavaScript Modifications
 
-## 📂 File Organization
-- **HTML**: Both modular (`index.html`) and standalone (`portfolio-standalone.html`) versions
-- **CSS**: Centralized styling in `css/style.css` for modular version
-- **JavaScript**: Interactive functionality in `js/main.js` for modular version
-- **Images**: All media assets properly organized in `images/` folder
-- **Executable**: Both HTML files are executable and ready to run
+1. Make changes to JS files in `assets/scripts/`
+2. After making changes, minify the updated JS:
+   ```
+   npx terser assets/scripts/main.js -o assets/scripts/min/main.min.js -c -m
+   ```
+3. If adding new script files, update the loading logic in `main.js`
 
-## 🔧 Customization
-- **Modular Version**: Edit `index.html`, `css/style.css`, and `js/main.js` separately
-- **Standalone Version**: Edit `portfolio-standalone.html` for all-in-one changes
-- **Content**: Update contact information, project details, and skills
-- **Images**: Replace placeholder images with actual project screenshots
-- **Styling**: Modify colors, fonts, and layout in respective CSS sections
+### Adding New Pages
 
-## 🎯 File Usage
-- **Use `index.html`** for development and when you want modular file structure
-- **Use `portfolio-standalone.html`** for quick deployment, sharing, or when you need a single file
-- Both versions are fully functional and responsive
+1. Create new HTML files in the root directory
+2. Link to the main CSS: `<link rel="stylesheet" href="assets/styles/main.css">`
+3. Include necessary scripts: `<script src="assets/scripts/main.js"></script>`
 
-## 📝 Version History
-- **v3.1** - Added standalone version, improved mobile responsiveness, enhanced project showcase
-- **v3.0** - Clean professional structure, organized assets, streamlined codebase
-- **v2.0** - Organized structure, removed project links, updated contact info
-- **v1.0** - Initial portfolio release
+## Testing
 
-## 📄 License
-© 2025 Made by AZHAR ALI. All rights reserved.
+Two test files are included to verify the structure and responsiveness:
+
+1. `structure-test.html` - Tests that all resources load correctly
+2. `responsive-test.html` - Tests the portfolio at different screen sizes
+
+## Reports
+
+- `portfolio-cleanup-report.md` - Comprehensive report of the portfolio restructuring and optimization
+- `restructuring-report.md` - Summary of changes made during reorganization
+
+## Backup
+
+Old files and unused assets are stored in timestamped backup folders:
+- `backup_before_refactor_*` - Original files before restructuring
+- `backup_unused_*` - Unused files identified during cleanup
 
 ---
-*Built with passion for clean code and great user experience* ✨
 
-## 🚀 Deployment Options
-- **GitHub Pages**: Host the repository for free web hosting
-- **Local Server**: Use Python's built-in server for local development
-- **Direct Browser**: Open HTML files directly in any modern browser
-- **Web Hosting**: Upload to any web hosting service
+© 2025 Azhar Ali. All rights reserved.

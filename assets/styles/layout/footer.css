@@ -1,0 +1,270 @@
+/* Modern Footer Design for Cybersecurity Theme */
+
+footer, .footer {
+    background: rgba(10, 15, 31, 0.95);
+    border-top: 1px solid rgba(0, 234, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(16, 22, 38, 0.95), rgba(10, 15, 31, 0.95)),
+        url('../assets/images/background/cyber-grid.svg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 0 3rem;
+}
+
+.footer-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+}
+
+.footer-column h3 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-column h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--primary-color);
+    border-radius: 1px;
+    transition: width 0.3s ease;
+}
+
+.footer-column h3:hover::after {
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.footer-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-nav li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 0;
+    display: inline-block;
+}
+
+.footer-nav a::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform: translateX(-8px);
+    color: var(--primary-color);
+}
+
+.footer-nav a:hover {
+    color: var(--primary-color);
+    padding-left: 16px;
+}
+
+.footer-nav a:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.footer-contact p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.footer-contact p i {
+    color: var(--primary-color);
+}
+
+.footer-about p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 234, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 234, 255, 0.2);
+}
+
+.social-link:hover {
+    background: var(--primary-color);
+    color: var(--bg-primary);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 234, 255, 0.3);
+}
+
+.subscribe-form {
+    display: flex;
+    margin-top: 1.5rem;
+}
+
+.subscribe-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 6px 0 0 6px;
+    border: 1px solid rgba(0, 234, 255, 0.2);
+    background: rgba(16, 22, 38, 0.7);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+}
+
+.subscribe-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 234, 255, 0.1);
+}
+
+.subscribe-button {
+    padding: 0.75rem 1.25rem;
+    background: var(--primary-color);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.subscribe-button:hover {
+    background: var(--secondary-color);
+    box-shadow: 0 0 15px rgba(94, 255, 161, 0.3);
+}
+
+.footer-bottom {
+    padding: 1.5rem 0;
+    text-align: center;
+    border-top: 1px solid rgba(0, 234, 255, 0.1);
+    margin-top: 3rem;
+    position: relative;
+}
+
+.footer-copyright {
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+}
+
+.footer-copyright a {
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-copyright a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* Animated cyber line at top of footer */
+.cyber-line {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, 
+        rgba(0, 234, 255, 0),
+        rgba(0, 234, 255, 0.5),
+        rgba(94, 255, 161, 0.5),
+        rgba(0, 234, 255, 0));
+    animation: cyberscan 5s linear infinite;
+}
+
+@keyframes cyberscan {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        padding: 4rem 0 2rem;
+    }
+    
+    .footer-grid {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .subscribe-form {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .subscribe-input, .subscribe-button {
+        border-radius: 6px;
+        width: 100%;
+    }
+}

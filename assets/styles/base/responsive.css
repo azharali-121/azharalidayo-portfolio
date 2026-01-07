@@ -1,0 +1,62 @@
+/* Responsive Utilities */
+
+/* General responsive utilities */
+.hide-xs {
+    display: initial;
+}
+
+.show-xs {
+    display: none;
+}
+
+/* Super small devices (< 400px) */
+@media (max-width: 400px) {
+    .hide-xs {
+        display: none;
+    }
+    
+    .show-xs {
+        display: initial;
+    }
+    
+    /* Adjust spacing for very small screens */
+    .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    
+    /* Stack all grid items */
+    .grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Adjust buttons for small screens */
+    .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    /* Reduce card padding on very small screens */
+    .card, .project-card, .service-card {
+        padding: 1rem;
+    }
+    
+    /* Adjust project image height */
+    .project-image {
+        height: 160px;
+    }
+    
+    /* Footer adjustments for tiny screens */
+    .footer__container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .footer__section {
+        text-align: center;
+    }
+    
+    .footer__social {
+        justify-content: center;
+    }
+}

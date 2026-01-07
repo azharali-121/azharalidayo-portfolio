@@ -1,0 +1,95 @@
+/* Global consistency fixes and overrides */
+
+/* Fix spacing across sections */
+section {
+    scroll-margin-top: 90px; /* For smooth scrolling with fixed navbar */
+}
+
+/* Ensure all images have proper rendering */
+img {
+    max-width: 100%;
+    height: auto; 
+    display: block;
+}
+
+/* Fix overflow issues */
+body, html {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Add consistent spacing for mobile */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    section {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
+
+/* Fix hero section alignment */
+.hero-text {
+    flex: 1; 
+    min-width: 300px;
+    padding-right: 30px;
+}
+
+@media (max-width: 768px) {
+    .hero-text {
+        padding-right: 0;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Fix skill progress bar width */
+[data-width="90"] {
+    width: 90%;
+}
+
+[data-width="85"] {
+    width: 85%;
+}
+
+[data-width="80"] {
+    width: 80%;
+}
+
+[data-width="75"] {
+    width: 75%;
+}
+
+[data-width="70"] {
+    width: 70%;
+}
+
+[data-width="65"] {
+    width: 65%;
+}
+
+/* Fix about section layout */
+.about-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* Fix contact section layout */
+.contact-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}

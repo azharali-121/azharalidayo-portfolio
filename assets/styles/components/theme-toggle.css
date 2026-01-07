@@ -1,0 +1,125 @@
+/* Theme Toggle Styles */
+
+/* Theme variables - light theme defaults (will be overridden by dark theme if selected) */
+:root {
+  --bg-color: #f8f9fa;
+  --text-color: #212529;
+  --primary-color: #0056b3;
+  --secondary-color: #17a2b8;
+  --accent-color: #00eaff;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --card-bg: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --header-bg: rgba(255, 255, 255, 0.9);
+  --gradient-start: #f1f5f9;
+  --gradient-end: #e2e8f0;
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+  --bg-color: #0a0f1f;
+  --text-color: #e2e8f0;
+  --primary-color: #00eaff;
+  --secondary-color: #50fa7b;
+  --accent-color: #00eaff;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(12, 16, 32, 0.7);
+  --shadow-color: rgba(0, 0, 0, 0.25);
+  --header-bg: rgba(10, 15, 31, 0.9);
+  --gradient-start: #0c1020;
+  --gradient-end: #141e36;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--card-bg);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px var(--shadow-color);
+  z-index: 1000;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+.theme-toggle i {
+  font-size: 1.25rem;
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+/* Light/Dark mode transition */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.light-theme-icon,
+.dark-theme-icon {
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.5s ease;
+}
+
+[data-theme="dark"] .light-theme-icon,
+[data-theme="light"] .dark-theme-icon {
+  opacity: 1;
+  transform: rotate(0);
+}
+
+[data-theme="dark"] .dark-theme-icon,
+[data-theme="light"] .light-theme-icon {
+  opacity: 0;
+  transform: rotate(180deg);
+}
+
+/* Additional theme-specific adjustments */
+[data-theme="light"] #vanta-bg {
+  opacity: 0.4; /* Make vanta background less prominent in light mode */
+}
+
+[data-theme="light"] .skill-category {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .hero-title,
+[data-theme="light"] .section-title {
+  color: #0a0f1f;
+}
+
+/* Theme preference toast notification */
+.theme-toast {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.theme-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Accessibility focus styles */
+.theme-toggle:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}

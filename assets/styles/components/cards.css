@@ -1,0 +1,693 @@
+/* Modern Card Designs for Cybersecurity Theme */
+
+/* Base card styling */
+.card {
+    background: rgba(16, 22, 38, 0.7);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 234, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 234, 255, 0.3);
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(0, 234, 255, 0.2);
+}
+
+.card:hover::after {
+    opacity: 1;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 234, 255, 0.1) 0%,
+        transparent 50%,
+        rgba(94, 255, 161, 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Project Cards */
+.project-card {
+    background: rgba(16, 22, 38, 0.7);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 234, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 234, 255, 0.3);
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(0, 234, 255, 0.2);
+}
+
+.project-image {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0; /* Match top corners with card */
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* Focus on top part of image */
+    transition: transform 0.6s ease;
+    display: block; /* Remove any bottom spacing */
+    backface-visibility: hidden; /* Prevents glitches on hover */
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 15, 31, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-link {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg-primary);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+.project-card:hover .project-link {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.1s;
+}
+
+.project-link:hover {
+    background: var(--secondary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(94, 255, 161, 0.3);
+}
+
+/* Disabled link styling for unavailable demos */
+.project-link.disabled-link {
+    cursor: not-allowed;
+    opacity: 0.4;
+    pointer-events: none;
+    background: rgba(100, 116, 139, 0.3);
+}
+
+.project-link.disabled-link:hover {
+    background: rgba(100, 116, 139, 0.3);
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.project-content {
+    padding: 1.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.project-card:hover .project-title {
+    color: var(--primary-color);
+}
+
+.project-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    flex: 1;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.tech-tag {
+    background: rgba(0, 234, 255, 0.08);
+    color: var(--primary-color);
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(0, 234, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+    background: rgba(0, 234, 255, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 3px 10px rgba(0, 234, 255, 0.2);
+}
+
+/* Featured project card */
+.project-card.featured {
+    grid-column: span 2;
+}
+
+.project-card.featured .project-image {
+    height: 300px;
+}
+
+/* Service Cards */
+.service-card {
+    padding: 2.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(16, 22, 38, 0.7);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 234, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 234, 255, 0.3);
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(0, 234, 255, 0.2);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(0, 234, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: var(--primary-color);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.service-icon::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 1px solid rgba(0, 234, 255, 0.2);
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    background: rgba(0, 234, 255, 0.15);
+    color: var(--primary-color);
+    transform: rotateY(180deg);
+}
+
+.service-card:hover .service-icon::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.service-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.service-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+    padding: 2rem;
+    position: relative;
+    background: rgba(16, 22, 38, 0.7);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 234, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 234, 255, 0.3);
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(0, 234, 255, 0.2);
+}
+
+.testimonial-text {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    position: relative;
+    font-style: italic;
+    padding-left: 1.5rem;
+}
+
+.testimonial-text::before {
+    content: '"';
+    position: absolute;
+    left: 0;
+    top: -10px;
+    font-size: 3rem;
+    color: rgba(0, 234, 255, 0.2);
+    font-family: serif;
+    line-height: 1;
+}
+
+.testimonial-client {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.client-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+}
+
+.client-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.client-name {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.client-role {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+}
+
+.testimonial-rating {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--secondary-color);
+    font-size: 0.85rem;
+    display: flex;
+    gap: 3px;
+}
+
+/* Contact Info Cards */
+.contact-card {
+    padding: 2rem;
+    background: rgba(16, 22, 38, 0.7);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 234, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 234, 255, 0.3);
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(0, 234, 255, 0.2);
+}
+
+.contact-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(0, 234, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+    color: var(--primary-color);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover .contact-icon {
+    background: rgba(0, 234, 255, 0.15);
+    box-shadow: 0 0 20px rgba(0, 234, 255, 0.3);
+}
+
+.contact-icon::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    border: 1px dashed rgba(0, 234, 255, 0.3);
+    animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.contact-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-value {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* Skill Cards for Skills Section */
+.skill-category {
+    background: rgba(16, 22, 38, 0.7);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(0, 234, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s ease;
+}
+
+.skill-category:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 234, 255, 0.3);
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(0, 234, 255, 0.2);
+}
+
+.category-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(0, 234, 255, 0.1);
+}
+
+.category-title i {
+    color: var(--secondary-color);
+}
+
+.skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.skill-item {
+    margin-bottom: 1rem;
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.skill-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.skill-name i {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.skill-percentage {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.skill-bar {
+    height: 8px;
+    background: rgba(224, 230, 245, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 4px;
+    transition: width 1.5s ease-out;
+    position: relative;
+}
+
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: skillShine 2s infinite;
+}
+
+@keyframes skillShine {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Timeline Cards */
+.timeline-card {
+    background: rgba(16, 22, 38, 0.7);
+    border-radius: 16px;
+    padding: 2rem;
+    border-left: 3px solid var(--primary-color);
+    border-top: 1px solid rgba(0, 234, 255, 0.1);
+    border-right: 1px solid rgba(0, 234, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 234, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s ease;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-card:hover {
+    transform: translateX(8px);
+    border-left-color: var(--secondary-color);
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(0, 234, 255, 0.2);
+}
+
+.timeline-card::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: -11px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 234, 255, 0.4);
+    z-index: 1;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-card:hover::before {
+    background: var(--secondary-color);
+    box-shadow: 0 0 15px rgba(94, 255, 161, 0.5);
+}
+
+.timeline-date {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    background: rgba(0, 234, 255, 0.08);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.timeline-card:hover .timeline-date {
+    color: var(--secondary-color);
+    background: rgba(94, 255, 161, 0.08);
+}
+
+.timeline-title {
+    font-size: 1.35rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+}
+
+.timeline-content {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .project-card.featured {
+        grid-column: auto;
+    }
+    
+    .project-card.featured .project-image {
+        height: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card, 
+    .project-card, 
+    .service-card, 
+    .testimonial-card, 
+    .contact-card,
+    .skill-category,
+    .timeline-card {
+        padding: 1.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%; /* Ensure cards don't overflow on mobile */
+    }
+    
+    .project-image {
+        height: 180px;
+    }
+    
+    .project-title {
+        font-size: 1.25rem;
+    }
+    
+    .service-icon,
+    .contact-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .category-title {
+        font-size: 1.35rem;
+    }
+    
+    /* Improve spacing in mobile view */
+    .project-content {
+        padding: 1.25rem;
+    }
+    
+    /* Ensure project cards have adequate spacing */
+    .projects-grid {
+        row-gap: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-rating {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-bottom: 1rem;
+        justify-content: center;
+    }
+}
