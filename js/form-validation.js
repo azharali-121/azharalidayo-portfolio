@@ -1,6 +1,7 @@
 /**
  * Enhanced Form Validation & Feedback
  * Provides real-time validation, success/error messages, and accessibility features
+ * INCLUDES: CSRF token protection for security
  */
 
 (function() {
@@ -9,11 +10,98 @@
     const form = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
     const submitBtn = document.getElementById('submitBtn');
+
+    /**
+     * CSRF Token Manager
+     * Generates cryptographically secure tokens and manages session storage
+     */
+    const CSRFTokenManager = {
+        TOKEN_KEY: 'csrf_token',
+        TOKEN_TIMESTAMP: 'csrf_token_timestamp',
+        TOKEN_EXPIRY: 3600000, // 1 hour in milliseconds
+
+        /**
+         * Generate cryptographically secure CSRF token
+         */
+        generateToken() {
+            const array = new Uint8Array(32);
+            crypto.getRandomValues(array);
+            return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+        },
+
+        /**
+         * Get valid token from session or generate new one
+         */
+        getToken() {
+            const token = sessionStorage.getItem(this.TOKEN_KEY);
+            const timestamp = sessionStorage.getItem(this.TOKEN_TIMESTAMP);
+            const now = Date.now();
+
+            // Check if token exists and hasn't expired
+            if (token && timestamp && (now - parseInt(timestamp)) < this.TOKEN_EXPIRY) {
+                return token;
+            }
+
+            // Generate new token
+            const newToken = this.generateToken();
+            sessionStorage.setItem(this.TOKEN_KEY, newToken);
+            sessionStorage.setItem(this.TOKEN_TIMESTAMP, now.toString());
+            return newToken;
+        },
+
+        /**
+         * Validate token (client-side check before sending to backend)
+         */
+        validateToken(token) {
+            const storedToken = sessionStorage.getItem(this.TOKEN_KEY);
+            const timestamp = sessionStorage.getItem(this.TOKEN_TIMESTAMP);
+            const now = Date.now();
+
+            // Check token exists, matches, and hasn't expired
+            return token === storedToken && 
+                   timestamp && 
+                   (now - parseInt(timestamp)) < this.TOKEN_EXPIRY;
+        },
+
+        /**
+         * Rotate token (generate new one after successful submission)
+         */
+        rotateToken() {
+            const newToken = this.generateToken();
+            sessionStorage.setItem(this.TOKEN_KEY, newToken);
+            sessionStorage.setItem(this.TOKEN_TIMESTAMP, Date.now().toString());
+            return newToken;
+        }
+    };
     
     if (!form) {
-        console.warn('Form validation: Contact form not found');
+        // Form not found - validation disabled
         return;
     }
+
+    /**
+     * Inject CSRF token as hidden field
+     */
+    function injectCSRFToken() {
+        // Remove existing CSRF field if present
+        const existingToken = form.querySelector('input[name="csrf_token"]');
+        if (existingToken) {
+            existingToken.remove();
+        }
+
+        // Create hidden input with CSRF token
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = 'csrf_token';
+        csrfInput.value = CSRFTokenManager.getToken();
+        csrfInput.setAttribute('data-security', 'csrf-protection');
+        
+        // Insert at beginning of form
+        form.insertBefore(csrfInput, form.firstChild);
+    }
+
+    // Inject CSRF token on page load
+    injectCSRFToken();
 
     // Validation rules
     const validationRules = {
@@ -155,45 +243,90 @@
     }
 
     /**
-     * Submit form to backend API
-     * TODO: Replace this mock with your actual backend endpoint
+     * Submit form to backend API with rate limiting and CSRF validation
+     * Backend endpoint should validate both rate limits and CSRF token
      */
     async function submitForm(formData) {
-        // --- BACKEND INTEGRATION REQUIRED ---
-        // Uncomment and configure this section when you have a backend:
-        /*
-        try {
-            const response = await fetch('YOUR_BACKEND_URL/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (!response.ok) {
-                throw new Error(`Server error: ${response.status}`);
-            }
-
-            const result = await response.json();
-            return result;
-        } catch (error) {
-            throw new Error(error.message || 'Failed to send message. Please try again.');
+        // --- CLIENT-SIDE RATE LIMIT CHECK ---
+        const rateCheck = RateLimitManager.checkLimit();
+        if (!rateCheck.allowed) {
+            throw new Error(RateLimitManager.getLimitMessage(rateCheck.resetTime));
         }
-        */
 
-        // --- MOCK SUCCESS RESPONSE (Development Only) ---
-        // This simulates a successful form submission
-        // Remove this section when integrating with real backend
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        // --- CLIENT-SIDE CSRF VALIDATION ---
+        const csrfToken = formData.csrf_token;
+        if (!csrfToken || !CSRFTokenManager.validateToken(csrfToken)) {
+            throw new Error('Security validation failed. Please refresh the page and try again.');
+        }
+
+        // --- BACKEND INTEGRATION ---
+        // Set your backend API endpoint URL here
+        const BACKEND_API_URL = process.env.CONTACT_API_URL || null;
         
-        console.log('📧 MOCK SUBMISSION - Form Data:', formData);
-        console.warn('⚠️ This is a mock response. Configure your backend API above.');
-        
-        return {
-            success: true,
-            message: '✅ Message received! (Mock response - no email sent)\n\nTo enable real email sending, configure your backend API in form-validation.js'
-        };
+        if (BACKEND_API_URL) {
+            // PRODUCTION: Real backend endpoint
+            try {
+                const response = await fetch(BACKEND_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': csrfToken, // Send token in custom header
+                    },
+                    body: JSON.stringify(formData),
+                    credentials: 'same-origin' // Include cookies for session validation
+                });
+
+                if (!response.ok) {
+                    // Handle specific error codes
+                    if (response.status === 403) {
+                        throw new Error('Security validation failed. Please refresh and try again.');
+                    }
+                    if (response.status === 429) {
+                        throw new Error('Too many requests. Please wait a moment and try again.');
+                    }
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                // Record successful submission for rate limiting
+                RateLimitManager.recordSubmission();
+                
+                // Rotate CSRF token after successful submission
+                CSRFTokenManager.rotateToken();
+                injectCSRFToken(); // Update hidden field with new token
+                
+                return result;
+            } catch (error) {
+                throw new Error(error.message || 'Failed to send message. Please try again.');
+            }
+        } else {
+            // --- MOCK RESPONSE (Development Only) ---
+            // This simulates a successful form submission
+            // To enable real backend:
+            // 1. Set BACKEND_API_URL above or set CONTACT_API_URL environment variable
+            // 2. Implement backend CSRF validation (see backend-example.js)
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Simulate CSRF validation on mock backend
+            if (!csrfToken || !CSRFTokenManager.validateToken(csrfToken)) {
+                throw new Error('Mock CSRF validation failed');
+            }
+            
+            // Record successful submission for rate limiting
+            RateLimitManager.recordSubmission();
+            
+            // Rotate token even in mock mode
+            CSRFTokenManager.rotateToken();
+            injectCSRFToken();
+            
+            const remainingSubmissions = RateLimitManager.checkLimit();
+            
+            return {
+                success: true,
+                message: `✅ Message received! (Mock response - no email sent)\n\n🛡️ Security Features Active:\n• CSRF Protection\n• Rate Limiting (${remainingSubmissions.remaining}/${RateLimitManager.MAX_SUBMISSIONS} remaining)\n\nTo enable real email sending:\n1. Set BACKEND_API_URL in form-validation.js\n2. Implement backend CSRF validation`
+            };
+        }
     }
 
     // Real-time validation on blur
@@ -249,8 +382,7 @@
             setTimeout(resetForm, 2000);
 
         } catch (error) {
-            // Log error for debugging
-            console.error('❌ Form submission error:', error);
+            // Silently fail - show user-friendly message below
             
             // Show user-friendly error message
             const errorMessage = error.message || 'An unexpected error occurred';
@@ -274,5 +406,5 @@
         }
     });
 
-    console.log('✅ Form validation initialized');
+    // Production: Console logging disabled
 })();

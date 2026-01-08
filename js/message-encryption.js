@@ -1,9 +1,18 @@
 /**
- * Message Encryption Feature
- * Demonstrates encryption/decryption for contact form messages
+ * Message Encoding Feature (Educational Demonstration)
+ * 
+ * IMPORTANT: This demonstrates Base64 encoding, NOT encryption.
+ * Base64 is a text encoding scheme - it's easily reversible and provides NO security.
+ * 
+ * Real encryption requires:
+ * - Backend server-side encryption (AES-256, RSA, etc.)
+ * - Secure key management
+ * - HTTPS/TLS for transport security
+ * 
+ * This feature is for educational purposes only to show encoding concepts.
  */
 
-class MessageEncryption {
+class MessageEncoding {
     constructor() {
         this.form = document.getElementById('contactForm');
         if (!this.form) return;
@@ -12,38 +21,58 @@ class MessageEncryption {
     }
 
     init() {
-        // Add encryption toggle button
+        // Add encoding toggle button
         const messageGroup = this.form.querySelector('#contactMessage')?.closest('.form-group');
         if (!messageGroup) return;
 
-        const encryptionControls = document.createElement('div');
-        encryptionControls.className = 'encryption-controls';
-        encryptionControls.innerHTML = `
-            <label class="encryption-toggle">
-                <input type="checkbox" id="encryptionToggle">
-                <span class="encryption-label">
-                    <i class="fas fa-lock"></i> Enable Message Encryption
+        const encodingControls = document.createElement('div');
+        encodingControls.className = 'encoding-controls';
+        encodingControls.innerHTML = `
+            <label class="encoding-toggle">
+                <input type="checkbox" id="encodingToggle">
+                <span class="encoding-label">
+                    <i class="fas fa-code"></i> Enable Base64 Encoding (Demo)
+                </span>
+                <span class="encoding-tooltip" title="Base64 is NOT encryption - it's easily reversible. This is for educational purposes only.">
+                    <i class="fas fa-question-circle"></i>
                 </span>
             </label>
-            <div class="encryption-info" style="display: none;">
-                <p><i class="fas fa-info-circle"></i> Your message will be encrypted using Base64 encoding before submission.</p>
-                <div class="encrypted-preview">
-                    <strong>Encrypted Preview:</strong>
-                    <code id="encryptedPreview"></code>
+            <div class="encoding-info" style="display: none;">
+                <div class="encoding-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Educational Notice:</strong> Base64 is encoding, not encryption. 
+                    It provides <strong>no security</strong> - anyone can decode it instantly.
+                </div>
+                <p><i class="fas fa-info-circle"></i> Your message will be converted to Base64 format before display.</p>
+                <div class="encoded-preview">
+                    <strong>Encoded Preview:</strong>
+                    <code id="encodedPreview"></code>
+                </div>
+                <div class="encoding-explanation">
+                    <details>
+                        <summary>Why Base64 isn't encryption</summary>
+                        <ul>
+                            <li>No secret key required - anyone can decode</li>
+                            <li>Deterministic - same input = same output</li>
+                            <li>Reversible with standard tools (atob function)</li>
+                            <li>Used for data transmission, not security</li>
+                        </ul>
+                        <p><strong>Real encryption requires:</strong> Backend server, secret keys, AES-256/RSA algorithms, and HTTPS.</p>
+                    </details>
                 </div>
             </div>
         `;
 
-        messageGroup.appendChild(encryptionControls);
+        messageGroup.appendChild(encodingControls);
 
         // Event listeners
-        const toggle = document.getElementById('encryptionToggle');
+        const toggle = document.getElementById('encodingToggle');
         const messageInput = document.getElementById('contactMessage');
-        const encryptionInfo = encryptionControls.querySelector('.encryption-info');
-        const encryptedPreview = document.getElementById('encryptedPreview');
+        const encodingInfo = encodingControls.querySelector('.encoding-info');
+        const encodedPreview = document.getElementById('encodedPreview');
 
         toggle.addEventListener('change', (e) => {
-            encryptionInfo.style.display = e.target.checked ? 'block' : 'none';
+            encodingInfo.style.display = e.target.checked ? 'block' : 'none';
             if (e.target.checked && messageInput.value) {
                 this.updatePreview(messageInput.value);
             }
@@ -55,81 +84,97 @@ class MessageEncryption {
             }
         });
 
-        // Intercept form submission
+        // Intercept form submission for demonstration
         this.form.addEventListener('submit', (e) => {
             if (toggle.checked) {
-                this.handleEncryptedSubmission(e);
+                this.handleEncodedSubmission(e);
             }
         }, true);
     }
 
     updatePreview(message) {
-        const preview = document.getElementById('encryptedPreview');
+        const preview = document.getElementById('encodedPreview');
         if (!preview) return;
 
         if (message.trim()) {
-            const encrypted = this.encrypt(message);
-            preview.textContent = encrypted.substring(0, 50) + (encrypted.length > 50 ? '...' : '');
+            const encoded = this.encode(message);
+            preview.textContent = encoded.substring(0, 50) + (encoded.length > 50 ? '...' : '');
         } else {
-            preview.textContent = 'Enter a message to see encryption preview';
+            preview.textContent = 'Enter a message to see encoded preview';
         }
     }
 
-    encrypt(message) {
+    encode(message) {
         try {
+            // Base64 encoding (NOT encryption)
             return btoa(unescape(encodeURIComponent(message)));
         } catch (e) {
-            console.error('Encryption failed:', e);
+            // Encoding failed - return original
             return message;
         }
     }
 
-    decrypt(encrypted) {
+    decode(encoded) {
         try {
-            return decodeURIComponent(escape(atob(encrypted)));
+            // Base64 decoding (easily reversible)
+            return decodeURIComponent(escape(atob(encoded)));
         } catch (e) {
-            console.error('Decryption failed:', e);
-            return encrypted;
+            // Decoding failed - return original
+            return encoded;
         }
     }
 
-    handleEncryptedSubmission(e) {
+    handleEncodedSubmission(e) {
         const messageInput = document.getElementById('contactMessage');
         const originalMessage = messageInput.value;
-        const encryptedMessage = this.encrypt(originalMessage);
+        const encodedMessage = this.encode(originalMessage);
 
-        // Show encryption notification
+        // Show encoding notification
         const formMessage = document.getElementById('formMessage');
         if (formMessage) {
             formMessage.style.display = 'block';
             formMessage.className = 'form-message form-info';
             formMessage.innerHTML = `
-                <i class="fas fa-shield-alt"></i>
-                <strong>Message Encrypted Successfully!</strong>
-                <div class="encryption-details">
-                    <p>Original Length: ${originalMessage.length} characters</p>
-                    <p>Encrypted Length: ${encryptedMessage.length} characters</p>
-                    <p>Encryption Method: Base64</p>
+                <i class="fas fa-info-circle"></i>
+                <strong>Message Encoded (Educational Demo)</strong>
+                <div class="encoding-warning-inline">
+                    ⚠️ <strong>Note:</strong> This is Base64 encoding, NOT secure encryption.
                 </div>
-                <details class="encryption-technical">
+                <div class="encoding-details">
+                    <p>Original Length: ${originalMessage.length} characters</p>
+                    <p>Encoded Length: ${encodedMessage.length} characters</p>
+                    <p>Method: Base64 (Reversible Encoding)</p>
+                    <p>Security Level: <strong style="color: #ff4444;">NONE</strong> - Anyone can decode this</p>
+                </div>
+                <details class="encoding-technical">
                     <summary>View Technical Details</summary>
                     <pre>Original: ${originalMessage.substring(0, 30)}...
-Encrypted: ${encryptedMessage.substring(0, 50)}...</pre>
+Encoded: ${encodedMessage.substring(0, 50)}...
+Decoded Back: ${this.decode(encodedMessage).substring(0, 30)}...</pre>
+                    <p style="margin-top: 10px; font-size: 12px; color: #ffaa00;">
+                        <strong>Try it yourself:</strong> Open browser console and type: <code>atob("${encodedMessage.substring(0, 40)}")</code>
+                    </p>
                 </details>
             `;
 
             setTimeout(() => {
                 formMessage.style.display = 'none';
-            }, 10000);
+            }, 12000);
         }
 
-        // Store encrypted message for backend (simulation)
-        console.log('Encrypted Message:', encryptedMessage);
-        console.log('To decrypt:', this.decrypt(encryptedMessage));
+        // Educational console output (part of the demo feature)
+        // These logs teach users about Base64 encoding
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.log('%c📝 Base64 Encoding Demo (NOT Encryption)', 'color: #ffaa00; font-weight: bold; font-size: 14px;');
+            console.log('Original Message:', originalMessage);
+            console.log('Encoded (Base64):', encodedMessage);
+            console.log('Decoded Back:', this.decode(encodedMessage));
+            console.log('%c⚠️ Security Notice: Base64 provides NO protection. Use HTTPS + backend encryption for real security.', 'color: #ff4444; font-weight: bold;');
+        }
     }
 }
 
-// Initialize message encryption
+// Initialize message encoding demo
 document.addEventListener('DOMContentLoaded', () => {
-    new MessageEncryption();
+    new MessageEncoding();
 });

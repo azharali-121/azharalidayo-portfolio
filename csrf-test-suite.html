@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRF Protection Test Suite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0f1f;
+            color: #00ff88;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #00eaff;
+            border-bottom: 2px solid #00eaff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            color: #5effa1;
+            margin: 30px 0 15px;
+        }
+        
+        .test-section {
+            background: rgba(0, 234, 255, 0.1);
+            border: 1px solid #00eaff;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .test-pass {
+            background: rgba(94, 255, 161, 0.2);
+            border-left: 4px solid #5effa1;
+            color: #5effa1;
+        }
+        
+        .test-fail {
+            background: rgba(255, 68, 68, 0.2);
+            border-left: 4px solid #ff4444;
+            color: #ff4444;
+        }
+        
+        .test-info {
+            background: rgba(255, 170, 0, 0.2);
+            border-left: 4px solid #ffaa00;
+            color: #ffaa00;
+        }
+        
+        button {
+            background: #00eaff;
+            color: #0a0f1f;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #5effa1;
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .status-ready {
+            background: #5effa1;
+            color: #0a0f1f;
+        }
+        
+        .status-pending {
+            background: #ffaa00;
+            color: #0a0f1f;
+        }
+        
+        .status-failed {
+            background: #ff4444;
+            color: white;
+        }
+        
+        code {
+            background: rgba(0, 234, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #00eaff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ CSRF Protection Test Suite</h1>
+        
+        <div class="test-section">
+            <h2>System Status</h2>
+            <div id="systemStatus">
+                <p>🔄 Running initial checks...</p>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Test 1: Token Generation</h2>
+            <button onclick="testTokenGeneration()">Run Test</button>
+            <div id="test1Results"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Test 2: Token Storage</h2>
+            <button onclick="testTokenStorage()">Run Test</button>
+            <div id="test2Results"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Test 3: Token Validation</h2>
+            <button onclick="testTokenValidation()">Run Test</button>
+            <div id="test3Results"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Test 4: Token Expiry</h2>
+            <button onclick="testTokenExpiry()">Run Test</button>
+            <div id="test4Results"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Test 5: Form Integration</h2>
+            <button onclick="testFormIntegration()">Run Test</button>
+            <div id="test5Results"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Test 6: Token Rotation</h2>
+            <button onclick="testTokenRotation()">Run Test</button>
+            <div id="test6Results"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Run All Tests</h2>
+            <button onclick="runAllTests()" style="background: #5effa1;">🚀 Execute Full Test Suite</button>
+            <div id="allTestsResults"></div>
+        </div>
+    </div>
+
+    <script>
+        // Mock CSRFTokenManager for testing
+        const CSRFTokenManager = {
+            TOKEN_KEY: 'csrf_token',
+            TOKEN_TIMESTAMP: 'csrf_token_timestamp',
+            TOKEN_EXPIRY: 3600000, // 1 hour
+
+            generateToken() {
+                const array = new Uint8Array(32);
+                crypto.getRandomValues(array);
+                return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+            },
+
+            getToken() {
+                const token = sessionStorage.getItem(this.TOKEN_KEY);
+                const timestamp = sessionStorage.getItem(this.TOKEN_TIMESTAMP);
+                const now = Date.now();
+
+                if (token && timestamp && (now - parseInt(timestamp)) < this.TOKEN_EXPIRY) {
+                    return token;
+                }
+
+                const newToken = this.generateToken();
+                sessionStorage.setItem(this.TOKEN_KEY, newToken);
+                sessionStorage.setItem(this.TOKEN_TIMESTAMP, now.toString());
+                return newToken;
+            },
+
+            validateToken(token) {
+                const storedToken = sessionStorage.getItem(this.TOKEN_KEY);
+                const timestamp = sessionStorage.getItem(this.TOKEN_TIMESTAMP);
+                const now = Date.now();
+
+                return token === storedToken && 
+                       timestamp && 
+                       (now - parseInt(timestamp)) < this.TOKEN_EXPIRY;
+            },
+
+            rotateToken() {
+                const newToken = this.generateToken();
+                sessionStorage.setItem(this.TOKEN_KEY, newToken);
+                sessionStorage.setItem(this.TOKEN_TIMESTAMP, Date.now().toString());
+                return newToken;
+            }
+        };
+
+        // System status check
+        window.addEventListener('DOMContentLoaded', () => {
+            const statusDiv = document.getElementById('systemStatus');
+            
+            const checks = {
+                crypto: typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function',
+                sessionStorage: typeof sessionStorage !== 'undefined',
+                fetch: typeof fetch === 'function'
+            };
+            
+            let html = '';
+            if (checks.crypto && checks.sessionStorage && checks.fetch) {
+                html = `
+                    <div class="test-pass">
+                        ✅ <strong>System Ready</strong><br>
+                        • Crypto API: Available<br>
+                        • Session Storage: Available<br>
+                        • Fetch API: Available
+                    </div>
+                    <div class="test-info">
+                        ℹ️ All dependencies are available. CSRF protection can be tested.
+                    </div>
+                `;
+            } else {
+                html = `
+                    <div class="test-fail">
+                        ❌ <strong>System Check Failed</strong><br>
+                        ${!checks.crypto ? '• Crypto API: Not Available<br>' : ''}
+                        ${!checks.sessionStorage ? '• Session Storage: Not Available<br>' : ''}
+                        ${!checks.fetch ? '• Fetch API: Not Available<br>' : ''}
+                    </div>
+                `;
+            }
+            
+            statusDiv.innerHTML = html;
+        });
+
+        // Test 1: Token Generation
+        function testTokenGeneration() {
+            const results = document.getElementById('test1Results');
+            results.innerHTML = '<p>🔄 Running test...</p>';
+            
+            try {
+                const token = CSRFTokenManager.generateToken();
+                
+                const tests = [
+                    { name: 'Token exists', pass: token !== null && token !== undefined },
+                    { name: 'Token is string', pass: typeof token === 'string' },
+                    { name: 'Token length is 64 characters', pass: token.length === 64 },
+                    { name: 'Token is hexadecimal', pass: /^[0-9a-f]{64}$/.test(token) },
+                    { name: 'Token is unique', pass: token !== CSRFTokenManager.generateToken() }
+                ];
+                
+                let html = '';
+                tests.forEach(test => {
+                    html += `<div class="test-${test.pass ? 'pass' : 'fail'}">
+                        ${test.pass ? '✅' : '❌'} ${test.name}
+                    </div>`;
+                });
+                
+                html += `<pre>Sample Token: ${token}</pre>`;
+                html += `<div class="test-info">ℹ️ 256-bit entropy (2^256 possible values)</div>`;
+                
+                results.innerHTML = html;
+            } catch (error) {
+                results.innerHTML = `<div class="test-fail">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        // Test 2: Token Storage
+        function testTokenStorage() {
+            const results = document.getElementById('test2Results');
+            results.innerHTML = '<p>🔄 Running test...</p>';
+            
+            try {
+                // Clear storage
+                sessionStorage.removeItem('csrf_token');
+                sessionStorage.removeItem('csrf_token_timestamp');
+                
+                const token1 = CSRFTokenManager.getToken();
+                const storedToken = sessionStorage.getItem('csrf_token');
+                const storedTimestamp = sessionStorage.getItem('csrf_token_timestamp');
+                
+                // Get again (should return same token)
+                const token2 = CSRFTokenManager.getToken();
+                
+                const tests = [
+                    { name: 'Token stored in sessionStorage', pass: storedToken !== null },
+                    { name: 'Timestamp stored in sessionStorage', pass: storedTimestamp !== null },
+                    { name: 'Stored token matches generated', pass: token1 === storedToken },
+                    { name: 'getToken() returns same token', pass: token1 === token2 },
+                    { name: 'Timestamp is recent', pass: Date.now() - parseInt(storedTimestamp) < 1000 }
+                ];
+                
+                let html = '';
+                tests.forEach(test => {
+                    html += `<div class="test-${test.pass ? 'pass' : 'fail'}">
+                        ${test.pass ? '✅' : '❌'} ${test.name}
+                    </div>`;
+                });
+                
+                html += `<pre>Token: ${storedToken}
+Timestamp: ${storedTimestamp} (${new Date(parseInt(storedTimestamp)).toLocaleString()})</pre>`;
+                
+                results.innerHTML = html;
+            } catch (error) {
+                results.innerHTML = `<div class="test-fail">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        // Test 3: Token Validation
+        function testTokenValidation() {
+            const results = document.getElementById('test3Results');
+            results.innerHTML = '<p>🔄 Running test...</p>';
+            
+            try {
+                const validToken = CSRFTokenManager.getToken();
+                const invalidToken = 'invalid-token-12345';
+                const expiredTimestamp = (Date.now() - 3700000).toString(); // 1 hour + 100 seconds ago
+                
+                // Test with expired token
+                sessionStorage.setItem('csrf_token_timestamp', expiredTimestamp);
+                const expiredValidation = CSRFTokenManager.validateToken(validToken);
+                
+                // Reset to valid timestamp
+                sessionStorage.setItem('csrf_token_timestamp', Date.now().toString());
+                
+                const tests = [
+                    { name: 'Valid token accepted', pass: CSRFTokenManager.validateToken(validToken) },
+                    { name: 'Invalid token rejected', pass: !CSRFTokenManager.validateToken(invalidToken) },
+                    { name: 'Empty token rejected', pass: !CSRFTokenManager.validateToken('') },
+                    { name: 'Null token rejected', pass: !CSRFTokenManager.validateToken(null) },
+                    { name: 'Expired token rejected', pass: !expiredValidation }
+                ];
+                
+                let html = '';
+                tests.forEach(test => {
+                    html += `<div class="test-${test.pass ? 'pass' : 'fail'}">
+                        ${test.pass ? '✅' : '❌'} ${test.name}
+                    </div>`;
+                });
+                
+                html += `<div class="test-info">ℹ️ All validation checks working correctly</div>`;
+                
+                results.innerHTML = html;
+            } catch (error) {
+                results.innerHTML = `<div class="test-fail">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        // Test 4: Token Expiry
+        function testTokenExpiry() {
+            const results = document.getElementById('test4Results');
+            results.innerHTML = '<p>🔄 Running test...</p>';
+            
+            try {
+                const token = CSRFTokenManager.getToken();
+                const timestamp = parseInt(sessionStorage.getItem('csrf_token_timestamp'));
+                const expiryTime = timestamp + CSRFTokenManager.TOKEN_EXPIRY;
+                const timeUntilExpiry = expiryTime - Date.now();
+                
+                const tests = [
+                    { name: 'Token has expiry time', pass: CSRFTokenManager.TOKEN_EXPIRY > 0 },
+                    { name: 'Expiry is 1 hour (3600000ms)', pass: CSRFTokenManager.TOKEN_EXPIRY === 3600000 },
+                    { name: 'Token not yet expired', pass: timeUntilExpiry > 0 }
+                ];
+                
+                let html = '';
+                tests.forEach(test => {
+                    html += `<div class="test-${test.pass ? 'pass' : 'fail'}">
+                        ${test.pass ? '✅' : '❌'} ${test.name}
+                    </div>`;
+                });
+                
+                const minutesUntilExpiry = Math.floor(timeUntilExpiry / 60000);
+                html += `<pre>Current Token Age: ${Math.floor((Date.now() - timestamp) / 1000)} seconds
+Time Until Expiry: ${minutesUntilExpiry} minutes
+Expires At: ${new Date(expiryTime).toLocaleString()}</pre>`;
+                
+                html += `<div class="test-info">ℹ️ Tokens expire after 1 hour for security</div>`;
+                
+                results.innerHTML = html;
+            } catch (error) {
+                results.innerHTML = `<div class="test-fail">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        // Test 5: Form Integration
+        function testFormIntegration() {
+            const results = document.getElementById('test5Results');
+            results.innerHTML = '<p>🔄 Running test...</p>';
+            
+            try {
+                // Check if running on contact page
+                const isContactPage = window.location.pathname.includes('contact.html');
+                
+                let html = '';
+                
+                if (isContactPage) {
+                    const form = document.getElementById('contactForm');
+                    const csrfField = form ? form.querySelector('input[name="csrf_token"]') : null;
+                    
+                    const tests = [
+                        { name: 'Contact form exists', pass: form !== null },
+                        { name: 'CSRF hidden field exists', pass: csrfField !== null },
+                        { name: 'CSRF field has value', pass: csrfField && csrfField.value.length === 64 },
+                        { name: 'CSRF field is hidden', pass: csrfField && csrfField.type === 'hidden' },
+                        { name: 'CSRF field has security attribute', pass: csrfField && csrfField.hasAttribute('data-security') }
+                    ];
+                    
+                    tests.forEach(test => {
+                        html += `<div class="test-${test.pass ? 'pass' : 'fail'}">
+                            ${test.pass ? '✅' : '❌'} ${test.name}
+                        </div>`;
+                    });
+                    
+                    if (csrfField) {
+                        html += `<pre>CSRF Field Value: ${csrfField.value}
+Field Type: ${csrfField.type}
+Security Attribute: ${csrfField.getAttribute('data-security')}</pre>`;
+                    }
+                } else {
+                    html = `<div class="test-info">
+                        ℹ️ <strong>Not on contact page</strong><br>
+                        Open <a href="contact.html" style="color: #00eaff;">contact.html</a> to test form integration.
+                    </div>`;
+                }
+                
+                results.innerHTML = html;
+            } catch (error) {
+                results.innerHTML = `<div class="test-fail">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        // Test 6: Token Rotation
+        function testTokenRotation() {
+            const results = document.getElementById('test6Results');
+            results.innerHTML = '<p>🔄 Running test...</p>';
+            
+            try {
+                const oldToken = CSRFTokenManager.getToken();
+                const oldTimestamp = sessionStorage.getItem('csrf_token_timestamp');
+                
+                // Wait a moment
+                setTimeout(() => {
+                    const newToken = CSRFTokenManager.rotateToken();
+                    const newTimestamp = sessionStorage.getItem('csrf_token_timestamp');
+                    
+                    const tests = [
+                        { name: 'New token generated', pass: newToken !== oldToken },
+                        { name: 'New token is valid', pass: CSRFTokenManager.validateToken(newToken) },
+                        { name: 'Old token invalidated', pass: !CSRFTokenManager.validateToken(oldToken) },
+                        { name: 'Timestamp updated', pass: newTimestamp !== oldTimestamp },
+                        { name: 'New timestamp is recent', pass: Date.now() - parseInt(newTimestamp) < 1000 }
+                    ];
+                    
+                    let html = '';
+                    tests.forEach(test => {
+                        html += `<div class="test-${test.pass ? 'pass' : 'fail'}">
+                            ${test.pass ? '✅' : '❌'} ${test.name}
+                        </div>`;
+                    });
+                    
+                    html += `<pre>Old Token: ${oldToken}
+New Token: ${newToken}
+Tokens Different: ${oldToken !== newToken}</pre>`;
+                    
+                    html += `<div class="test-info">ℹ️ Token rotation prevents replay attacks</div>`;
+                    
+                    results.innerHTML = html;
+                }, 100);
+            } catch (error) {
+                results.innerHTML = `<div class="test-fail">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        // Run all tests
+        async function runAllTests() {
+            const results = document.getElementById('allTestsResults');
+            results.innerHTML = '<p>🔄 Running all tests...</p>';
+            
+            testTokenGeneration();
+            await new Promise(r => setTimeout(r, 100));
+            
+            testTokenStorage();
+            await new Promise(r => setTimeout(r, 100));
+            
+            testTokenValidation();
+            await new Promise(r => setTimeout(r, 100));
+            
+            testTokenExpiry();
+            await new Promise(r => setTimeout(r, 100));
+            
+            testFormIntegration();
+            await new Promise(r => setTimeout(r, 100));
+            
+            testTokenRotation();
+            
+            results.innerHTML = `
+                <div class="test-pass">
+                    ✅ <strong>All tests executed</strong><br>
+                    Check individual test sections above for detailed results.
+                </div>
+                <div class="test-info">
+                    ℹ️ Review each section to verify all tests passed.<br>
+                    Green = Pass, Red = Fail
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

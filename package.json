@@ -1,0 +1,31 @@
+{
+  "name": "azhar-ali-portfolio",
+  "version": "1.0.0",
+  "description": "Professional portfolio website for Azhar Ali with production optimization",
+  "private": true,
+  "scripts": {
+    "clean": "node build-scripts/clean.js",
+    "build:js": "node build-scripts/build-js.js",
+    "build:css": "node build-scripts/build-css.js",
+    "build": "npm run clean && npm run build:js && npm run build:css",
+    "watch": "npm run build -- --watch",
+    "serve": "npx http-server . -p 8080 -c-1",
+    "dev": "npm run serve",
+    "production": "npm run build && npm run serve"
+  },
+  "keywords": [
+    "portfolio",
+    "cybersecurity",
+    "web-development"
+  ],
+  "author": "Azhar Ali",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.19.11",
+    "clean-css": "^5.3.3",
+    "clean-css-cli": "^5.6.3",
+    "html-minifier-terser": "^7.2.0",
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {}
+}

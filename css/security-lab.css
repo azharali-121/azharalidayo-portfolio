@@ -1,0 +1,787 @@
+/**
+ * Security Lab Styles
+ * Scoped styles for the security breach simulator
+ * 
+ * Design: Hacker dashboard aesthetic with dark theme
+ * Colors: Black backgrounds, neon green/cyan accents
+ * Typography: Monospace for terminal, sans-serif for UI
+ */
+
+/* ===========================
+   Security Lab Section
+   =========================== */
+.security-lab-section {
+    min-height: 100vh;
+    padding: 8rem 0 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+.security-lab-section .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.security-lab-section .section-title {
+    font-size: 2.5rem;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-blue, #0ff);
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.security-lab-section .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ===========================
+   Security Dashboard
+   =========================== */
+.security-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ===========================
+   Dashboard Panels
+   =========================== */
+.dashboard-panel {
+    background: linear-gradient(135deg, rgba(10, 15, 31, 0.95) 0%, rgba(20, 25, 45, 0.95) 100%);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.dashboard-panel:hover {
+    border-color: rgba(0, 255, 255, 0.4);
+    box-shadow: 0 8px 30px rgba(0, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.panel-header {
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(0, 255, 65, 0.1) 100%);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.panel-header i {
+    color: #0ff;
+    font-size: 1.25rem;
+}
+
+.panel-header h2 {
+    font-size: 1.25rem;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--text-primary, #fff);
+    margin: 0;
+    flex: 1;
+}
+
+.panel-content {
+    padding: 1.5rem;
+}
+
+/* ===========================
+   Target System Panel
+   =========================== */
+.target-panel {
+    grid-column: 1 / -1;
+}
+
+.target-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    border-left: 3px solid #0ff;
+}
+
+.info-row .label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.info-row .value {
+    color: #00ff41;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+/* Status Badge */
+.status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    margin-left: auto;
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+.status-badge.status-secure {
+    background: rgba(0, 255, 65, 0.2);
+    color: #00ff41;
+    border: 2px solid #00ff41;
+}
+
+.status-badge.status-attack {
+    background: rgba(255, 69, 0, 0.2);
+    color: #ff4500;
+    border: 2px solid #ff4500;
+}
+
+.status-badge.status-locked {
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff0000;
+    border: 2px solid #ff0000;
+}
+
+.status-badge.status-limited {
+    background: rgba(255, 165, 0, 0.2);
+    color: #ffa500;
+    border: 2px solid #ffa500;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* ===========================
+   Control Panel
+   =========================== */
+.attack-btn {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(135deg, #0ff 0%, #00ff41 100%);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.attack-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 255, 255, 0.4);
+}
+
+.attack-btn:active {
+    transform: translateY(0);
+}
+
+.attack-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.attack-btn.stop-btn {
+    background: linear-gradient(135deg, #ff4500 0%, #ff0000 100%);
+    color: #fff;
+}
+
+.attack-btn.reset-btn {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.attack-btn.reset-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Attack Stats */
+.attack-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 3px solid #0ff;
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+}
+
+/* Progress Bar */
+.progress-container {
+    margin-top: 1.5rem;
+}
+
+.progress-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #0ff 0%, #00ff41 100%);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: progressShimmer 2s infinite;
+}
+
+@keyframes progressShimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-text {
+    text-align: center;
+    font-weight: 700;
+    color: #0ff;
+    margin-top: 0.5rem;
+    font-family: 'Courier New', monospace;
+}
+
+/* ===========================
+   Terminal Panel
+   =========================== */
+.terminal-panel {
+    grid-column: 1 / -1;
+    min-height: 400px;
+}
+
+.terminal-output {
+    background: #000;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    padding: 1rem;
+    border-radius: 6px;
+    max-height: 400px;
+    overflow-y: auto;
+    line-height: 1.6;
+    border: 1px solid rgba(0, 255, 65, 0.3);
+}
+
+.terminal-line {
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 0.75rem;
+    animation: terminalLineAppear 0.2s ease-out;
+}
+
+@keyframes terminalLineAppear {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.terminal-line .timestamp {
+    color: rgba(0, 255, 255, 0.6);
+    flex-shrink: 0;
+}
+
+.terminal-line .message {
+    color: #00ff41;
+    word-break: break-word;
+}
+
+.terminal-line.error .message {
+    color: #ff4444;
+}
+
+.terminal-line.warning .message {
+    color: #ffa500;
+}
+
+.terminal-line.system .message {
+    color: #0ff;
+}
+
+.terminal-line.attack .message {
+    color: #ff4500;
+    font-weight: 700;
+}
+
+.terminal-line.info .message {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.clear-btn {
+    background: rgba(255, 0, 0, 0.2);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    color: #ff4444;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: auto;
+}
+
+.clear-btn:hover {
+    background: rgba(255, 0, 0, 0.3);
+    border-color: rgba(255, 0, 0, 0.6);
+}
+
+/* Custom scrollbar for terminal */
+.terminal-output::-webkit-scrollbar {
+    width: 10px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+    background: rgba(0, 255, 65, 0.1);
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 65, 0.3);
+    border-radius: 5px;
+}
+
+.terminal-output::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 65, 0.5);
+}
+
+/* ===========================
+   Defense Panel
+   =========================== */
+.defense-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.defense-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border-left: 4px solid #0ff;
+    transition: all 0.3s ease;
+}
+
+.defense-item:hover {
+    background: rgba(0, 0, 0, 0.3);
+    transform: translateX(5px);
+}
+
+.defense-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 255, 255, 0.1);
+    border-radius: 50%;
+    border: 2px solid #0ff;
+    flex-shrink: 0;
+}
+
+.defense-icon i {
+    font-size: 1.5rem;
+    color: #0ff;
+}
+
+.defense-info {
+    flex: 1;
+}
+
+.defense-info h3 {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 0.25rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.defense-info p {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5rem;
+}
+
+.defense-status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.defense-status.active {
+    background: rgba(0, 255, 65, 0.2);
+    color: #00ff41;
+    border: 1px solid #00ff41;
+}
+
+/* ===========================
+   Explanation Panel
+   =========================== */
+.explanation-panel {
+    grid-column: 1 / -1;
+    animation: explanationSlideIn 0.5s ease-out;
+}
+
+@keyframes explanationSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.explanation-content {
+    line-height: 1.8;
+}
+
+.explanation-section {
+    margin-bottom: 2rem;
+}
+
+.explanation-section h3 {
+    font-size: 1.5rem;
+    color: #0ff;
+    margin-bottom: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.explanation-section h4 {
+    font-size: 1.2rem;
+    color: #00ff41;
+    margin-bottom: 0.75rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.explanation-text p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+}
+
+.defense-list-explanation {
+    list-style: none;
+    padding: 0;
+}
+
+.defense-list-explanation li {
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid #0ff;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.defense-list-explanation li strong {
+    color: #0ff;
+}
+
+.takeaway {
+    background: rgba(0, 255, 65, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 255, 65, 0.3);
+}
+
+.takeaway p {
+    color: #fff;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.recommendations {
+    background: rgba(0, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 255, 255, 0.2);
+}
+
+.recommendations ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recommendations li {
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 3px solid #0ff;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.recommendations li strong {
+    color: #0ff;
+    display: inline-block;
+    min-width: 180px;
+}
+
+.stats {
+    margin-top: 2rem;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-box {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+    border-color: rgba(0, 255, 255, 0.6);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 255, 255, 0.2);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===========================
+   Warning Banner
+   =========================== */
+.warning-banner {
+    background: linear-gradient(135deg, rgba(255, 165, 0, 0.1) 0%, rgba(255, 69, 0, 0.1) 100%);
+    border: 2px solid rgba(255, 165, 0, 0.3);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.warning-banner i {
+    font-size: 1.5rem;
+    color: #ffa500;
+    flex-shrink: 0;
+}
+
+.warning-banner strong {
+    color: #ffa500;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 1024px) {
+    .security-dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    .target-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .security-lab-section {
+        padding: 6rem 0 2rem;
+    }
+    
+    .security-lab-section .section-title {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .dashboard-panel {
+        margin: 0 0.5rem;
+    }
+    
+    .panel-header {
+        padding: 1rem;
+    }
+    
+    .panel-content {
+        padding: 1rem;
+    }
+    
+    .attack-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .terminal-output {
+        font-size: 0.8rem;
+        max-height: 300px;
+    }
+    
+    .recommendations li strong {
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .security-lab-section .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .attack-btn {
+        font-size: 0.9rem;
+        padding: 0.875rem 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .defense-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .defense-icon {
+        margin: 0 auto;
+    }
+}
+
+/* ===========================
+   Accessibility
+   =========================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .dashboard-panel:hover {
+        transform: none;
+    }
+    
+    .attack-btn:hover {
+        transform: none;
+    }
+    
+    .stat-box:hover {
+        transform: none;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+.attack-btn:focus,
+.clear-btn:focus {
+    outline: 3px solid #0ff;
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .security-lab-section {
+        padding: 2rem 0;
+    }
+    
+    .dashboard-panel {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    .attack-btn,
+    .clear-btn {
+        display: none;
+    }
+}

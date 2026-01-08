@@ -19,7 +19,7 @@
         const body = document.body;
 
         if (!navToggle || !navMenu) {
-            console.warn('Navigation elements not found');
+            // Navigation elements not found
             return;
         }
 
@@ -33,7 +33,7 @@
             navToggle.setAttribute('aria-expanded', isExpanded);
             navMenu.setAttribute('aria-hidden', !isExpanded);
             
-            console.log('Menu toggled:', isExpanded ? 'open' : 'closed');
+            // Production: Menu toggle logging disabled
         }
 
         // Close mobile menu
@@ -46,7 +46,7 @@
             navToggle.setAttribute('aria-expanded', 'false');
             navMenu.setAttribute('aria-hidden', 'true');
             
-            console.log('Menu closed');
+            // Production: Menu close logging disabled
         }
 
         // Hamburger toggle click
@@ -112,6 +112,6 @@
         // Initialize active page
         setActivePage();
 
-        console.log('Multi-page mobile navigation initialized');
+        // Production: Console logging disabled
     }
 })();

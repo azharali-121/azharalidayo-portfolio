@@ -39,9 +39,7 @@ function loadScript(src) {
  */
 function initializeVantaBackground() {
     // This is now handled directly in the HTML for better performance
-    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-        console.log('Vanta background initialized');
-    }
+    // Production: Console logging disabled
 }
 
 /**

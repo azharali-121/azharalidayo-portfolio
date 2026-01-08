@@ -79,10 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    // Console message for debugging (development only)
-    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-        console.log('Dark cyber theme enforced');
-    }
+    // Production: Console logging disabled
 });
 
 // Force the proper Vanta effect configuration when it initializes

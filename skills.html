@@ -70,7 +70,11 @@
     <link rel="stylesheet" href="assets/styles/min/main.min.css">
     <link rel="stylesheet" href="assets/styles/components/mobile-responsive.css">
     <link rel="stylesheet" href="assets/styles/components/hacker-features.css">
+    <link rel="stylesheet" href="assets/styles/components/attack-surface.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div id="vanta-bg"></div>
@@ -87,7 +91,9 @@
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
                 <li><a href="skills.html" class="nav-link active">Technical Skills</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="assets/documents/Resume(CV).pdf" class="nav-link" download="Azhar-Ali-Resume.pdf">Resume</a></li>
+                <li><a href="security-lab.html" class="nav-link">Security Lab</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="assets/documents/Resume%28CV%29.pdf" class="nav-link" download="Azhar-Ali-Resume.pdf">Resume</a></li>
             </ul>
             
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
@@ -245,6 +251,32 @@
         </div>
     </section>
 
+    <!-- Attack Surface Overview Section -->
+    <section class="attack-surface-section">
+        <div class="container">
+            <div class="section-header">
+                <i class="fas fa-radar"></i>
+                <h2 class="glitch-text" data-text="Attack Surface Overview">Attack Surface Overview</h2>
+                <p class="section-description">Security analysis of application layers and potential vulnerability exposure areas</p>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="attackSurfaceChart"></canvas>
+            </div>
+            
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: rgba(0, 255, 255, 0.2); border: 2px solid #0ff;"></div>
+                    <span>Current attack surface mapping across different application layers</span>
+                </div>
+                <p class="chart-note">
+                    <i class="fas fa-info-circle"></i>
+                    Higher values indicate larger attack surfaces requiring enhanced security measures. This visualization helps identify critical areas for security hardening and penetration testing focus.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="footer__container">
             <div class="footer__section">
@@ -277,7 +309,7 @@
                     <a href="skills.html"><i class="fas fa-chevron-right"></i> Technical Skills</a>
                     <a href="about.html"><i class="fas fa-chevron-right"></i> About</a>
                     <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a>
-                    <a href="assets/documents/Resume(CV).pdf" download="Azhar-Ali-Resume.pdf"><i class="fas fa-chevron-right"></i> Resume</a>
+                    <a href="assets/documents/Resume%28CV%29.pdf" download="Azhar-Ali-Resume.pdf"><i class="fas fa-chevron-right"></i> Resume</a>
                 </div>
             </div>
             
@@ -319,6 +351,112 @@
     <script src="js/fab-message.js" defer></script>
     <script src="js/coming-soon-modal.js" defer></script>
     <script src="js/skill-demos.js" defer></script>
+    <script src="js/self-explaining-system.js" defer></script>
+    <script src="js/system-state-mode.js" defer></script>
+    
+    <!-- Attack Surface Radar Chart -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('attackSurfaceChart');
+            if (!ctx) return;
+            
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'UI Surface',
+                        'Client Logic',
+                        'Backend APIs',
+                        'Security Layer',
+                        'Performance'
+                    ],
+                    datasets: [{
+                        label: 'Attack Surface Exposure',
+                        data: [85, 80, 70, 65, 75],
+                        backgroundColor: 'rgba(0, 255, 255, 0.15)',
+                        borderColor: '#0ff',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#0ff',
+                        pointBorderColor: '#0a0f1f',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointHoverBackgroundColor: '#00ff41',
+                        pointHoverBorderColor: '#0ff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                color: '#0ff',
+                                font: {
+                                    family: "'Courier New', 'Consolas', monospace",
+                                    size: 14,
+                                    weight: '600'
+                                },
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(10, 15, 31, 0.95)',
+                            titleColor: '#0ff',
+                            bodyColor: '#fff',
+                            borderColor: '#0ff',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.r + '% exposure';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            min: 0,
+                            ticks: {
+                                stepSize: 20,
+                                color: '#0ff',
+                                backdropColor: 'transparent',
+                                font: {
+                                    family: "'Courier New', 'Consolas', monospace",
+                                    size: 12
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 255, 255, 0.2)',
+                                circular: true
+                            },
+                            pointLabels: {
+                                color: '#0ff',
+                                font: {
+                                    family: "'Courier New', 'Consolas', monospace",
+                                    size: 13,
+                                    weight: '700'
+                                },
+                                padding: 10
+                            },
+                            angleLines: {
+                                color: 'rgba(0, 255, 255, 0.3)'
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeInOutQuart'
+                    }
+                }
+            });
+        });
+    </script>
     
     <script>
         // Update footer year automatically

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Access Point</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        
+        .container {
+            max-width: min(800px, 90vw);
+            width: 100%;
+            border: 2px solid #0ff;
+            border-radius: 12px;
+            padding: 1.25rem;
+            background: rgba(0, 20, 40, 0.9);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+        
+        .header {
+            color: #0ff;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+            text-align: center;
+            word-wrap: break-word;
+        }
+        
+        .content {
+            line-height: 1.8;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+        }
+        
+        .content p {
+            margin-bottom: 1rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .content ul {
+            word-wrap: break-word;
+        }
+        
+        .flag {
+            background: rgba(0, 255, 65, 0.1);
+            border: 2px solid #00ff41;
+            padding: 1.25rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            text-align: center;
+            font-size: clamp(0.9rem, 3vw, 1.3rem);
+            font-weight: bold;
+            letter-spacing: 1px;
+            animation: glow 2s ease-in-out infinite;
+            font-family: 'Courier New', monospace;
+            word-wrap: break-word;
+            overflow-wrap: anywhere;
+            word-break: break-all;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(0, 255, 65, 0.8); }
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 2rem;
+            color: #0ff;
+            font-style: italic;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            word-wrap: break-word;
+        }
+        
+        .error {
+            color: #ff4444;
+            text-align: center;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            word-wrap: break-word;
+        }
+        
+        .hint {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            margin-top: 1rem;
+            text-align: center;
+            word-wrap: break-word;
+        }
+        
+        a {
+            color: #0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            word-wrap: break-word;
+        }
+        
+        a:hover {
+            color: #00ff41;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+        }
+        
+        .ascii-art {
+            font-size: clamp(0.4rem, 1.5vw, 0.7rem);
+            line-height: 1.2;
+            color: rgba(0, 255, 255, 0.6);
+            margin: 1rem 0;
+            text-align: center;
+            overflow-x: auto;
+            white-space: pre;
+            padding: 0.5rem;
+        }
+        
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+            }
+            
+            .container {
+                padding: 1rem;
+                border-radius: 8px;
+            }
+            
+            .flag {
+                padding: 1rem;
+                margin: 1.5rem 0;
+                letter-spacing: 0.5px;
+            }
+            
+            .content ul {
+                margin-left: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .ascii-art {
+                font-size: 0.35rem;
+            }
+            
+            .flag {
+                font-size: 0.85rem;
+                padding: 0.875rem;
+            }
+        }
+        
+        /* Ensure no horizontal overflow */
+        html, body {
+            overflow-x: hidden;
+        }
+        
+        * {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="content">
+        <!-- Content will be populated by JavaScript based on key validation -->
+    </div>
+
+    <script>
+        /**
+         * Flag Page - CTF Easter Egg
+         * 
+         * Purpose: Reward curious developers who follow the breadcrumb trail
+         * Security: Simple key validation, not a real authentication system
+         * 
+         * Expected flow:
+         * 1. User finds console hint
+         * 2. Discovers HTML comment in index.html
+         * 3. Explores window.__secrets object
+         * 4. Decodes path to this page
+         * 5. Reaches here with correct key parameter
+         */
+        
+        (function() {
+            'use strict';
+            
+            const container = document.getElementById('content');
+            
+            /**
+             * Get query parameter safely
+             * No eval, no innerHTML injection - using textContent
+             */
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+            
+            /**
+             * Sanitize text to prevent any XSS (defense in depth)
+             */
+            function sanitize(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            /**
+             * Show success message with flag
+             */
+            function showFlag() {
+                const asciiArt = `
+    ██████╗ ██╗   ██╗██████╗ ██╗ ██████╗ ███████╗██╗████████╗██╗   ██╗
+   ██╔════╝██║   ██║██╔══██╗██║██╔═══██╗██╔════╝██║╚══██╔══╝╚██╗ ██╔╝
+   ██║     ██║   ██║██████╔╝██║██║   ██║███████╗██║   ██║    ╚████╔╝ 
+   ██║     ██║   ██║██╔══██╗██║██║   ██║╚════██║██║   ██║     ╚██╔╝  
+   ╚██████╗╚██████╔╝██║  ██║██║╚██████╔╝███████║██║   ██║      ██║   
+    ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝      ╚═╝   
+                `;
+                
+                container.innerHTML = `
+                    <div class="header">🎯 FLAG CAPTURED</div>
+                    <div class="ascii-art">${sanitize(asciiArt)}</div>
+                    <div class="content">
+                        <p>Congratulations! You've demonstrated the curiosity and technical skills that I value.</p>
+                        <div class="flag">FLAG{CUR10S1TY_1S_TH3_K3Y_T0_D1SC0V3RY}</div>
+                        <p><strong>What this means:</strong></p>
+                        <ul style="list-style-position: inside; margin-left: 1rem;">
+                            <li>✓ You know how to use browser DevTools</li>
+                            <li>✓ You explore beyond the visible interface</li>
+                            <li>✓ You understand basic security concepts</li>
+                            <li>✓ You have the persistence to solve puzzles</li>
+                        </ul>
+                        <p style="margin-top: 1.5rem;">
+                            <strong>Why this matters:</strong> In cybersecurity and software development, 
+                            the best solutions come from those who ask questions, explore systems deeply, 
+                            and never settle for surface-level understanding.
+                        </p>
+                        <p>
+                            If you found this interesting, I'd love to connect. Whether you're recruiting, 
+                            collaborating, or just want to discuss security and development, reach out.
+                        </p>
+                        <p style="text-align: center; margin-top: 2rem;">
+                            <a href="index.html">← Back to Portfolio</a> | 
+                            <a href="contact.html">📧 Get in Touch</a> | 
+                            <a href="security-lab.html">🔒 Try the Security Lab</a>
+                        </p>
+                    </div>
+                    <div class="signature">
+                        — Azhar Ali<br>
+                        <span style="font-size: 0.9rem; color: rgba(255,255,255,0.6);">
+                            Cybersecurity Enthusiast | Full-Stack Developer
+                        </span>
+                    </div>
+                `;
+            }
+            
+            /**
+             * Show access denied message
+             */
+            function showDenied() {
+                container.innerHTML = `
+                    <div class="header">⚠️ ACCESS DENIED</div>
+                    <div class="content error">
+                        <p>Invalid access key.</p>
+                        <p class="hint">
+                            Hint: The answer is in the journey, not the destination.<br>
+                            Start from the beginning...
+                        </p>
+                        <p style="margin-top: 2rem; text-align: center;">
+                            <a href="index.html">← Return to Portfolio</a>
+                        </p>
+                    </div>
+                `;
+            }
+            
+            // Main logic
+            const key = getQueryParam('key');
+            const expectedKey = 'curiosity'; // From the clues
+            
+            if (key === expectedKey) {
+                showFlag();
+            } else {
+                showDenied();
+            }
+            
+            // Log to console for those who check
+            console.log('%c[FLAG PAGE]', 'color: #0ff; font-weight: bold;', 'Key validation:', key === expectedKey ? 'SUCCESS' : 'FAILED');
+        })();
+    </script>
+</body>
+</html>

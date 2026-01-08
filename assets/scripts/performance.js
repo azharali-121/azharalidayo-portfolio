@@ -41,9 +41,7 @@ class PerformanceMonitor {
                 for (const entry of entryList.getEntries()) {
                     if (entry.name === 'first-contentful-paint') {
                         this.metrics.firstContentfulPaint = entry.startTime;
-                        if (isDevelopment) {
-                            console.log(`First Contentful Paint: ${Math.round(entry.startTime)}ms`);
-                        }
+                        // Production: Performance logging disabled
                     }
                 }
             });
@@ -54,9 +52,7 @@ class PerformanceMonitor {
                 const entries = entryList.getEntries();
                 const lastEntry = entries[entries.length - 1];
                 this.metrics.largestContentfulPaint = lastEntry.startTime;
-                if (isDevelopment) {
-                    console.log(`Largest Contentful Paint: ${Math.round(lastEntry.startTime)}ms`);
-                }
+                // Production: Performance logging disabled
             });
             
             lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
@@ -67,10 +63,7 @@ class PerformanceMonitor {
         const navToDOM = this.metrics.domLoaded - this.metrics.navigationStart;
         const navToLoad = this.metrics.windowLoaded - this.metrics.navigationStart;
         
-        if (isDevelopment) {
-            console.log(`DOM Content Loaded: ${navToDOM}ms`);
-            console.log(`Window Loaded: ${navToLoad}ms`);
-        }
+        // Production: Performance metrics logged to analytics only
         
         // Send metrics to analytics if available
         if (window.gtag) {
@@ -273,10 +266,7 @@ class PerformanceMonitor {
         document.querySelectorAll('img').forEach(img => {
             // Add low quality version for slow connections
             // This would require having low-quality versions of images on server
-            // For demonstration, we're just logging this
-            if (isDevelopment) {
-                console.log("Network optimization: Would load low-quality version of", img.src);
-            }
+            // Production: Network logging disabled
         });
     }
     

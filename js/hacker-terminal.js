@@ -1,6 +1,7 @@
 /**
  * Hacker Terminal Animation
  * Simulates a terminal boot sequence with typing effect
+ * Respects prefers-reduced-motion accessibility preference
  */
 
 class HackerTerminal {
@@ -8,9 +9,17 @@ class HackerTerminal {
         this.container = document.getElementById(containerId);
         if (!this.container) return;
 
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const config = window.PortfolioConfig || {};
+        const typingEnabled = config.typingAnimationsEnabled !== undefined ? 
+                             config.typingAnimationsEnabled : 
+                             !prefersReducedMotion;
+
         this.options = {
-            typingSpeed: 50,
-            messageDelay: 300,
+            typingSpeed: typingEnabled ? 50 : 0, // Instant if reduced motion
+            messageDelay: typingEnabled ? 300 : 0, // No delay if reduced motion
+            animationsEnabled: typingEnabled,
             messages: [
                 'booting portfolio system...',
                 'initializing secure connection...',
@@ -29,7 +38,31 @@ class HackerTerminal {
 
     init() {
         this.container.innerHTML = '';
-        this.runTerminal();
+        
+        // If animations disabled, show all messages instantly
+        if (!this.options.animationsEnabled) {
+            this.showAllMessagesInstantly();
+        } else {
+            this.runTerminal();
+        }
+    }
+
+    showAllMessagesInstantly() {
+        this.options.messages.forEach(message => {
+            const line = document.createElement('div');
+            line.className = 'terminal-line';
+            
+            const prefix = document.createElement('span');
+            prefix.className = 'terminal-prefix';
+            prefix.textContent = '$ ';
+            line.appendChild(prefix);
+            
+            const text = document.createElement('span');
+            text.textContent = message;
+            line.appendChild(text);
+            
+            this.container.appendChild(line);
+        });
     }
 
     async typeMessage(message) {
@@ -44,6 +77,12 @@ class HackerTerminal {
 
         const text = document.createElement('span');
         line.appendChild(text);
+
+        // If animations disabled, show instantly
+        if (!this.options.animationsEnabled) {
+            text.textContent = message;
+            return;
+        }
 
         for (let i = 0; i < message.length; i++) {
             text.textContent += message[i];

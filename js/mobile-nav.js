@@ -12,7 +12,7 @@
     const navLinks = document.querySelectorAll('.nav-link');
     
     if (!navToggle || !navMenu) {
-        console.warn('Mobile nav: Required elements not found');
+        // Mobile nav elements not found - disabled
         return;
     }
 
@@ -101,6 +101,6 @@
     // Set active link on page load
     setActiveLink();
 
-    console.log('✅ Mobile navigation initialized');
+    // Production: Console logging disabled
 })();
 

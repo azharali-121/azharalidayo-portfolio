@@ -21,14 +21,26 @@
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isSmallScreen = window.innerWidth < 768;
     
-    // SAFEGUARD: Don't initialize Vanta on mobile screens or if user prefers reduced motion
-    if (isSmallScreen) {
-        console.log('⚠️ Vanta disabled: Screen width < 768px (mobile device)');
-        return;
+    // Check global config if available
+    const config = window.PortfolioConfig || {};
+    const particlesEnabled = config.particlesEnabled !== undefined ? 
+                            config.particlesEnabled : 
+                            (!isSmallScreen && !prefersReducedMotion);
+    
+    /**
+     * Apply static gradient fallback when particles disabled
+     */
+    function applyStaticFallback() {
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+            heroSection.style.background = 'linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1428 100%)';
+            heroSection.classList.add('static-background');
+        }
     }
     
-    if (prefersReducedMotion) {
-        console.log('⚠️ Vanta disabled: User prefers reduced motion');
+    // SAFEGUARD: Don't initialize Vanta on mobile screens or if user prefers reduced motion
+    if (!particlesEnabled || isSmallScreen || prefersReducedMotion) {
+        applyStaticFallback();
         return;
     }
 
@@ -38,13 +50,13 @@
     function initializeParticles() {
         // Wait for Vanta and Three.js to load
         if (typeof VANTA === 'undefined' || typeof THREE === 'undefined') {
-            console.warn('⚠️ Vanta.js or Three.js not loaded');
+            // Vanta.js or Three.js not loaded
             return;
         }
 
         const heroSection = document.querySelector('.hero');
         if (!heroSection) {
-            console.warn('⚠️ Hero section not found');
+            // Hero section not found - particles disabled
             return;
         }
 
@@ -68,7 +80,7 @@
                     showLines: false // Disable lines for better performance
                 });
                 
-                console.log('✅ Mobile-optimized particles initialized (DOTS)');
+                // Mobile-optimized particles initialized (DOTS)
             } else {
                 // Desktop settings: Full effect
                 VANTA.CUBES({
@@ -86,10 +98,10 @@
                     spacing: 3.5
                 });
                 
-                console.log('✅ Desktop particles initialized (CUBES)');
+                // Desktop particles initialized (CUBES)
             }
         } catch (error) {
-            console.error('❌ Particle initialization error:', error);
+            // Particle initialization error - silently fail
         }
     }
 
@@ -111,7 +123,7 @@
     // SAFEGUARD: Destroy Vanta if window resized below 768px
     window.addEventListener('resize', () => {
         if (window.vantaEffect && window.innerWidth < 768) {
-            console.log('⚠️ Vanta disabled: Window resized below 768px');
+            // Vanta disabled: Window resized below 768px
             window.vantaEffect.destroy();
             window.vantaEffect = null;
         }
