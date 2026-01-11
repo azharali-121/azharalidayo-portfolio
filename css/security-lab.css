@@ -10,10 +10,10 @@
 /* ===========================
    Navigation Fixes
    =========================== */
-/* Navbar positioning fix */
+/* Ensure navbar doesn't interfere with toggle button */
 .navbar {
-    position: relative;
-    z-index: 1000;
+    position: fixed !important;
+    z-index: 1000 !important;
 }
 
 .nav-container {
@@ -21,46 +21,32 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 1000;
 }
 
-/* Hide toggle on desktop, show only on mobile */
+/* Override security-lab specific nav-toggle styles to match main.min.css */
 .nav-toggle {
     display: none; /* Hide by default on desktop */
-    background: transparent;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    z-index: 1001;
     flex-direction: column;
     justify-content: space-between;
     width: 30px;
     height: 21px;
+    cursor: pointer;
+    z-index: 999 !important; /* Match main.min.css */
+    background: transparent;
+    border: none;
+    padding: 0;
     position: relative;
-    /* Ensure visibility and touch targets */
-    min-width: 44px;
-    min-height: 44px;
-    align-items: center;
-    /* Ensure it's above other elements */
-    pointer-events: auto;
 }
 
 .nav-toggle .bar {
+    display: block;
     width: 100%;
     height: 3px;
-    background: var(--primary-color);
     border-radius: 3px;
+    background: var(--primary-color);
     transition: all 0.3s ease;
-    display: block;
     box-shadow: 0 0 5px rgba(0, 234, 255, 0.5);
-    /* Hardware acceleration */
-    will-change: transform, opacity;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-}
-
-.nav-toggle:hover .bar {
-    background: var(--secondary-color);
-    box-shadow: 0 0 10px rgba(94, 255, 161, 0.6);
 }
 
 .nav-toggle.active .bar:nth-child(1) {
