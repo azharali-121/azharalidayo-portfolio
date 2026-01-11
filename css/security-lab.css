@@ -10,6 +10,19 @@
 /* ===========================
    Navigation Fixes
    =========================== */
+/* Navbar positioning fix */
+.navbar {
+    position: relative;
+    z-index: 1000;
+}
+
+.nav-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* Hide toggle on desktop, show only on mobile */
 .nav-toggle {
     display: none; /* Hide by default on desktop */
@@ -23,10 +36,12 @@
     width: 30px;
     height: 21px;
     position: relative;
-    /* Ensure visibility */
+    /* Ensure visibility and touch targets */
     min-width: 44px;
     min-height: 44px;
     align-items: center;
+    /* Ensure it's above other elements */
+    pointer-events: auto;
 }
 
 .nav-toggle .bar {
