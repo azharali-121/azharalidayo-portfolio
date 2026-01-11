@@ -76,7 +76,9 @@
 @media (max-width: 768px) {
     /* Show toggle button on mobile */
     .nav-toggle {
-        display: flex;
+        display: flex !important;
+        position: relative !important;
+        z-index: 1001 !important;
     }
     
     .navbar .nav-menu {
