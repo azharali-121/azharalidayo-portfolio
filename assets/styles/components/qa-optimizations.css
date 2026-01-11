@@ -1,0 +1,308 @@
+/**
+ * QA Optimizations & Accessibility Enhancements
+ * Fixes for spacing, touch targets, and responsive issues
+ */
+
+/* ===================================
+   FOOTER IMPROVEMENTS
+   =================================== */
+
+/* Footer copyright section - better layout */
+.footer__copyright {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__copyright-text {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Footer action buttons - proper spacing */
+.footer__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    min-height: 44px; /* Accessibility: minimum touch target */
+    min-width: 44px;
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: 6px;
+    color: #06b6d4;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-primary);
+}
+
+.footer-action-btn:hover {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: rgba(6, 182, 212, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+}
+
+.footer-action-btn:active {
+    transform: translateY(0);
+}
+
+.footer-action-btn i {
+    font-size: 1rem;
+}
+
+/* Desktop: side-by-side layout */
+@media (min-width: 769px) {
+    .footer__copyright {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer__copyright-text {
+        text-align: left;
+    }
+}
+
+/* ===================================
+   HERO SECTION ENHANCEMENTS
+   =================================== */
+
+/* Ensure proper vertical spacing between hero elements */
+.hero-title {
+    margin-bottom: 1rem;
+}
+
+.hero-title-separator {
+    margin: 1.25rem 0;
+}
+
+.hero-subtitle {
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        margin-bottom: 0.75rem;
+    }
+
+    .hero-title-separator {
+        margin: 1rem 0;
+    }
+
+    .hero-subtitle {
+        margin-bottom: 1.25rem;
+    }
+}
+
+/* ===================================
+   ABOUT/PROFILE SECTION READABILITY
+   =================================== */
+
+/* Constrain paragraph width for better readability */
+.profile-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profile-text {
+    max-width: 70ch; /* Optimal reading width */
+    margin: 0 auto 1.5rem;
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.profile-text:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .profile-text {
+        max-width: 100%;
+        font-size: 0.9375rem;
+        line-height: 1.7;
+    }
+}
+
+/* ===================================
+   NAVIGATION ACCESSIBILITY
+   =================================== */
+
+/* Ensure hamburger menu has proper touch target */
+.nav-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.625rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Skip to main content link - visible on focus */
+.skip-to-main {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    padding: 0.75rem 1.5rem;
+    background: #06b6d4;
+    color: #0a0f1e;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: top 0.3s ease;
+}
+
+.skip-to-main:focus {
+    top: 1rem;
+    outline: 3px solid #14b8a6;
+    outline-offset: 2px;
+}
+
+/* ===================================
+   FOOTER SOCIAL ICONS - TOUCH TARGETS
+   =================================== */
+
+.footer__social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.625rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+/* ===================================
+   FLOATING ACTION BUTTON (FAB)
+   =================================== */
+
+/* Ensure FAB meets touch target requirements */
+.fab-message {
+    min-width: 56px;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 480px) {
+    .fab-message {
+        min-width: 52px;
+        min-height: 52px;
+    }
+}
+
+/* ===================================
+   BUTTON SYSTEM ENHANCEMENTS
+   =================================== */
+
+/* Ensure all interactive elements meet minimum size */
+button,
+.btn,
+a.btn {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Primary button - enhanced for mobile */
+@media (max-width: 480px) {
+    .btn-primary,
+    .btn-secondary {
+        font-size: 0.9375rem;
+        padding: 0.875rem 1.5rem;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* ===================================
+   SECTION SPACING CONSISTENCY
+   =================================== */
+
+/* Vertical rhythm between sections */
+section + section {
+    margin-top: 0;
+}
+
+.profile-section,
+.education-section,
+.cta-section {
+    padding: 4rem 0;
+}
+
+@media (max-width: 768px) {
+    .profile-section,
+    .education-section,
+    .cta-section {
+        padding: 3rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-section,
+    .education-section,
+    .cta-section {
+        padding: 2.5rem 0;
+    }
+}
+
+/* ===================================
+   OVERFLOW PREVENTION
+   =================================== */
+
+/* Prevent horizontal overflow at all breakpoints */
+* {
+    max-width: 100%;
+}
+
+img,
+video,
+iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Ensure long words break properly */
+.profile-text,
+.education-card,
+.footer-description,
+.hero-description {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* ===================================
+   LOADER OPTIMIZATION
+   =================================== */
+
+/* Ensure loader doesn't cause layout shift */
+body.loader-active {
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Smooth transition when loader is removed */
+body {
+    transition: overflow 0.3s ease;
+}

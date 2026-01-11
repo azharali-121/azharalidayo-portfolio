@@ -1,0 +1,267 @@
+/* ===================================
+   Academic Foundations Section
+   Mobile-First Timeline Card Layout
+   =================================== */
+
+/* Section Container */
+.education-section {
+    background: linear-gradient(135deg, #0a0f1e 0%, #1a1f35 100%);
+    padding: 4rem 1rem;
+    position: relative;
+}
+
+.education-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--primary-color) 50%, 
+        transparent 100%
+    );
+}
+
+/* Timeline Container */
+.education-timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+/* Mobile-First: Vertical Timeline Line */
+.education-timeline::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, 
+        var(--primary-color) 0%, 
+        rgba(22, 163, 74, 0.3) 100%
+    );
+}
+
+/* Education Card */
+.education-card {
+    position: relative;
+    margin-left: 3rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, 
+        rgba(22, 163, 74, 0.08) 0%, 
+        rgba(16, 185, 129, 0.04) 100%
+    );
+    border: 1px solid rgba(22, 163, 74, 0.25);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.education-card:last-child {
+    margin-bottom: 0;
+}
+
+.education-card:hover {
+    transform: translateX(8px);
+    border-color: rgba(22, 163, 74, 0.5);
+    box-shadow: 0 8px 24px rgba(22, 163, 74, 0.2);
+}
+
+/* Timeline Marker */
+.timeline-marker {
+    position: absolute;
+    left: -2.5rem;
+    top: 1.75rem;
+    width: 14px;
+    height: 14px;
+    background: var(--primary-color);
+    border: 3px solid #0a0f1e;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.2);
+    z-index: 2;
+}
+
+.education-card:hover .timeline-marker {
+    background: var(--accent-color);
+    box-shadow: 0 0 0 6px rgba(22, 163, 74, 0.3);
+}
+
+/* Card Content */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Degree Name - Prominent */
+.degree-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+/* Institution Name - Muted */
+.institution-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Education Period - Clear and Visible */
+.education-period {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0.5rem 0 0 0;
+}
+
+.education-period i {
+    font-size: 0.875rem;
+    opacity: 0.9;
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+
+/* Small Mobile (360px - 480px) */
+@media screen and (max-width: 480px) {
+    .education-section {
+        padding: 3rem 0.75rem;
+    }
+
+    .education-timeline {
+        padding: 1.5rem 0;
+    }
+
+    .education-timeline::before {
+        left: 0.75rem;
+    }
+
+    .education-card {
+        margin-left: 2.25rem;
+        margin-bottom: 1.5rem;
+        padding: 1.25rem;
+        border-radius: 10px;
+    }
+
+    .timeline-marker {
+        left: -1.875rem;
+        top: 1.5rem;
+        width: 12px;
+        height: 12px;
+    }
+
+    .degree-name {
+        font-size: 1.125rem;
+    }
+
+    .institution-name {
+        font-size: 0.9375rem;
+    }
+
+    .education-period {
+        font-size: 0.8125rem;
+    }
+}
+
+/* Tablet (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .education-section {
+        padding: 3.5rem 1.5rem;
+    }
+
+    .education-card {
+        padding: 1.75rem;
+    }
+
+    .degree-name {
+        font-size: 1.375rem;
+    }
+
+    .institution-name {
+        font-size: 1.0625rem;
+    }
+}
+
+/* Desktop (769px+) - Two Column or Stacked */
+@media screen and (min-width: 769px) {
+    .education-section {
+        padding: 5rem 2rem;
+    }
+
+    .education-timeline {
+        max-width: 1000px;
+        padding: 2.5rem 0;
+    }
+
+    .education-timeline::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .education-card {
+        width: calc(50% - 2rem);
+        margin-left: 0;
+        padding: 2rem;
+    }
+
+    .education-card:nth-child(odd) {
+        margin-right: auto;
+        margin-left: 0;
+    }
+
+    .education-card:nth-child(even) {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .timeline-marker {
+        left: auto;
+        right: -2.5rem;
+    }
+
+    .education-card:nth-child(even) .timeline-marker {
+        right: auto;
+        left: -2.5rem;
+    }
+
+    .education-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .degree-name {
+        font-size: 1.5rem;
+    }
+
+    .institution-name {
+        font-size: 1.125rem;
+    }
+
+    .education-period {
+        font-size: 0.9375rem;
+    }
+}
+
+/* Large Desktop (1200px+) */
+@media screen and (min-width: 1200px) {
+    .education-timeline {
+        max-width: 1100px;
+    }
+
+    .education-card {
+        padding: 2.25rem;
+    }
+}

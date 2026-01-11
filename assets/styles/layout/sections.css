@@ -277,9 +277,29 @@ section {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     section {
-        padding: 4rem 0;
+        padding: 3.5rem 0;
+    }
+    
+    .section-header {
+        margin-bottom: 2.5rem;
+    }
+    
+    .about-content {
+        padding: 1.75rem;
+    }
+    
+    .section-title::after {
+        width: 30px;
+        height: 30px;
+        bottom: -22px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    section {
+        padding: 4.5rem 0;
     }
     
     .section-header {
@@ -287,14 +307,26 @@ section {
     }
     
     .about-content {
-        padding: 2rem;
+        padding: 2.25rem;
     }
 }
 
-@media (max-width: 576px) {
-    .section-title::after {
-        width: 30px;
-        height: 30px;
-        bottom: -22px;
+@media (min-width: 769px) and (max-width: 1024px) {
+    section {
+        padding: 5.5rem 0;
+    }
+    
+    .section-header {
+        margin-bottom: 3.5rem;
+    }
+    
+    .about-content {
+        padding: 2.75rem;
+    }
+}
+
+@media (min-width: 1025px) {
+    section {
+        padding: 6.5rem 0;
     }
 }

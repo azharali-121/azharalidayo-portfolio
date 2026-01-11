@@ -9,8 +9,8 @@
     
     <!-- SEO Meta Tags -->
     <title>Projects | Azhar Ali</title>
-    <meta name="description" content="Explore my portfolio of projects including job portals, instant messaging apps, and chess AI implementations built with MERN stack, Socket.io, and Java.">
-    <meta name="keywords" content="Azhar Ali, Projects, Portfolio, MERN Stack, Socket.io, React Native, Java, Web Development, Mobile Development">
+    <meta name="description" content="Selected engineering projects with honest, concise descriptions and links to source code.">
+    <meta name="keywords" content="Azhar Ali, Projects, Portfolio, MERN, Socket.io, Java, OOP, DSA">
     <meta name="author" content="Azhar Ali">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="revisit-after" content="7 days">
@@ -20,7 +20,7 @@
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Projects | Azhar Ali - Cybersecurity Specialist & Full-Stack Developer">
-    <meta property="og:description" content="Explore my portfolio of projects including job portals, instant messaging apps, and chess AI implementations.">
+    <meta property="og:description" content="Explore selected engineering work with clear scope and contributions.">
     <meta property="og:image" content="https://www.YOUR-DOMAIN.com/assets/images/profile/profile_img.jpg">
     <meta property="og:image:secure_url" content="https://www.YOUR-DOMAIN.com/assets/images/profile/profile_img.jpg">
     <meta property="og:image:type" content="image/jpeg">
@@ -37,7 +37,7 @@
     <meta name="twitter:site" content="@AzharAli">
     <meta name="twitter:creator" content="@AzharAli">
     <meta name="twitter:title" content="Projects | Azhar Ali - Cybersecurity Specialist & Full-Stack Developer">
-    <meta name="twitter:description" content="Explore my portfolio of projects including job portals, instant messaging apps, and chess AI implementations.">
+    <meta name="twitter:description" content="Explore selected engineering work with clear scope and contributions.">
     <meta name="twitter:image" content="https://www.YOUR-DOMAIN.com/assets/images/profile/profile_img.jpg">
     <meta name="twitter:image:alt" content="Azhar Ali - Projects Portfolio">
     
@@ -69,9 +69,17 @@
     
     <link rel="stylesheet" href="assets/styles/min/main.min.css">
     <link rel="stylesheet" href="assets/styles/components/mobile-responsive.css">
+    <link rel="stylesheet" href="assets/styles/components/audit-fixes.css">
+    <link rel="stylesheet" href="assets/styles/components/attack-surface.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-to-main" tabindex="0">Skip to main content</a>
+    
     <div id="vanta-bg"></div>
     
     <nav class="navbar">
@@ -83,9 +91,8 @@
             
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="projects.html" class="nav-link active">Projects</a></li>
-                <li><a href="skills.html" class="nav-link">Technical Skills</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="skills.html" class="nav-link">Skills</a></li>
                 <li><a href="security-lab.html" class="nav-link">Security Lab</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
                 <li><a href="assets/documents/Resume%28CV%29.pdf" class="nav-link" download="Azhar-Ali-Resume.pdf">Resume</a></li>
@@ -95,27 +102,33 @@
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-                <span class="bar"></span>
+                <span class="sr-only">Toggle navigation menu</span>
             </button>
         </div>
     </nav>
 
+    <main id="main-content">
     <section id="projects" class="projects">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title"><i class="fas fa-code-branch"></i> Featured Projects</h2>
+                <h2 class="section-title"><i class="fa-solid fa-code-branch" aria-hidden="true"></i> Featured Projects</h2>
                 <p class="section-subtitle">Selected Engineering Work</p>
+            </div>
+
+            <!-- Professional notice -->
+            <div class="projects-info" role="note" aria-live="polite">
+                <p>Some builds are intentionally offline.<br>Semester projects will go live after final validation.</p>
             </div>
             
             <div class="projects-grid">
                 <!-- Job Portal Project -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="assets/images/projects/jobportal.jpg" alt="Job Portal System - MERN stack application with real-time notifications using Socket.io and MongoDB" loading="lazy" width="400" height="220" class="lazy-image" sizes="(max-width: 768px) 100vw, 400px">
+                        <img src="assets/images/projects/jobportal.jpg" alt="Job Portal System" loading="lazy" width="400" height="220" class="lazy-image" sizes="(max-width: 768px) 100vw, 400px">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://github.com/AzharDayo/Job-Portal-System" class="project-link" target="_blank" aria-label="View Job Portal System source code on GitHub" title="View source code on GitHub">
-                                    <i class="fab fa-github"></i>
+                                <a href="https://github.com/AzharDayo/Job-Portal-System" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View Job Portal System on GitHub" title="View source code on GitHub">
+                                    <i class="fa-brands fa-github"></i>
                                 </a>
                             </div>
                         </div>
@@ -123,13 +136,9 @@
                     <div class="project-content">
                         <h3 class="project-title">Job Portal System</h3>
                         <p class="project-description">
-                            <strong>Problem:</strong> Traditional job boards lack real-time employer-candidate communication, forcing users to refresh pages constantly and miss opportunities.<br><br>
-                            
-                            <strong>Solution Architecture:</strong> Built a MERN stack application with Socket.io WebSocket layer. React frontend handles optimistic UI updates, Node.js/Express backend manages authentication via JWT with bcrypt password hashing, MongoDB stores user profiles with compound indexes on (location + skills) for sub-100ms search queries.<br><br>
-                            
-                            <strong>Technical Challenge:</strong> Notification system initially caused database write spikes (200+ writes/sec) during peak hours. Solved by implementing Redis pub/sub as message broker, batching notifications, and using MongoDB change streams to sync state. Result: 60% faster job-matching notifications, 45% increase in user engagement, system handles 500+ concurrent connections.<br><br>
-                            
-                            <strong>Trade-offs:</strong> Chose MongoDB over PostgreSQL for flexible resume schema evolution, accepting eventual consistency for notification delivery counts in exchange for horizontal scaling capability.
+                            <strong>Scope:</strong> Based on an open‑source foundation; I implemented UI refinements and selected features.
+                            <br><br>
+                            <strong>Focus:</strong> Real‑time updates, improved user flows, and performance/usability gains over the upstream project.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">React.js</span>
@@ -143,11 +152,11 @@
                 <!-- Instant Messaging App -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="assets/images/projects/Instant-Messaging.jpg" alt="Instant Messaging App - End-to-end encrypted chat application with React Native and WebSocket real-time communication" loading="lazy" width="400" height="220" class="lazy-image" sizes="(max-width: 768px) 100vw, 400px">
+                        <img src="assets/images/projects/Instant-Messaging.jpg" alt="Instant Messaging App" loading="lazy" width="400" height="220" class="lazy-image" sizes="(max-width: 768px) 100vw, 400px">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://github.com/AzharDayo/Instant-Messaging-App" class="project-link" target="_blank" aria-label="View Instant Messaging App source code on GitHub" title="View source code on GitHub">
-                                    <i class="fab fa-github"></i>
+                                <a href="https://github.com/AzharDayo/Instant-Messaging-App" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View Instant Messaging App on GitHub" title="View source code on GitHub">
+                                    <i class="fa-brands fa-github"></i>
                                 </a>
                             </div>
                         </div>
@@ -155,15 +164,9 @@
                     <div class="project-content">
                         <h3 class="project-title">Instant Messaging App</h3>
                         <p class="project-description">
-                            <strong>Problem:</strong> WhatsApp clones exist, but building one that scales to 10K+ concurrent users requires solving hard distributed systems problems.<br><br>
-                            
-                            <strong>System Design:</strong> React Native mobile client maintains persistent WebSocket connections via Socket.io. Express.js backend uses Node.js cluster module (4 workers) behind nginx load balancer. Messages stored in MongoDB (indexed by roomId + timestamp), media files in AWS S3 with CloudFront CDN.<br><br>
-                            
-                            <strong>Technical Challenge:</strong> Group chat message ordering across distributed clients. Initial approach used client timestamps causing message reordering during network lag. Switched to server-assigned Lamport timestamps with vector clocks for causal ordering. Added optimistic UI updates with local rollback on conflict detection.<br><br>
-                            
-                            <strong>Security Implementation:</strong> End-to-end encryption using AES-256-GCM. Each conversation generates unique symmetric key via ECDH key exchange (P-256 curve). Public keys signed with HMAC, stored encrypted in DB. Messages encrypted client-side before WebSocket transmission.<br><br>
-                            
-                            <strong>Results:</strong> 99.9% uptime over 6 months, handles 10K+ daily active users, average message latency 45ms, supports group chats up to 256 members.
+                            <strong>Scope:</strong> Open‑source based; I contributed feature‑level enhancements and practical UX improvements.
+                            <br><br>
+                            <strong>Focus:</strong> Message ordering, real‑time delivery, and practical security improvements — reliable flows without heavy jargon.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">Socket.io</span>
@@ -177,11 +180,11 @@
                 <!-- Chess Game -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="assets/images/projects/chess_game.jpg" alt="Chess Game - Java-based chess with AI using minimax algorithm, alpha-beta pruning, and transposition tables" loading="lazy" width="400" height="220" class="lazy-image" sizes="(max-width: 768px) 100vw, 400px">
+                        <img src="assets/images/projects/chess_game.jpg" alt="Chess Game (Java)" loading="lazy" width="400" height="220" class="lazy-image" sizes="(max-width: 768px) 100vw, 400px">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://github.com/AzharDayo/Chess-Game-Java" class="project-link" target="_blank" aria-label="View Chess Game source code on GitHub" title="View source code on GitHub">
-                                    <i class="fab fa-github"></i>
+                                <a href="https://github.com/AzharDayo/Chess-Game-Java" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View Chess Game on GitHub" title="View source code on GitHub">
+                                    <i class="fa-brands fa-github"></i>
                                 </a>
                             </div>
                         </div>
@@ -189,59 +192,98 @@
                     <div class="project-content">
                         <h3 class="project-title">Chess Game</h3>
                         <p class="project-description">
-                            <strong>Problem:</strong> Chess AI requires evaluating millions of board positions. Naive minimax explores 20^4 = 160K positions at depth 4, causing 5-10 second move delays.<br><br>
-                            
-                            <strong>Algorithm Implementation:</strong> Minimax with alpha-beta pruning reduces search space by ~60%. Evaluation function weighs piece values (pawn=100, knight/bishop=300, rook=500, queen=900) plus positional bonuses from 64-element lookup tables for each piece type. Implement move ordering heuristic (captures first, then checks) to maximize pruning effectiveness.<br><br>
-                            
-                            <strong>Code Example - Core pruning logic:</strong><br>
-                            <code style="background: rgba(0,234,255,0.1); padding: 8px; display: block; border-left: 3px solid #00eaff; margin: 8px 0; font-size: 0.85em;">int minimax(Board b, int depth, int alpha, int beta, boolean isMax) {<br>
-                            &nbsp;&nbsp;if (depth == 0) return evaluate(b);<br>
-                            &nbsp;&nbsp;List&lt;Move&gt; moves = orderMoves(b.getLegalMoves());<br>
-                            &nbsp;&nbsp;for (Move m : moves) {<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;int score = -minimax(b.makeMove(m), depth-1, -beta, -alpha, !isMax);<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;if (score >= beta) return beta; // Beta cutoff<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;alpha = Math.max(alpha, score);<br>
-                            &nbsp;&nbsp;}<br>
-                            &nbsp;&nbsp;return alpha;<br>
-                            }</code><br><br>
-                            
-                            <strong>Performance Optimizations:</strong> Transposition table (HashMap) caches board evaluations using Zobrist hashing, preventing redundant calculations when same position reached via different move sequences. Reduces effective search space by additional 40%.<br><br>
-                            
-                            <strong>Results:</strong> AI searches depth 6 in under 100ms, plays at ~1600 ELO level, 95% legal move accuracy. Swing GUI renders at 60 FPS with piece drag animations.
+                            <strong>Scope:</strong> Java-based project focused on Object-Oriented Programming and DSA concepts.
+                            <br><br>
+                            <strong>Approach:</strong> Desktop implementation; logical move selection (e.g., minimax with alpha‑beta pruning).
+                            <br><br>
+                            <strong>Focus:</strong> Clean Java design and clear DSA application without extras.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">Java</span>
-                            <span class="tech-tag">Swing GUI</span>
-                            <span class="tech-tag">Game Logic</span>
-                            <span class="tech-tag">AI Algorithm</span>
+                            <span class="tech-tag">OOP</span>
+                            <span class="tech-tag">Algorithms</span>
                         </div>
                     </div>
                 </div>
-                
+
+                <!-- Interactive Highlight: Chess AI Speed Comparison -->
+                <div class="project-card" aria-labelledby="chess-speed-title">
+                    <div class="project-content">
+                        <h3 class="project-title" id="chess-speed-title">Chess AI Speed Comparison</h3>
+                        <p class="project-description">
+                            See how simple pruning can reduce the work a chess AI does. Adjust branching factor and depth, then compare naive vs. optimized searches.
+                        </p>
+                        <div class="project-tech" style="gap:0.5rem;">
+                            <label for="bf-input">Branching factor</label>
+                            <input id="bf-input" type="number" min="2" max="40" value="20" aria-label="Branching factor" style="max-width:90px;">
+                            <label for="depth-input" style="margin-left:0.5rem;">Depth</label>
+                            <input id="depth-input" type="number" min="2" max="6" value="4" aria-label="Search depth" style="max-width:90px;">
+                            <button id="compare-btn" class="btn btn-primary" style="margin-left:0.75rem;">Run Comparison</button>
+                        </div>
+                        <div id="compare-output" class="projects-info" role="status" aria-live="polite" style="margin-top:0.75rem;">
+                            <p>
+                                Naive positions: <span id="naive-nodes">—</span> · Est. time: <span id="naive-time">—</span>
+                                <br>
+                                Optimized positions: <span id="opt-nodes">—</span> · Est. time: <span id="opt-time">—</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
+    <!-- ===================================================
+         RELOCATED: Attack Surface Overview Section
+         Originally from skills.html - Now displayed as a
+         security visualization mini-project/demo
+         =================================================== -->
+    <section class="attack-surface-section">
+        <div class="container">
+            <div class="section-header">
+                <i class="fa-solid fa-radar"></i>
+                <h2 class="glitch-text" data-text="Attack Surface Overview">Attack Surface Overview</h2>
+                <p class="section-description">Security analysis of application layers and potential vulnerability exposure areas</p>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="attackSurfaceChart"></canvas>
+            </div>
+            
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: rgba(0, 255, 255, 0.2); border: 2px solid #0ff;"></div>
+                    <span>Current attack surface mapping across different application layers</span>
+                </div>
+                <p class="chart-note">
+                    <i class="fas fa-info-circle"></i>
+                    Higher values indicate larger attack surfaces requiring enhanced security measures. This visualization helps identify critical areas for security hardening and penetration testing focus.
+                </p>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
         <div class="footer__container">
             <div class="footer__section">
                 <div class="footer__logo">
-                    <img src="assets/images/profile/logo.jpg" alt="Azhar Ali" class="footer-logo" loading="lazy" width="120" height="120">
-                    <h2 class="name-glow">Azhar Ali</h2>
+                    <img src="assets/images/profile/logo.jpg" alt="Azhar Ali Logo" class="footer-logo" loading="lazy" width="120" height="120">
+                    <span class="footer-brand-name">Azhar Ali</span>
                 </div>
-                <p>Full-Stack Software Engineer and Cybersecurity Specialist, delivering robust, secure, and scalable solutions across web, mobile, and desktop platforms. Proficient in C++, Java, Python, and Flutter, with a passion for innovative, high-performance applications.</p>
+                <p class="footer-description">Full-Stack Software Engineer and Cybersecurity Specialist, delivering robust, secure, and scalable solutions across web, mobile, and desktop platforms. Proficient in C++, Java, Python, and Flutter, with a passion for innovative, high-performance applications.</p>
                 <div class="footer__social">
-                    <a href="mailto:azharalidayo10@gmail.com" aria-label="Email">
-                        <i class="fas fa-envelope"></i>
+                    <a href="mailto:azharalidayo10@gmail.com" aria-label="Email Azhar Ali">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
                     </a>
-                    <a href="https://wa.me/923133610655" aria-label="WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/923133610655" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/azhar-ali-994242330" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
+                    <a href="https://www.linkedin.com/in/azhar-ali-994242330" target="_blank" rel="noopener noreferrer" aria-label="View LinkedIn profile">
+                        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
                     </a>
-                    <a href="https://github.com/AzharDayo" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
+                    <a href="https://github.com/AzharDayo" target="_blank" rel="noopener noreferrer" aria-label="View GitHub profile">
+                        <i class="fab fa-github" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -249,37 +291,44 @@
             <div class="footer__section">
                 <h3>Quick Links</h3>
                 <div class="footer__links">
-                    <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
-                    <a href="projects.html"><i class="fas fa-chevron-right"></i> Projects</a>
-                    <a href="skills.html"><i class="fas fa-chevron-right"></i> Technical Skills</a>
-                    <a href="about.html"><i class="fas fa-chevron-right"></i> About</a>
-                    <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a>
-                    <a href="assets/documents/Resume%28CV%29.pdf" download="Azhar-Ali-Resume.pdf"><i class="fas fa-chevron-right"></i> Resume</a>
+                    <a href="index.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Home</a>
+                    <a href="projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Projects</a>
+                    <a href="skills.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Skills</a>
+                    <a href="security-lab.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Security Lab</a>
+                    <a href="contact.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Contact</a>
+                    <a href="assets/documents/Resume%28CV%29.pdf" target="_blank" rel="noopener noreferrer" download="Azhar-Ali-Resume.pdf"><i class="fas fa-chevron-right" aria-hidden="true"></i> Resume</a>
                 </div>
             </div>
             
-            <div class="footer__section">
+            <div class="footer__section footer__section--technical">
                 <h3>Technical Focus</h3>
                 <div class="footer__links">
-                    <a href="projects.html"><i class="fas fa-chevron-right"></i> Full-Stack Development</a>
-                    <a href="projects.html"><i class="fas fa-chevron-right"></i> Real-Time Systems</a>
-                    <a href="skills.html"><i class="fas fa-chevron-right"></i> Cybersecurity</a>
-                    <a href="about.html"><i class="fas fa-chevron-right"></i> Secure Architecture</a>
+                    <a href="projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Full-Stack Development</a>
+                    <a href="projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Real-Time Systems</a>
+                    <a href="skills.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Cybersecurity</a>
+                    <a href="index.html#profile"><i class="fas fa-chevron-right" aria-hidden="true"></i> Profile</a>
                 </div>
             </div>
         </div>
         
         <div class="footer__copyright">
-            <p>&copy; <span id="current-year">2025</span> <span>Azhar Ali</span>. All rights reserved.</p>
+            <p class="footer__copyright-text">
+                &copy; <span id="current-year">2025</span> Azhar Ali. All rights reserved.
+            </p>
+            <div class="footer__actions">
+                <button id="explain-mode-trigger" class="footer-action-btn" aria-label="Start site explanation walkthrough">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    <span>Explain this site</span>
+                </button>
+            </div>
         </div>
     </footer>
 
     <!-- Floating Action Button -->
-    <button class="fab-message" id="fab-message" aria-label="Send Message" title="Send Message">
-        <i class="fas fa-paper-plane"></i>
+    <button class="fab-message" id="fab-message" aria-label="Go to contact form" title="Contact Me" style="position: fixed !important; bottom: 30px !important; right: 30px !important; left: auto !important; top: auto !important;">
+        <i class="fa-solid fa-paper-plane"></i>
     </button>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cubes.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js" defer></script>
     <script src="js/particle-bg.js" defer></script>
@@ -300,6 +349,151 @@
     <script>
         // Update footer year automatically
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Lightweight Chess AI speed comparison
+        (function(){
+            const bfEl = document.getElementById('bf-input');
+            const dEl = document.getElementById('depth-input');
+            const btn = document.getElementById('compare-btn');
+            const naiveNodesEl = document.getElementById('naive-nodes');
+            const optNodesEl = document.getElementById('opt-nodes');
+            const naiveTimeEl = document.getElementById('naive-time');
+            const optTimeEl = document.getElementById('opt-time');
+            if(!bfEl || !dEl || !btn) return;
+
+            // Assume ~0.02 ms per position (simulated work)
+            const msPerNode = 0.02;
+
+            function formatNumber(n){
+                return n.toLocaleString('en-US');
+            }
+
+            function estimate(bf, depth){
+                const naive = Math.pow(bf, depth);
+                // Simple pruning estimate (~40% of naive work). Not exact, just illustrative.
+                const optimized = Math.round(naive * 0.4);
+                return {
+                    naive,
+                    optimized,
+                    naiveMs: naive * msPerNode,
+                    optMs: optimized * msPerNode
+                };
+            }
+
+            btn.addEventListener('click', () => {
+                const bf = Math.max(2, Math.min(40, parseInt(bfEl.value || '20', 10)));
+                const d = Math.max(2, Math.min(6, parseInt(dEl.value || '4', 10)));
+                const { naive, optimized, naiveMs, optMs } = estimate(bf, d);
+                naiveNodesEl.textContent = formatNumber(naive);
+                optNodesEl.textContent = formatNumber(optimized);
+                naiveTimeEl.textContent = `${naiveMs.toFixed(2)} ms`;
+                optTimeEl.textContent = `${optMs.toFixed(2)} ms`;
+            });
+        })();
+    </script>
+    
+    <!-- Attack Surface Radar Chart - Relocated from skills.html -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('attackSurfaceChart');
+            if (!ctx) return;
+            
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'UI Surface',
+                        'Client Logic',
+                        'Backend APIs',
+                        'Security Layer',
+                        'Performance'
+                    ],
+                    datasets: [{
+                        label: 'Attack Surface Exposure',
+                        data: [85, 80, 70, 65, 75],
+                        backgroundColor: 'rgba(0, 255, 255, 0.15)',
+                        borderColor: '#0ff',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#0ff',
+                        pointBorderColor: '#0a0f1f',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointHoverBackgroundColor: '#00ff41',
+                        pointHoverBorderColor: '#0ff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                color: '#0ff',
+                                font: {
+                                    family: "'Courier New', 'Consolas', monospace",
+                                    size: 14,
+                                    weight: '600'
+                                },
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(10, 15, 31, 0.95)',
+                            titleColor: '#0ff',
+                            bodyColor: '#fff',
+                            borderColor: '#0ff',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.r + '% exposure';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            min: 0,
+                            ticks: {
+                                stepSize: 20,
+                                color: '#0ff',
+                                backdropColor: 'transparent',
+                                font: {
+                                    family: "'Courier New', 'Consolas', monospace",
+                                    size: 12
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 255, 255, 0.2)',
+                                circular: true
+                            },
+                            pointLabels: {
+                                color: '#0ff',
+                                font: {
+                                    family: "'Courier New', 'Consolas', monospace",
+                                    size: 13,
+                                    weight: '700'
+                                },
+                                padding: 10
+                            },
+                            angleLines: {
+                                color: 'rgba(0, 255, 255, 0.3)'
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeInOutQuart'
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>

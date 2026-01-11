@@ -8,9 +8,9 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' cdnjs.cloudflare.com cdn.jsdelivr.net 'unsafe-eval'; style-src 'self' fonts.googleapis.com cdnjs.cloudflare.com 'unsafe-inline'; font-src 'self' fonts.gstatic.com fonts.googleapis.com cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self'">
     
     <!-- SEO Meta Tags -->
-    <title>Technical Skills | Azhar Ali</title>
-    <meta name="description" content="Technical skills including Python, Java, C++, JavaScript, MERN stack, Socket.io, cybersecurity tools, and expertise in full-stack development.">
-    <meta name="keywords" content="Azhar Ali, Technical Skills, Python, Java, C++, JavaScript, MERN Stack, Cybersecurity, Full-Stack Development">
+    <title>Skills | Azhar Ali</title>
+    <meta name="description" content="Skills including Python, Java, C++, JavaScript, MERN stack, Socket.io, cybersecurity tools, and expertise in full-stack development.">
+    <meta name="keywords" content="Azhar Ali, Skills, Python, Java, C++, JavaScript, MERN Stack, Cybersecurity, Full-Stack Development">
     <meta name="author" content="Azhar Ali">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="revisit-after" content="7 days">
@@ -19,14 +19,14 @@
     <link rel="canonical" href="https://www.YOUR-DOMAIN.com/skills.html">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Technical Skills | Azhar Ali - Cybersecurity Specialist & Full-Stack Developer">
-    <meta property="og:description" content="My technical skills include Python, Java, C++, JavaScript, MERN stack, and cybersecurity tools.">
+    <meta property="og:title" content="Skills | Azhar Ali - Cybersecurity Specialist & Full-Stack Developer">
+    <meta property="og:description" content="My skills include Python, Java, C++, JavaScript, MERN stack, and cybersecurity tools.">
     <meta property="og:image" content="https://www.YOUR-DOMAIN.com/assets/images/profile/profile_img.jpg">
     <meta property="og:image:secure_url" content="https://www.YOUR-DOMAIN.com/assets/images/profile/profile_img.jpg">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Azhar Ali - Technical Skills">
+    <meta property="og:image:alt" content="Azhar Ali - Skills">
     <meta property="og:url" content="https://www.YOUR-DOMAIN.com/skills.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Azhar Ali - Portfolio">
@@ -36,10 +36,10 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@AzharAli">
     <meta name="twitter:creator" content="@AzharAli">
-    <meta name="twitter:title" content="Technical Skills | Azhar Ali - Cybersecurity Specialist & Full-Stack Developer">
-    <meta name="twitter:description" content="My technical skills include Python, Java, C++, JavaScript, MERN stack, and cybersecurity tools.">
+    <meta name="twitter:title" content="Skills | Azhar Ali - Cybersecurity Specialist & Full-Stack Developer">
+    <meta name="twitter:description" content="My skills include Python, Java, C++, JavaScript, MERN stack, and cybersecurity tools.">
     <meta name="twitter:image" content="https://www.YOUR-DOMAIN.com/assets/images/profile/profile_img.jpg">
-    <meta name="twitter:image:alt" content="Azhar Ali - Technical Skills">
+    <meta name="twitter:image:alt" content="Azhar Ali - Skills">
     
     <!-- Theme Color and PWA Settings - Force Dark Theme -->
     <meta name="theme-color" content="#0a0f1f">
@@ -71,6 +71,9 @@
     <link rel="stylesheet" href="assets/styles/components/mobile-responsive.css">
     <link rel="stylesheet" href="assets/styles/components/hacker-features.css">
     <link rel="stylesheet" href="assets/styles/components/attack-surface.css">
+    <link rel="stylesheet" href="assets/styles/components/audit-fixes.css">
+    <link rel="stylesheet" href="assets/styles/components/skills-refactor.css">
+    <link rel="stylesheet" href="assets/styles/components/floating-balls.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <!-- Chart.js for data visualization -->
@@ -89,8 +92,7 @@
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
-                <li><a href="skills.html" class="nav-link active">Technical Skills</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="skills.html" class="nav-link">Skills</a></li>
                 <li><a href="security-lab.html" class="nav-link">Security Lab</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
                 <li><a href="assets/documents/Resume%28CV%29.pdf" class="nav-link" download="Azhar-Ali-Resume.pdf">Resume</a></li>
@@ -100,162 +102,163 @@
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-                <span class="bar"></span>
+                <span class="sr-only">Toggle navigation menu</span>
             </button>
         </div>
     </nav>
 
+    <main id="main-content">
     <section id="skills" class="skills">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title"><i class="fas fa-code"></i> Technical Skills</h2>
+                <h2 class="section-title"><i class="fa-solid fa-code" aria-hidden="true"></i> Skills</h2>
                 <p class="section-subtitle">Core competencies demonstrated in projects above</p>
             </div>
             
-            <div class="skills-container">
-                <!-- Languages & Core CS -->
+            <div class="skills-container skills-refactored">
+                <!-- Programming Languages -->
                 <div class="skill-category">
-                    <div class="skill-category-header">
-                        <i class="fas fa-laptop-code"></i>
-                        <h3>Languages & Fundamentals</h3>
-                    </div>
-                    <div class="skill-grid">
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fab fa-python"></i>
-                                Python
-                            </div>
-                            <span class="skill-experience">2 years</span>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fab fa-java"></i>
-                                Java
-                            </div>
-                            <span class="skill-experience">3 years</span>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fab fa-js-square"></i>
-                                JavaScript/Node.js
-                            </div>
-                            <span class="skill-experience">2 years</span>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-cuttlefish"></i>
-                                C++
-                            </div>
-                            <span class="skill-experience">2 years</span>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-project-diagram"></i>
-                                Data Structures & Algorithms
-                            </div>
-                            <span class="skill-experience">3 years</span>
-                        </div>
+                    <h3 class="skill-category-title">Programming Languages</h3>
+                    <div class="skill-chips">
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Systems programming and low-level optimization; practical experience in competitive programming.">C</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Systems programming practice; not primary in portfolio projects.">C++</span>
+                        <span class="skill-chip" data-skill-level="Strong" data-skill-context="Chess Game: OOP design + DSA; implemented logical move selection (minimax with pruning).">Java</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Used for scripting and small utilities; complementary, not primary in these projects.">Python</span>
+                        <span class="skill-chip" data-skill-level="Strong" data-skill-context="Job Portal & Messaging: backend routes, real‑time updates, and UX enhancements.">JavaScript</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Modern mobile development; cross-platform Android app development.">Kotlin</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Cross-platform mobile framework; used for building responsive mobile UIs.">Dart</span>
                     </div>
                 </div>
                 
-                <!-- Web & Backend -->
+                <!-- Mobile App Development -->
                 <div class="skill-category">
-                    <div class="skill-category-header">
-                        <i class="fas fa-server"></i>
-                        <h3>Backend & Infrastructure</h3>
-                    </div>
-                    <div class="skill-grid">
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fab fa-node-js"></i>
-                                Express.js
-                            </div>
-                            <span class="skill-experience">1.5 years</span>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-database"></i>
-                                MongoDB
-                            </div>
-                            <span class="skill-experience">1.5 years</span>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-bolt"></i>
-                                Socket.io
-                            </div>
-                            <span class="skill-experience">1 year</span>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-database"></i>
-                                MySQL
-                            </div>
-                            <span class="skill-experience">2 years</span>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-exchange-alt"></i>
-                                REST APIs
-                            </div>
-                            <span class="skill-experience">2 years</span>
-                        </div>
+                    <h3 class="skill-category-title">Mobile App Development</h3>
+                    <div class="skill-chips">
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Native Android development; Java and Kotlin for app logic, UI design, and mobile optimization.">Android Development (Java/Kotlin)</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Cross-platform mobile apps; Flutter provides high-performance, visually native mobile experiences.">Flutter</span>
                     </div>
                 </div>
                 
-                <!-- Security & Tools -->
-                <div class="skill-category cybersecurity">
-                    <div class="skill-category-header">
-                        <i class="fas fa-shield-alt"></i>
-                        <h3>Security & DevTools</h3>
+                <!-- Backend & Databases -->
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Backend & Databases</h3>
+                    <div class="skill-chips">
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Lightweight Python web framework; used for building RESTful APIs and backend services.">Flask</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Messaging: API endpoints for delivery/status; Job Portal: clean routes and flow.">Express.js</span>
+                        <span class="skill-chip" data-skill-level="Strong" data-skill-context="Messaging & Job Portal: clean endpoints, input validation, and secure responses.">REST APIs</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Backend automation and scripting for deployment, data processing, and routine tasks.">Automation Programming</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Job Portal: structured data models, query performance, and real‑time updates.">MongoDB</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Messaging App: real‑time delivery, message ordering, and connection handling.">Socket.io</span>
+                        <span class="skill-chip" data-skill-level="Beginner" data-skill-context="Basic CRUD and schema design; secondary to MongoDB in showcased projects.">MySQL</span>
                     </div>
-                    <div class="skill-grid">
-                        <div class="skill-item featured">
-                            <div class="skill-name">
-                                <i class="fas fa-bug"></i>
-                                OWASP Top 10
-                            </div>
-                            <span class="skill-experience">1 year</span>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-lock"></i>
-                                Encryption
-                            </div>
-                            <span class="skill-experience">1 year</span>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fab fa-git-alt"></i>
-                                Git
-                            </div>
-                            <span class="skill-experience">3 years</span>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-bug"></i>
-                                Burp Suite
-                            </div>
-                            <span class="skill-experience">1 year</span>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fab fa-react"></i>
-                                React/React Native
-                            </div>
-                            <span class="skill-experience">1 year</span>
-                        </div>
+                </div>
+                
+                <!-- Data Structures & Core CS -->
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Data Structures & Core CS</h3>
+                    <div class="skill-chips">
+                        <span class="skill-chip" data-skill-level="Strong" data-skill-context="Deep understanding of arrays, linked lists, trees, graphs, hash tables; applied in Chess AI and DSA projects.">Data Structures</span>
+                        <span class="skill-chip" data-skill-level="Strong" data-skill-context="Chess Game: applied DSA for efficient move evaluation and pruning algorithms.">Algorithms</span>
+                        <span class="skill-chip" data-skill-level="Strong" data-skill-context="Chess Game: OOP design principles including encapsulation, inheritance, and polymorphism.">Object-Oriented Programming (OOP)</span>
+                    </div>
+                </div>
+                
+                <!-- CS Core Subjects -->
+                <div class="skill-category">
+                    <h3 class="skill-category-title">CS Core Subjects</h3>
+                    <div class="skill-chips">
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="OSI model, TCP/IP protocol, DNS, HTTP/HTTPS; understanding of socket programming and network communication.">Computer Networks</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Boolean algebra, logic gates, combinational circuits; foundation for digital systems design.">Digital Logic Design (DLD)</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Database design, normalization, query optimization; practical experience with relational and NoSQL databases.">Database Systems</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Process management, memory management, scheduling, synchronization; understanding of OS fundamentals.">Operating Systems</span>
+                    </div>
+                </div>
+                
+                <!-- Networking & Cybersecurity -->
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Networking & Cybersecurity</h3>
+                    <div class="skill-chips">
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="TCP/IP stack, routing, switching, network protocols; design and troubleshooting of secure networks.">Networking Fundamentals</span>
+                        <span class="skill-chip" data-skill-level="Strong" data-skill-context="Secure coding, threat modeling, vulnerability assessment, OWASP principles; applied to all portfolio projects.">Cybersecurity</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Ethical hacking mindset; authorized security testing, vulnerability discovery, and responsible disclosure.">Ethical Hacking</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Network defense, intrusion detection, firewall configuration, DDoS mitigation, and secure network architecture.">Network Security</span>
+                    </div>
+                </div>
+                
+                <!-- Cybersecurity Tools & Techniques -->
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Cybersecurity Tools & Techniques</h3>
+                    <div class="skill-chips">
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Network reconnaissance tool; used for port scanning, service enumeration, and network mapping.">Nmap</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Python-based network packet analysis; custom protocol implementation and packet manipulation.">Scapy</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Security assessment methodology; identifying vulnerabilities in applications and infrastructure.">Vulnerability Assessment</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Systematic testing to discover and validate security weaknesses; responsible and authorized penetration testing.">Penetration Testing</span>
+                        <span class="skill-chip skill-chip--featured" data-skill-level="Proficient" data-skill-context="Outcome: reduced common web risks (XSS/CSRF) via input validation and safe flows.">OWASP Top 10</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Messaging: end‑to‑end encrypted messages for privacy; understood encryption algorithms and implementations.">Encryption</span>
+                        <span class="skill-chip" data-skill-level="Beginner" data-skill-context="Used to identify insecure patterns; outcome: safer forms and APIs.">Burp Suite</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Linux distribution for penetration testing; extensive suite of security tools including Nmap, Scapy, Wireshark, and more.">Kali Linux</span>
+                    </div>
+                </div>
+                
+                <!-- Tools & Version Control -->
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Tools & Version Control</h3>
+                    <div class="skill-chips">
+                        <span class="skill-chip" data-skill-level="Strong" data-skill-context="Version control across all projects; structured commits and clear branching for team collaboration.">Git</span>
+                        <span class="skill-chip" data-skill-level="Strong" data-skill-context="Collaborative development platform; used for repository hosting, CI/CD, and open-source contributions.">GitHub</span>
+                        <span class="skill-chip" data-skill-level="Proficient" data-skill-context="Job Portal & Messaging: clean UI flows, responsive layouts, and usability improvements.">React/React Native</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Attack Surface Overview Section -->
+    <!-- Interactive Floating Balls Section -->
+    <section class="floating-balls-section">
+        <div class="floating-balls-header">
+            <h2><i class="fa-solid fa-circle-nodes" aria-hidden="true"></i> Interactive Skill Universe</h2>
+            <p>Drag, click, and play with the floating skills! Each ball represents a core competency.</p>
+        </div>
+        
+        <div class="floating-balls-container" role="region" aria-label="Interactive floating skills visualization">
+            <!-- Balls will be dynamically generated here -->
+        </div>
+        
+        <div class="floating-balls-controls">
+            <button id="floating-balls-reset" aria-label="Reset all balls to initial positions">
+                <i class="fas fa-redo" aria-hidden="true"></i> Reset
+            </button>
+            <button id="floating-balls-shuffle" aria-label="Shuffle all balls with random motion">
+                <i class="fas fa-random" aria-hidden="true"></i> Shuffle
+            </button>
+        </div>
+    </section>
+
+    <!-- Skill Detail Modal -->
+    <div id="skill-modal" class="skill-modal" role="dialog" aria-labelledby="skill-modal-title" aria-hidden="true">
+        <div class="skill-modal-backdrop" id="skill-modal-backdrop"></div>
+        <div class="skill-modal-content">
+            <button id="skill-modal-close" class="skill-modal-close" aria-label="Close skill details">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 id="skill-modal-title" class="skill-modal-title"></h3>
+            <div class="skill-modal-body">
+                <p class="skill-modal-level"><strong>Proficiency:</strong> <span id="skill-modal-level-value"></span></p>
+                <p class="skill-modal-context" id="skill-modal-context-value"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================
+         REMOVED: Attack Surface Overview Section
+         This section has been relocated to projects.html
+         to showcase security visualization as a mini-project
+         =================================================== -->
+    <!-- 
     <section class="attack-surface-section">
         <div class="container">
             <div class="section-header">
-                <i class="fas fa-radar"></i>
+                <i class="fa-solid fa-radar"></i>
                 <h2 class="glitch-text" data-text="Attack Surface Overview">Attack Surface Overview</h2>
                 <p class="section-description">Security analysis of application layers and potential vulnerability exposure areas</p>
             </div>
@@ -276,27 +279,29 @@
             </div>
         </div>
     </section>
+    -->
+    </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="footer__container">
             <div class="footer__section">
                 <div class="footer__logo">
-                    <img src="assets/images/profile/logo.jpg" alt="Azhar Ali" class="footer-logo" loading="lazy" width="120" height="120">
-                    <h2 class="name-glow">Azhar Ali</h2>
+                    <img src="assets/images/profile/logo.jpg" alt="Azhar Ali Logo" class="footer-logo" loading="lazy" width="120" height="120">
+                    <span class="footer-brand-name">Azhar Ali</span>
                 </div>
-                <p>Full-Stack Software Engineer and Cybersecurity Specialist, delivering robust, secure, and scalable solutions across web, mobile, and desktop platforms. Proficient in C++, Java, Python, and Flutter, with a passion for innovative, high-performance applications.</p>
+                <p class="footer-description">Full-Stack Software Engineer and Cybersecurity Specialist, delivering robust, secure, and scalable solutions across web, mobile, and desktop platforms. Proficient in C++, Java, Python, and Flutter, with a passion for innovative, high-performance applications.</p>
                 <div class="footer__social">
-                    <a href="mailto:azharalidayo10@gmail.com" aria-label="Email">
-                        <i class="fas fa-envelope"></i>
+                    <a href="mailto:azharalidayo10@gmail.com" aria-label="Email Azhar Ali">
+                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
                     </a>
-                    <a href="https://wa.me/923133610655" aria-label="WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/923133610655" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/azhar-ali-994242330" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
+                    <a href="https://www.linkedin.com/in/azhar-ali-994242330" target="_blank" rel="noopener noreferrer" aria-label="View LinkedIn profile">
+                        <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
                     </a>
-                    <a href="https://github.com/AzharDayo" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
+                    <a href="https://github.com/AzharDayo" target="_blank" rel="noopener noreferrer" aria-label="View GitHub profile">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -304,34 +309,42 @@
             <div class="footer__section">
                 <h3>Quick Links</h3>
                 <div class="footer__links">
-                    <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
-                    <a href="projects.html"><i class="fas fa-chevron-right"></i> Projects</a>
-                    <a href="skills.html"><i class="fas fa-chevron-right"></i> Technical Skills</a>
-                    <a href="about.html"><i class="fas fa-chevron-right"></i> About</a>
-                    <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a>
-                    <a href="assets/documents/Resume%28CV%29.pdf" download="Azhar-Ali-Resume.pdf"><i class="fas fa-chevron-right"></i> Resume</a>
+                    <a href="index.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Home</a>
+                    <a href="projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Projects</a>
+                    <a href="skills.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Skills</a>
+                    <a href="security-lab.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Security Lab</a>
+                    <a href="contact.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Contact</a>
+                    <a href="assets/documents/Resume%28CV%29.pdf" target="_blank" rel="noopener noreferrer" download="Azhar-Ali-Resume.pdf"><i class="fas fa-chevron-right" aria-hidden="true"></i> Resume</a>
                 </div>
             </div>
             
-            <div class="footer__section">
+            <div class="footer__section footer__section--technical">
                 <h3>Technical Focus</h3>
                 <div class="footer__links">
-                    <a href="projects.html"><i class="fas fa-chevron-right"></i> Full-Stack Development</a>
-                    <a href="projects.html"><i class="fas fa-chevron-right"></i> Real-Time Systems</a>
-                    <a href="skills.html"><i class="fas fa-chevron-right"></i> Cybersecurity</a>
-                    <a href="about.html"><i class="fas fa-chevron-right"></i> Secure Architecture</a>
+                    <a href="projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Full-Stack Development</a>
+                    <a href="projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Real-Time Systems</a>
+                    <a href="skills.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Cybersecurity</a>
+                    <a href="index.html#profile"><i class="fas fa-chevron-right" aria-hidden="true"></i> Profile</a>
                 </div>
             </div>
         </div>
         
         <div class="footer__copyright">
-            <p>&copy; <span id="current-year">2025</span> <span>Azhar Ali</span>. All rights reserved.</p>
+            <p class="footer__copyright-text">
+                &copy; <span id="current-year">2025</span> Azhar Ali. All rights reserved.
+            </p>
+            <div class="footer__actions">
+                <button id="explain-mode-trigger" class="footer-action-btn" aria-label="Start site explanation walkthrough">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    <span>Explain this site</span>
+                </button>
+            </div>
         </div>
     </footer>
 
     <!-- Floating Action Button -->
-    <button class="fab-message" id="fab-message" aria-label="Send Message" title="Send Message">
-        <i class="fas fa-paper-plane"></i>
+    <button class="fab-message" id="fab-message" aria-label="Go to contact form" title="Contact Me" style="position: fixed !important; bottom: 30px !important; right: 30px !important; left: auto !important; top: auto !important;">
+        <i class="fa-solid fa-paper-plane"></i>
     </button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
@@ -354,113 +367,69 @@
     <script src="js/self-explaining-system.js" defer></script>
     <script src="js/system-state-mode.js" defer></script>
     
-    <!-- Attack Surface Radar Chart -->
+    <!-- Skill Detail Modal Interaction -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('attackSurfaceChart');
-            if (!ctx) return;
+            const skillChips = document.querySelectorAll('.skill-chip');
+            const modal = document.getElementById('skill-modal');
+            const modalTitle = document.getElementById('skill-modal-title');
+            const modalLevel = document.getElementById('skill-modal-level-value');
+            const modalContext = document.getElementById('skill-modal-context-value');
+            const modalClose = document.getElementById('skill-modal-close');
+            const modalBackdrop = document.getElementById('skill-modal-backdrop');
             
-            new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: [
-                        'UI Surface',
-                        'Client Logic',
-                        'Backend APIs',
-                        'Security Layer',
-                        'Performance'
-                    ],
-                    datasets: [{
-                        label: 'Attack Surface Exposure',
-                        data: [85, 80, 70, 65, 75],
-                        backgroundColor: 'rgba(0, 255, 255, 0.15)',
-                        borderColor: '#0ff',
-                        borderWidth: 2,
-                        pointBackgroundColor: '#0ff',
-                        pointBorderColor: '#0a0f1f',
-                        pointBorderWidth: 2,
-                        pointRadius: 5,
-                        pointHoverRadius: 7,
-                        pointHoverBackgroundColor: '#00ff41',
-                        pointHoverBorderColor: '#0ff'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                            labels: {
-                                color: '#0ff',
-                                font: {
-                                    family: "'Courier New', 'Consolas', monospace",
-                                    size: 14,
-                                    weight: '600'
-                                },
-                                padding: 15
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(10, 15, 31, 0.95)',
-                            titleColor: '#0ff',
-                            bodyColor: '#fff',
-                            borderColor: '#0ff',
-                            borderWidth: 1,
-                            padding: 12,
-                            displayColors: true,
-                            callbacks: {
-                                label: function(context) {
-                                    return context.dataset.label + ': ' + context.parsed.r + '% exposure';
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        r: {
-                            beginAtZero: true,
-                            max: 100,
-                            min: 0,
-                            ticks: {
-                                stepSize: 20,
-                                color: '#0ff',
-                                backdropColor: 'transparent',
-                                font: {
-                                    family: "'Courier New', 'Consolas', monospace",
-                                    size: 12
-                                }
-                            },
-                            grid: {
-                                color: 'rgba(0, 255, 255, 0.2)',
-                                circular: true
-                            },
-                            pointLabels: {
-                                color: '#0ff',
-                                font: {
-                                    family: "'Courier New', 'Consolas', monospace",
-                                    size: 13,
-                                    weight: '700'
-                                },
-                                padding: 10
-                            },
-                            angleLines: {
-                                color: 'rgba(0, 255, 255, 0.3)'
-                            }
-                        }
-                    },
-                    animation: {
-                        duration: 1500,
-                        easing: 'easeInOutQuart'
+            if (!modal) return;
+            
+            // Open modal on skill chip click
+            skillChips.forEach(chip => {
+                chip.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const skillName = this.textContent.trim();
+                    const skillLevel = this.dataset.skillLevel || 'Not specified';
+                    const skillContext = this.dataset.skillContext || 'Learn by exploring the projects.';
+                    
+                    modalTitle.textContent = skillName;
+                    modalLevel.textContent = skillLevel;
+                    modalContext.textContent = skillContext;
+                    
+                    modal.setAttribute('aria-hidden', 'false');
+                    modal.classList.add('skill-modal-open');
+                });
+                
+                // Keyboard accessibility: Enter and Space to open
+                chip.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
                     }
+                });
+            });
+            
+            // Close modal functions
+            function closeModal() {
+                modal.setAttribute('aria-hidden', 'true');
+                modal.classList.remove('skill-modal-open');
+            }
+            
+            modalClose.addEventListener('click', closeModal);
+            modalBackdrop.addEventListener('click', closeModal);
+            
+            // Close on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('skill-modal-open')) {
+                    closeModal();
                 }
             });
         });
-    </script>
-    
-    <script>
+        
         // Update footer year automatically
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
+
+    <!-- Skill Explorer Mini-Game: Interactive animations on skill chip clicks -->
+    <script src="js/skill-animations.js"></script>
+    
+    <!-- Interactive Floating Balls: Physics-based draggable skill visualization -->
+    <script src="js/floating-balls.js" defer></script>
 </body>
 </html>

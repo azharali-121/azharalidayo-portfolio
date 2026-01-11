@@ -28,6 +28,12 @@
         // Update ARIA attribute
         navToggle.setAttribute('aria-expanded', !isActive);
         
+        // Manage focus and tab order for accessibility
+        navMenu.setAttribute('aria-hidden', isActive);
+        navLinks.forEach(link => {
+            link.tabIndex = !isActive ? 0 : -1;
+        });
+        
         // Prevent body scroll when menu is open
         document.body.style.overflow = !isActive ? 'hidden' : '';
     }
@@ -39,6 +45,13 @@
         navToggle.classList.remove('active');
         navMenu.classList.remove('active');
         navToggle.setAttribute('aria-expanded', 'false');
+        
+        // Reset focus management
+        navMenu.setAttribute('aria-hidden', 'true');
+        navLinks.forEach(link => {
+            link.tabIndex = -1;
+        });
+        
         document.body.style.overflow = '';
     }
 
@@ -55,6 +68,9 @@
         // Add active class to matching link
         navLinks.forEach(link => {
             const href = link.getAttribute('href');
+            
+            // Skip download links
+            if (link.hasAttribute('download')) return;
             
             // Check if link matches current page
             if (href === currentPage || 
@@ -76,9 +92,18 @@
         }
     });
 
-    // Handle nav link clicks - just close menu
+    // Handle nav link clicks - update active state and close menu
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', (e) => {
+            // Remove active class from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+            
+            // Add active class to clicked link (unless it's a download link)
+            if (!link.hasAttribute('download')) {
+                link.classList.add('active');
+            }
+            
+            // Close mobile menu
             closeMenu();
         });
     });

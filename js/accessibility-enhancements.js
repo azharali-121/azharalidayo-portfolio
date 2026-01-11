@@ -217,10 +217,16 @@
         
         document.querySelectorAll('.nav-link').forEach(link => {
             const linkPath = link.getAttribute('href');
+            
+            // Skip download links
+            if (link.hasAttribute('download')) return;
+            
             if (linkPath === currentPath || 
                 (currentPath === '' && linkPath === 'index.html')) {
                 link.setAttribute('aria-current', 'page');
                 link.classList.add('active');
+            } else {
+                link.removeAttribute('aria-current');
             }
         });
     }

@@ -146,6 +146,12 @@ class SecuritySimulator {
         const progress = Math.min((this.attemptCount / this.commonPasswords.length) * 100, 100);
         this.elements.progressFill.style.width = `${progress}%`;
         this.elements.progressText.textContent = `${Math.floor(progress)}%`;
+        
+        // Update ARIA attributes for progressbar
+        const progressBar = document.querySelector('.progress-bar[role="progressbar"]');
+        if (progressBar) {
+            progressBar.setAttribute('aria-valuenow', Math.floor(progress));
+        }
     }
     
     /**
@@ -341,6 +347,12 @@ class SecuritySimulator {
         this.elements.progressFill.style.width = '0%';
         this.elements.progressText.textContent = '0%';
         this.elements.explanationPanel.style.display = 'none';
+        
+        // Reset ARIA attributes
+        const progressBar = document.querySelector('.progress-bar[role="progressbar"]');
+        if (progressBar) {
+            progressBar.setAttribute('aria-valuenow', '0');
+        }
         
         this.clearLogs();
         this.logMessage('System reset complete. Ready for new simulation.', 'system');

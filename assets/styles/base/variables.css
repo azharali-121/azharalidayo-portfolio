@@ -66,6 +66,15 @@
     --space-12: 5rem;    /* 80px */
     --space-16: 8rem;    /* 128px */
     
+    /* Named spacing for consistency */
+    --space-xs: 0.5rem;  /* 8px */
+    --space-sm: 1rem;    /* 16px */
+    --space-md: 1.5rem;  /* 24px */
+    --space-lg: 2rem;    /* 32px */
+    --space-xl: 3rem;    /* 48px */
+    --space-2xl: 4rem;   /* 64px */
+    --space-3xl: 5rem;   /* 80px */
+    
     /* Border Radius */
     --radius-sm: 0.125rem;  /* 2px */
     --radius-base: 0.25rem; /* 4px */

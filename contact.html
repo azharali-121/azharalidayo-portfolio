@@ -71,9 +71,13 @@
     <link rel="stylesheet" href="assets/styles/components/mobile-responsive.css">
     <link rel="stylesheet" href="assets/styles/components/form-success-animation.css">
     <link rel="stylesheet" href="assets/styles/components/hacker-features.css">
+    <link rel="stylesheet" href="assets/styles/components/audit-fixes.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-to-main" tabindex="0">Skip to main content</a>
+    
     <div id="vanta-bg"></div>
     
     <nav class="navbar">
@@ -86,10 +90,9 @@
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
-                <li><a href="skills.html" class="nav-link">Technical Skills</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="skills.html" class="nav-link">Skills</a></li>
                 <li><a href="security-lab.html" class="nav-link">Security Lab</a></li>
-                <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
                 <li><a href="assets/documents/Resume%28CV%29.pdf" class="nav-link" download="Azhar-Ali-Resume.pdf">Resume</a></li>
             </ul>
             
@@ -97,15 +100,16 @@
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-                <span class="bar"></span>
+                <span class="sr-only">Toggle navigation menu</span>
             </button>
         </div>
     </nav>
 
+    <main id="main-content">
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title"><i class="fas fa-paper-plane"></i> Get In Touch</h2>
+                <h2 class="section-title"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Get In Touch</h2>
                 <p class="section-subtitle">Let's Work Together</p>
             </div>
             
@@ -113,45 +117,45 @@
                 <div class="contact-info">
                     <div class="contact-card">
                         <div class="contact-icon contact-icon-email">
-                            <i class="fas fa-envelope"></i>
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
                         </div>
                         <h3>Email</h3>
                         <p>azharalidayo10@gmail.com</p>
                         <a href="mailto:azharalidayo10@gmail.com" class="contact-btn">
-                            <i class="fas fa-paper-plane"></i> Send Email
+                            <i class="fa-solid fa-paper-plane"></i> Send Email
                         </a>
                     </div>
                     
                     <div class="contact-card">
                         <div class="contact-icon contact-icon-whatsapp">
-                            <i class="fab fa-whatsapp"></i>
+                            <i class="fa-brands fa-whatsapp"></i>
                         </div>
                         <h3>WhatsApp</h3>
                         <p>+92 313 3610 655</p>
                         <a href="https://wa.me/923133610655" class="contact-btn" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Chat Now
+                            <i class="fa-brands fa-whatsapp"></i> Chat Now
                         </a>
                     </div>
                     
                     <div class="contact-card">
                         <div class="contact-icon contact-icon-linkedin">
-                            <i class="fab fa-linkedin-in"></i>
+                            <i class="fa-brands fa-linkedin-in"></i>
                         </div>
                         <h3>LinkedIn</h3>
                         <p>Professional Network</p>
                         <a href="https://www.linkedin.com/in/azhar-ali-994242330" class="contact-btn" target="_blank">
-                            <i class="fab fa-linkedin-in"></i> Connect
+                            <i class="fa-brands fa-linkedin-in"></i> Connect
                         </a>
                     </div>
                     
                     <div class="contact-card">
                         <div class="contact-icon contact-icon-github">
-                            <i class="fab fa-github"></i>
+                            <i class="fa-brands fa-github"></i>
                         </div>
                         <h3>GitHub</h3>
                         <p>Code Repository</p>
                         <a href="https://github.com/AzharDayo" class="contact-btn" target="_blank">
-                            <i class="fab fa-github"></i> Follow
+                            <i class="fa-brands fa-github"></i> Follow
                         </a>
                     </div>
                 </div>
@@ -190,34 +194,35 @@
                         
                         <button type="submit" class="btn btn-primary" id="submitBtn">
                             <span>Send Message</span>
-                            <i class="fas fa-paper-plane"></i>
+                            <i class="fa-solid fa-paper-plane"></i>
                         </button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
+    </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="footer__container">
             <div class="footer__section">
                 <div class="footer__logo">
-                    <img src="assets/images/profile/logo.jpg" alt="Azhar Ali" class="footer-logo" loading="lazy" width="120" height="120">
-                    <h2 class="name-glow">Azhar Ali</h2>
+                    <img src="assets/images/profile/logo.jpg" alt="Azhar Ali Logo" class="footer-logo" loading="lazy" width="120" height="120">
+                    <span class="footer-brand-name">Azhar Ali</span>
                 </div>
-                <p>Full-Stack Software Engineer and Cybersecurity Specialist, delivering robust, secure, and scalable solutions across web, mobile, and desktop platforms. Proficient in C++, Java, Python, and Flutter, with a passion for innovative, high-performance applications.</p>
+                <p class="footer-description">Full-Stack Software Engineer and Cybersecurity Specialist, delivering robust, secure, and scalable solutions across web, mobile, and desktop platforms. Proficient in C++, Java, Python, and Flutter, with a passion for innovative, high-performance applications.</p>
                 <div class="footer__social">
-                    <a href="mailto:azharalidayo10@gmail.com" aria-label="Email">
-                        <i class="fas fa-envelope"></i>
+                    <a href="mailto:azharalidayo10@gmail.com" aria-label="Email Azhar Ali">
+                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
                     </a>
-                    <a href="https://wa.me/923133610655" aria-label="WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/923133610655" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/azhar-ali-994242330" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
+                    <a href="https://www.linkedin.com/in/azhar-ali-994242330" target="_blank" rel="noopener noreferrer" aria-label="View LinkedIn profile">
+                        <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
                     </a>
-                    <a href="https://github.com/AzharDayo" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
+                    <a href="https://github.com/AzharDayo" target="_blank" rel="noopener noreferrer" aria-label="View GitHub profile">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -225,28 +230,36 @@
             <div class="footer__section">
                 <h3>Quick Links</h3>
                 <div class="footer__links">
-                    <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
-                    <a href="projects.html"><i class="fas fa-chevron-right"></i> Projects</a>
-                    <a href="skills.html"><i class="fas fa-chevron-right"></i> Technical Skills</a>
-                    <a href="about.html"><i class="fas fa-chevron-right"></i> About</a>
-                    <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a>
-                    <a href="assets/documents/Resume%28CV%29.pdf" download="Azhar-Ali-Resume.pdf"><i class="fas fa-chevron-right"></i> Resume</a>
+                    <a href="index.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Home</a>
+                    <a href="projects.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Projects</a>
+                    <a href="skills.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Skills</a>
+                    <a href="security-lab.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Security Lab</a>
+                    <a href="contact.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Contact</a>
+                    <a href="assets/documents/Resume%28CV%29.pdf" target="_blank" rel="noopener noreferrer" download="Azhar-Ali-Resume.pdf"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Resume</a>
                 </div>
             </div>
             
-            <div class="footer__section">
+            <div class="footer__section footer__section--technical">
                 <h3>Technical Focus</h3>
                 <div class="footer__links">
-                    <a href="projects.html"><i class="fas fa-chevron-right"></i> Full-Stack Development</a>
-                    <a href="projects.html"><i class="fas fa-chevron-right"></i> Real-Time Systems</a>
-                    <a href="skills.html"><i class="fas fa-chevron-right"></i> Cybersecurity</a>
-                    <a href="about.html"><i class="fas fa-chevron-right"></i> Secure Architecture</a>
+                    <a href="projects.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Full-Stack Development</a>
+                    <a href="projects.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Real-Time Systems</a>
+                    <a href="skills.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Cybersecurity</a>
+                    <a href="index.html#profile"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Profile</a>
                 </div>
             </div>
         </div>
         
         <div class="footer__copyright">
-            <p>&copy; <span id="current-year">2025</span> <span>Azhar Ali</span>. All rights reserved.</p>
+            <p class="footer__copyright-text">
+                &copy; <span id="current-year">2025</span> Azhar Ali. All rights reserved.
+            </p>
+            <div class="footer__actions">
+                <button id="explain-mode-trigger" class="footer-action-btn" aria-label="Start site explanation walkthrough">
+                    <i class="fa-solid fa-info-circle" aria-hidden="true"></i>
+                    <span>Explain this site</span>
+                </button>
+            </div>
         </div>
     </footer>
 
@@ -270,6 +283,8 @@
     <script src="js/coming-soon-modal.js" defer></script>
     <script src="js/message-encryption.js" defer></script>
     <script src="js/system-state-mode.js" defer></script>
+    <script src="js/self-explaining-system.js" defer></script>
+    <script src="js/explain-mode.js" defer></script>
     
     <script>
         // Update footer year automatically

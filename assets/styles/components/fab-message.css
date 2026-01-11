@@ -5,18 +5,21 @@
 
 /* FAB Container */
 .fab-message {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 30px !important;
+    left: auto !important;
+    top: auto !important;
     width: 60px;
     height: 60px;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
     border-radius: 50%;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 999;
+    z-index: 9999 !important;
     box-shadow: 
         0 4px 20px rgba(0, 234, 255, 0.4),
         0 0 40px rgba(0, 234, 255, 0.2);

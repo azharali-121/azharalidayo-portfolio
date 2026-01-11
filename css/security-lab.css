@@ -8,6 +8,108 @@
  */
 
 /* ===========================
+   Navigation Fixes
+   =========================== */
+/* Hide toggle on desktop, show only on mobile */
+.nav-toggle {
+    display: none; /* Hide by default on desktop */
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 1001;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.nav-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    display: block;
+    box-shadow: 0 0 5px rgba(0, 234, 255, 0.5);
+}
+
+.nav-toggle:hover .bar {
+    background: var(--secondary-color);
+    box-shadow: 0 0 10px rgba(94, 255, 161, 0.6);
+}
+
+.nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+@media (max-width: 768px) {
+    /* Show toggle button on mobile */
+    .nav-toggle {
+        display: flex;
+    }
+    
+    .navbar .nav-menu {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        flex-direction: column;
+        background: rgba(10, 15, 31, 0.98);
+        width: 250px;
+        height: 100vh;
+        text-align: center;
+        transition: right 0.5s ease;
+        box-shadow: -5px 0 30px rgba(0, 255, 255, 0.2);
+        padding: 2rem;
+        border-left: 1px solid rgba(0, 255, 255, 0.2);
+        z-index: 998;
+        justify-content: center;
+    }
+    
+    .navbar .nav-menu.active {
+        right: 0;
+    }
+    
+    .navbar .nav-menu li {
+        margin: 1rem 0;
+    }
+    
+    .navbar .nav-link {
+        color: #0ff;
+        font-size: 1.1rem;
+        padding: 0.75rem 1.5rem;
+        display: block;
+    }
+    
+    .navbar .nav-link:hover,
+    .navbar .nav-link.active {
+        color: #00ff41;
+        text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        transform: translateX(10px);
+    }
+}
+
+/* ===========================
    Security Lab Section
    =========================== */
 .security-lab-section {
@@ -32,13 +134,26 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.security-lab-section .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #0ff, transparent);
 }
 
 .security-lab-section .section-subtitle {
     font-size: 1.1rem;
     color: var(--text-secondary, rgba(255, 255, 255, 0.7));
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
 }
 
 /* ===========================
@@ -46,10 +161,11 @@
    =========================== */
 .security-dashboard {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: 1fr;
     gap: 2rem;
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 /* ===========================
@@ -116,6 +232,11 @@
     background: rgba(0, 0, 0, 0.3);
     border-radius: 6px;
     border-left: 3px solid #0ff;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.info-row:last-child {
+    border-bottom: none;
 }
 
 .info-row .label {
@@ -175,6 +296,7 @@
    =========================== */
 .attack-btn {
     width: 100%;
+    min-height: 44px;
     padding: 1rem 1.5rem;
     font-size: 1rem;
     font-weight: 600;
@@ -199,13 +321,20 @@
     box-shadow: 0 8px 25px rgba(0, 255, 255, 0.4);
 }
 
+.attack-btn:focus {
+    outline: 3px solid #0ff;
+    outline-offset: 3px;
+}
+
 .attack-btn:active {
     transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 255, 255, 0.3);
 }
 
 .attack-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    transform: none !important;
 }
 
 .attack-btn.stop-btn {
@@ -227,7 +356,7 @@
 /* Attack Stats */
 .attack-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     margin-bottom: 1.5rem;
 }
@@ -327,8 +456,16 @@
     border-radius: 6px;
     max-height: 400px;
     overflow-y: auto;
+    overflow-x: hidden;
     line-height: 1.6;
     border: 1px solid rgba(0, 255, 65, 0.3);
+    word-wrap: break-word;
+    outline: none;
+}
+
+.terminal-output:focus {
+    border-color: rgba(0, 255, 65, 0.6);
+    box-shadow: 0 0 0 3px rgba(0, 255, 65, 0.2);
 }
 
 .terminal-line {
@@ -385,15 +522,29 @@
     border: 1px solid rgba(255, 0, 0, 0.4);
     color: #ff4444;
     padding: 0.5rem 0.75rem;
+    min-height: 44px;
+    min-width: 44px;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
     margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .clear-btn:hover {
     background: rgba(255, 0, 0, 0.3);
     border-color: rgba(255, 0, 0, 0.6);
+}
+
+.clear-btn:focus {
+    outline: 3px solid #ff4444;
+    outline-offset: 2px;
+}
+
+.clear-btn:active {
+    background: rgba(255, 0, 0, 0.4);
 }
 
 /* Custom scrollbar for terminal */
@@ -417,74 +568,135 @@
 /* ===========================
    Defense Panel
    =========================== */
+/* Center the defense panel */
+.defense-panel {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    grid-column: 1 / -1;
+}
+
+/* Center the defense panel header */
+.defense-panel .panel-header {
+    justify-content: center;
+}
+
 .defense-list {
     display: grid;
-    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+@media (min-width: 1024px) {
+    .defense-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+    }
 }
 
 .defense-item {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.3) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
     border-left: 4px solid #0ff;
     transition: all 0.3s ease;
+    min-height: 200px;
+    box-shadow: 0 4px 12px rgba(0, 255, 255, 0.1);
+    width: 100%;
+    justify-content: space-between;
 }
 
 .defense-item:hover {
-    background: rgba(0, 0, 0, 0.3);
-    transform: translateX(5px);
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.4) 100%);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 255, 255, 0.25);
+    border-color: rgba(0, 255, 255, 0.5);
 }
 
 .defense-icon {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 255, 255, 0.1);
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(0, 255, 65, 0.1) 100%);
     border-radius: 50%;
     border: 2px solid #0ff;
-    flex-shrink: 0;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
 
 .defense-icon i {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: #0ff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
 }
 
 .defense-info {
     flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .defense-info h3 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #fff;
-    margin-bottom: 0.25rem;
+    margin: 0;
     font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    text-shadow: 0 0 8px rgba(0, 234, 255, 0.3);
 }
 
 .defense-info p {
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 0.5rem;
+    font-size: 0.925rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    flex: 1;
+    line-height: 1.5;
 }
 
 .defense-status {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    align-self: center;
+    box-shadow: 0 2px 8px rgba(0, 255, 65, 0.2);
 }
 
 .defense-status.active {
     background: rgba(0, 255, 65, 0.2);
     color: #00ff41;
     border: 1px solid #00ff41;
+}
+
+.defense-status.active::before {
+    content: '✓ ';
+}
+
+/* Screen reader only text for active status */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 /* ===========================
@@ -661,17 +873,104 @@
 /* ===========================
    Responsive Design
    =========================== */
-@media (max-width: 1024px) {
+
+/* Desktop Large (1200px+) - 3-column layout */
+@media (min-width: 1200px) {
     .security-dashboard {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+    }
+    
+    .target-panel {
+        grid-column: 1 / -1;
+    }
+    
+    .terminal-panel {
+        grid-column: span 2;
+    }
+    
+    .explanation-panel {
+        grid-column: 1 / -1;
+    }
+    
+    .defense-panel {
+        grid-column: 1 / -1;
+        max-width: 1100px;
+    }
+    
+    .defense-list {
+        gap: 2.5rem;
     }
     
     .target-info {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
-@media (max-width: 768px) {
+/* Desktop Medium (900px - 1199px) - 2-column layout */
+@media (min-width: 900px) and (max-width: 1199px) {
+    .security-dashboard {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    .target-panel {
+        grid-column: 1 / -1;
+    }
+    
+    .terminal-panel {
+        grid-column: 1 / -1;
+    }
+    
+    .explanation-panel {
+        grid-column: 1 / -1;
+    }
+    
+    .defense-panel {
+        grid-column: 1 / -1;
+        max-width: 950px;
+        margin: 0 auto;
+    }
+    
+    .defense-list {
+        gap: 2rem;
+    }
+    
+    .target-info {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablet (768px - 899px) - 2-column for smaller panels */
+@media (min-width: 768px) and (max-width: 899px) {
+    .security-dashboard {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .target-panel,
+    .terminal-panel,
+    .explanation-panel,
+    .defense-panel {
+        grid-column: 1 / -1;
+    }
+    
+    .defense-panel {
+        max-width: 750px;
+        margin: 0 auto;
+    }
+    
+    .defense-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .target-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
     .security-lab-section {
         padding: 6rem 0 2rem;
     }
@@ -682,8 +981,16 @@
         gap: 0.5rem;
     }
     
+    .security-dashboard {
+        gap: 1.5rem;
+    }
+    
     .dashboard-panel {
-        margin: 0 0.5rem;
+        margin: 0;
+    }
+    
+    .defense-panel {
+        max-width: 100%;
     }
     
     .panel-header {
@@ -691,11 +998,21 @@
     }
     
     .panel-content {
-        padding: 1rem;
+        padding: 1.25rem;
+    }
+    
+    .defense-list {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .defense-item {
+        max-width: 100%;
     }
     
     .attack-stats {
         grid-template-columns: 1fr;
+        gap: 12px;
     }
     
     .stat-grid {
@@ -703,24 +1020,47 @@
     }
     
     .terminal-output {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         max-height: 300px;
+        padding: 0.875rem;
     }
     
     .recommendations li strong {
         display: block;
         margin-bottom: 0.25rem;
     }
+    
+    .target-info {
+        gap: 12px;
+    }
 }
 
 @media (max-width: 480px) {
+    .security-lab-section {
+        padding: 5rem 0 1.5rem;
+    }
+    
     .security-lab-section .section-title {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .security-dashboard {
+        gap: 16px;
+    }
+    
+    .dashboard-panel {
+        border-radius: 8px;
+    }
+    
+    .panel-content {
+        padding: 16px;
     }
     
     .attack-btn {
         font-size: 0.9rem;
         padding: 0.875rem 1rem;
+        min-height: 44px;
     }
     
     .stat-number {
@@ -728,12 +1068,21 @@
     }
     
     .defense-item {
-        flex-direction: column;
-        text-align: center;
+        min-height: auto;
+        padding: 16px;
     }
     
-    .defense-icon {
-        margin: 0 auto;
+    .defense-list {
+        gap: 12px;
+    }
+    
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .warning-banner {
+        padding: 1rem;
+        font-size: 0.9rem;
     }
 }
 

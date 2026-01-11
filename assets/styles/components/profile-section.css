@@ -1,0 +1,228 @@
+/**
+ * Profile/About Section Styles
+ * Consolidated personal information section for Home page
+ */
+
+/* ===== PROFILE SECTION ===== */
+
+.profile-section {
+    padding: 4rem 0;
+    background: var(--bg-primary);
+    position: relative;
+}
+
+.profile-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(0, 234, 255, 0.03), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(94, 255, 161, 0.03), transparent 40%);
+    z-index: 0;
+}
+
+.profile-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.profile-text {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.profile-text:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .profile-section {
+        padding: 3rem 0;
+    }
+    
+    .profile-text {
+        font-size: 1rem;
+        line-height: 1.7;
+        margin-bottom: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-section {
+        padding: 2.5rem 0;
+    }
+    
+    .profile-text {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* ===== CTA SECTION ===== */
+
+.cta-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, rgba(0, 234, 255, 0.05), rgba(94, 255, 161, 0.05));
+    border-top: 1px solid rgba(0, 234, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 234, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 234, 255, 0.08), transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(94, 255, 161, 0.08), transparent 50%);
+    animation: pulse 8s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.cta-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cta-text {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn {
+    min-width: 180px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.btn-secondary {
+    background: rgba(94, 255, 161, 0.1);
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-color);
+    color: var(--bg-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(94, 255, 161, 0.3);
+}
+
+@media (max-width: 768px) {
+    .cta-section {
+        padding: 4rem 0;
+    }
+    
+    .cta-title {
+        font-size: 1.875rem;
+        margin-bottom: 0.875rem;
+    }
+    
+    .cta-text {
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+    }
+    
+    .cta-buttons {
+        gap: 1rem;
+    }
+    
+    .cta-buttons .btn {
+        min-width: 160px;
+        padding: 0.875rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-section {
+        padding: 3rem 0;
+    }
+    
+    .cta-title {
+        font-size: 1.625rem;
+    }
+    
+    .cta-text {
+        font-size: 1rem;
+        margin-bottom: 1.75rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+/* ===== SECTION HEADER IMPROVEMENTS ===== */
+
+.section-header {
+    margin-bottom: 3rem;
+}
+
+.section-subtitle {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .section-header {
+        margin-bottom: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-header {
+        margin-bottom: 2rem;
+    }
+}

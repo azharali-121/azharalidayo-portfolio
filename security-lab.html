@@ -54,10 +54,14 @@
     <link rel="stylesheet" href="assets/styles/min/main.min.css">
     <link rel="stylesheet" href="assets/styles/components/mobile-responsive.css">
     <link rel="stylesheet" href="assets/styles/components/hacker-features.css">
+    <link rel="stylesheet" href="assets/styles/components/audit-fixes.css">
     <link rel="stylesheet" href="css/security-lab.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-to-main" tabindex="0">Skip to main content</a>
+    
     <div id="vanta-bg"></div>
     
     <nav class="navbar">
@@ -70,15 +74,17 @@
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
-                <li><a href="skills.html" class="nav-link">Technical Skills</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="security-lab.html" class="nav-link active">Security Lab</a></li>
+                <li><a href="skills.html" class="nav-link">Skills</a></li>
+                <li><a href="security-lab.html" class="nav-link">Security Lab</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
                 <li><a href="assets/documents/Resume%28CV%29.pdf" class="nav-link" download="Azhar-Ali-Resume.pdf">Resume</a></li>
             </ul>
             
-            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-label="Toggle navigation menu" aria-controls="nav-menu">
-                <span class="hamburger"></span>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="sr-only">Toggle navigation menu</span>
             </button>
         </div>
     </nav>
@@ -87,7 +93,7 @@
         <div class="container">
             <div class="section-header">
                 <h1 class="section-title">
-                    <i class="fas fa-shield-alt"></i> Security Breach Simulator
+                    <i class="fa-solid fa-shield-alt"></i> Security Breach Simulator
                 </h1>
                 <p class="section-subtitle">Educational demonstration of brute force attacks and defense mechanisms</p>
             </div>
@@ -96,9 +102,9 @@
                 <!-- Target System Panel -->
                 <div class="dashboard-panel target-panel">
                     <div class="panel-header">
-                        <i class="fas fa-server"></i>
+                        <i class="fa-solid fa-server" aria-hidden="true"></i>
                         <h2>Target System</h2>
-                        <span class="status-badge" id="systemStatus">SECURE</span>
+                        <span class="status-badge" id="systemStatus" role="status" aria-live="polite">SECURE</span>
                     </div>
                     <div class="panel-content">
                         <div class="target-info">
@@ -129,20 +135,20 @@
                 <!-- Attack Control Panel -->
                 <div class="dashboard-panel control-panel">
                     <div class="panel-header">
-                        <i class="fas fa-crosshairs"></i>
+                        <i class="fa-solid fa-crosshairs" aria-hidden="true"></i>
                         <h2>Attack Control</h2>
                     </div>
                     <div class="panel-content">
                         <button id="startAttackBtn" class="attack-btn" aria-label="Start brute force simulation">
-                            <i class="fas fa-play"></i>
+                            <i class="fa-solid fa-play"></i>
                             Start Brute Force Simulation
                         </button>
                         <button id="stopAttackBtn" class="attack-btn stop-btn" style="display: none;" aria-label="Stop attack simulation">
-                            <i class="fas fa-stop"></i>
+                            <i class="fa-solid fa-stop"></i>
                             Stop Attack
                         </button>
                         <button id="resetBtn" class="attack-btn reset-btn" aria-label="Reset simulation">
-                            <i class="fas fa-redo"></i>
+                            <i class="fa-solid fa-redo"></i>
                             Reset
                         </button>
                         
@@ -164,7 +170,7 @@
                         <!-- Progress Bar -->
                         <div class="progress-container">
                             <div class="progress-label">Attack Progress</div>
-                            <div class="progress-bar">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Dictionary attack progress">
                                 <div class="progress-fill" id="progressFill"></div>
                             </div>
                             <div class="progress-text" id="progressText">0%</div>
@@ -175,14 +181,15 @@
                 <!-- Terminal Output Panel -->
                 <div class="dashboard-panel terminal-panel">
                     <div class="panel-header">
-                        <i class="fas fa-terminal"></i>
+                        <i class="fa-solid fa-terminal" aria-hidden="true"></i>
                         <h2>Attack Logs</h2>
                         <button id="clearLogsBtn" class="clear-btn" aria-label="Clear terminal logs">
-                            <i class="fas fa-trash"></i>
+                            <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                            <span class="sr-only">Clear logs</span>
                         </button>
                     </div>
                     <div class="panel-content">
-                        <div class="terminal-output" id="terminalOutput" role="log" aria-live="polite" aria-atomic="false">
+                        <div class="terminal-output" id="terminalOutput" role="log" aria-live="polite" aria-atomic="false" tabindex="0" aria-label="Attack simulation logs">
                             <div class="terminal-line system">
                                 <span class="timestamp">[00:00:00]</span>
                                 <span class="message">System initialized. Ready for simulation.</span>
@@ -194,43 +201,51 @@
                 <!-- Defense Mechanisms Panel -->
                 <div class="dashboard-panel defense-panel">
                     <div class="panel-header">
-                        <i class="fas fa-shield-virus"></i>
+                        <i class="fa-solid fa-shield-virus" aria-hidden="true"></i>
                         <h2>Active Defenses</h2>
                     </div>
                     <div class="panel-content">
                         <div class="defense-list">
-                            <div class="defense-item" data-defense="ratelimit">
-                                <div class="defense-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <article class="defense-item" data-defense="ratelimit" role="region" aria-labelledby="defense-ratelimit">
+                                <div class="defense-icon" aria-hidden="true"><i class="fa-solid fa-tachometer-alt"></i></div>
                                 <div class="defense-info">
-                                    <h3>Rate Limiting</h3>
+                                    <h3 id="defense-ratelimit">Rate Limiting</h3>
                                     <p>Restricts login attempts per time window</p>
-                                    <span class="defense-status active">ACTIVE</span>
+                                    <span class="defense-status active" aria-label="Defense status: Active">
+                                        <span class="sr-only">Active: </span>ACTIVE
+                                    </span>
                                 </div>
-                            </div>
-                            <div class="defense-item" data-defense="lockout">
-                                <div class="defense-icon"><i class="fas fa-lock"></i></div>
+                            </article>
+                            <article class="defense-item" data-defense="lockout" role="region" aria-labelledby="defense-lockout">
+                                <div class="defense-icon" aria-hidden="true"><i class="fa-solid fa-lock"></i></div>
                                 <div class="defense-info">
-                                    <h3>Account Lockout</h3>
+                                    <h3 id="defense-lockout">Account Lockout</h3>
                                     <p>Locks account after failed attempts threshold</p>
-                                    <span class="defense-status active">ACTIVE</span>
+                                    <span class="defense-status active" aria-label="Defense status: Active">
+                                        <span class="sr-only">Active: </span>ACTIVE
+                                    </span>
                                 </div>
-                            </div>
-                            <div class="defense-item" data-defense="delay">
-                                <div class="defense-icon"><i class="fas fa-hourglass-half"></i></div>
+                            </article>
+                            <article class="defense-item" data-defense="delay" role="region" aria-labelledby="defense-delay">
+                                <div class="defense-icon" aria-hidden="true"><i class="fa-solid fa-hourglass-half"></i></div>
                                 <div class="defense-info">
-                                    <h3>Progressive Delay</h3>
+                                    <h3 id="defense-delay">Progressive Delay</h3>
                                     <p>Increases response time with each failure</p>
-                                    <span class="defense-status active">ACTIVE</span>
+                                    <span class="defense-status active" aria-label="Defense status: Active">
+                                        <span class="sr-only">Active: </span>ACTIVE
+                                    </span>
                                 </div>
-                            </div>
-                            <div class="defense-item" data-defense="logging">
-                                <div class="defense-icon"><i class="fas fa-clipboard-list"></i></div>
+                            </article>
+                            <article class="defense-item" data-defense="logging" role="region" aria-labelledby="defense-logging">
+                                <div class="defense-icon" aria-hidden="true"><i class="fa-solid fa-clipboard-list"></i></div>
                                 <div class="defense-info">
-                                    <h3>Security Logging</h3>
+                                    <h3 id="defense-logging">Security Logging</h3>
                                     <p>Records all authentication attempts</p>
-                                    <span class="defense-status active">ACTIVE</span>
+                                    <span class="defense-status active" aria-label="Defense status: Active">
+                                        <span class="sr-only">Active: </span>ACTIVE
+                                    </span>
                                 </div>
-                            </div>
+                            </article>
                         </div>
                     </div>
                 </div>
@@ -238,7 +253,7 @@
                 <!-- Educational Explanation Panel -->
                 <div class="dashboard-panel explanation-panel" id="explanationPanel" style="display: none;">
                     <div class="panel-header">
-                        <i class="fas fa-graduation-cap"></i>
+                        <i class="fa-solid fa-graduation-cap"></i>
                         <h2>What Happened?</h2>
                     </div>
                     <div class="panel-content">
@@ -250,68 +265,77 @@
             </div>
 
             <!-- Warning Banner -->
-            <div class="warning-banner">
-                <i class="fas fa-exclamation-triangle"></i>
+            <div class="warning-banner" role="alert">
+                <i class="fa-solid fa-exclamation-triangle" aria-hidden="true"></i>
                 <strong>Educational Purpose Only:</strong> This is a simulation designed to demonstrate cybersecurity concepts. 
                 All attacks are simulated and no real systems are accessed. Never attempt unauthorized access to real systems.
             </div>
         </div>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="footer__container">
             <div class="footer__section">
                 <div class="footer__logo">
-                    <img src="assets/images/profile/logo.jpg" alt="Azhar Ali" class="footer-logo" loading="lazy" width="120" height="120">
-                    <h2 class="name-glow">Azhar Ali</h2>
+                    <img src="assets/images/profile/logo.jpg" alt="Azhar Ali Logo" class="footer-logo" loading="lazy" width="120" height="120">
+                    <span class="footer-brand-name">Azhar Ali</span>
                 </div>
-                <p>Full-Stack Software Engineer and Cybersecurity Specialist, delivering robust, secure, and scalable solutions across web, mobile, and desktop platforms. Proficient in C++, Java, Python, and Flutter, with a passion for innovative, high-performance applications.</p>
+                <p class="footer-description">Full-Stack Software Engineer and Cybersecurity Specialist, delivering robust, secure, and scalable solutions across web, mobile, and desktop platforms. Proficient in C++, Java, Python, and Flutter, with a passion for innovative, high-performance applications.</p>
                 <div class="footer__social">
-                    <a href="mailto:azharalidayo10@gmail.com" aria-label="Email">
-                        <i class="fas fa-envelope"></i>
+                    <a href="mailto:azharalidayo10@gmail.com" aria-label="Email Azhar Ali">
+                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
                     </a>
-                    <a href="https://wa.me/923133610655" aria-label="WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/923133610655" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/azhar-ali-994242330" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
+                    <a href="https://www.linkedin.com/in/azhar-ali-994242330" target="_blank" rel="noopener noreferrer" aria-label="View LinkedIn profile">
+                        <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
                     </a>
-                    <a href="https://github.com/AzharDayo" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
+                    <a href="https://github.com/AzharDayo" target="_blank" rel="noopener noreferrer" aria-label="View GitHub profile">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
             
             <div class="footer__section">
                 <h3>Quick Links</h3>
-                <ul class="footer__links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="skills.html">Technical Skills</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="security-lab.html">Security Lab</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+                <div class="footer__links">
+                    <a href="index.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Home</a>
+                    <a href="projects.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Projects</a>
+                    <a href="skills.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Skills</a>
+                    <a href="security-lab.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Security Lab</a>
+                    <a href="contact.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Contact</a>
+                    <a href="assets/documents/Resume%28CV%29.pdf" target="_blank" rel="noopener noreferrer" download="Azhar-Ali-Resume.pdf"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Resume</a>
+                </div>
             </div>
             
-            <div class="footer__section">
-                <h3>Contact Info</h3>
-                <ul class="footer__contact">
-                    <li><i class="fas fa-envelope"></i> azharalidayo10@gmail.com</li>
-                    <li><i class="fas fa-phone"></i> +92 313 3610 655</li>
-                    <li><i class="fas fa-map-marker-alt"></i> Pakistan</li>
-                </ul>
+            <div class="footer__section footer__section--technical">
+                <h3>Technical Focus</h3>
+                <div class="footer__links">
+                    <a href="projects.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Full-Stack Development</a>
+                    <a href="projects.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Real-Time Systems</a>
+                    <a href="skills.html"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Cybersecurity</a>
+                    <a href="index.html#profile"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i> Profile</a>
+                </div>
             </div>
         </div>
         
-        <div class="footer__bottom">
-            <p>&copy; <span id="current-year">2026</span> Azhar Ali. All rights reserved.</p>
+        <div class="footer__copyright">
+            <p class="footer__copyright-text">
+                &copy; <span id="current-year">2025</span> Azhar Ali. All rights reserved.
+            </p>
+            <div class="footer__actions">
+                <button id="explain-mode-trigger" class="footer-action-btn" aria-label="Start site explanation walkthrough">
+                    <i class="fa-solid fa-info-circle" aria-hidden="true"></i>
+                    <span>Explain this site</span>
+                </button>
+            </div>
         </div>
     </footer>
 
     <!-- Floating Action Button -->
-    <button class="fab-message" id="fab-message" aria-label="Send Message" title="Send Message">
-        <i class="fas fa-paper-plane"></i>
+    <button class="fab-message" id="fab-message" aria-label="Go to contact form" title="Contact Me" style="position: fixed !important; bottom: 30px !important; right: 30px !important; left: auto !important; top: auto !important;">
+        <i class="fa-solid fa-paper-plane"></i>
     </button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
@@ -325,6 +349,8 @@
     <script src="js/fab-message.js" defer></script>
     <script src="js/coming-soon-modal.js" defer></script>
     <script src="js/security-simulator.js" defer></script>
+    <script src="js/self-explaining-system.js" defer></script>
+    <script src="js/explain-mode.js" defer></script>
     
     <script>
         // Update footer year automatically

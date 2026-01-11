@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fab = document.getElementById('fab-message');
     const heroSection = document.querySelector('.hero');
     
-    if (!fab || !heroSection) return;
+    if (!fab) return;
     
     // Intersection Observer to detect when hero section is out of view
     const observer = new IntersectionObserver(
@@ -29,30 +29,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     );
     
-    // Start observing the hero section
-    observer.observe(heroSection);
+    // Start observing the hero section if it exists
+    if (heroSection) {
+        observer.observe(heroSection);
+    } else {
+        // No hero section (non-home pages) - show FAB immediately after small delay
+        setTimeout(() => fab.classList.add('fab-visible'), 500);
+    }
     
-    // Smooth scroll to contact form on click
+    // Smooth scroll to contact form on click; fallback to contact page
     fab.addEventListener('click', (e) => {
         e.preventDefault();
-        
+
         const contactSection = document.getElementById('contact');
         const contactForm = document.getElementById('contactForm');
-        
-        // Scroll to contact section
+
         if (contactSection) {
+            // Scroll to contact section if present on this page
             contactSection.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
-            
-            // Focus on first input after scroll completes
+
             setTimeout(() => {
                 const firstInput = contactForm?.querySelector('input[name="name"]');
                 if (firstInput) {
                     firstInput.focus();
                 }
             }, 800);
+        } else {
+            // If contact section isn't present, navigate to contact page
+            window.location.href = 'contact.html';
         }
     });
     

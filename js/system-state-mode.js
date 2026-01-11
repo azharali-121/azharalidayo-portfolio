@@ -90,7 +90,17 @@
         indicator.type = 'button'; // Prevent form submission
         indicator.id = 'system-status-indicator';
         indicator.className = 'system-status-indicator';
-        indicator.innerHTML = '<span class="status-dot"></span><span class="status-text">system: stable</span>';
+        
+        // Create icon and text structure for better styling
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-terminal';
+        icon.setAttribute('aria-hidden', 'true');
+        
+        const textSpan = document.createElement('span');
+        textSpan.textContent = 'System State';
+        
+        indicator.appendChild(icon);
+        indicator.appendChild(textSpan);
         indicator.setAttribute('aria-label', 'Toggle system state panel');
         
         // Add click handler
@@ -129,17 +139,24 @@
      * Helper function to insert indicator into footer
      */
     function insertIntoFooter(indicator) {
-        // Find footer copyright section
-        const footerCopyright = document.querySelector('.footer__copyright p');
+        // Find footer actions container
+        const footerActions = document.querySelector('.footer__actions');
         
-        if (footerCopyright) {
-            // Add separator and button to footer text
-            const separator = document.createTextNode(' | ');
-            footerCopyright.appendChild(separator);
-            footerCopyright.appendChild(indicator);
+        if (footerActions) {
+            // Add system state toggle as a separate button in actions container
+            indicator.classList.add('footer-action-btn');
+            footerActions.appendChild(indicator);
             elements.statusIndicator = indicator;
-            // Add footer-specific class for styling
-            indicator.classList.add('in-footer');
+        } else {
+            // Fallback: add to copyright text if actions container not found
+            const footerCopyright = document.querySelector('.footer__copyright-text');
+            if (footerCopyright) {
+                const separator = document.createTextNode(' | ');
+                footerCopyright.appendChild(separator);
+                footerCopyright.appendChild(indicator);
+                elements.statusIndicator = indicator;
+                indicator.classList.add('in-footer');
+            }
         }
     }
 

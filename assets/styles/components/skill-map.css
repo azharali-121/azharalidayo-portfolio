@@ -1,0 +1,193 @@
+/**
+ * Skill Map Visualization Styles
+ * Responsive, interactive node-based skill visualization
+ */
+
+/* ===================================
+   SKILL MAP CONTAINER
+   =================================== */
+
+.skill-map-section {
+    padding: 3rem 2rem;
+    background: rgba(0, 234, 255, 0.05);
+    border: 1px solid rgba(0, 234, 255, 0.2);
+    border-radius: 16px;
+    margin: 3rem auto;
+    max-width: 900px;
+}
+
+.skill-map-section h2 {
+    text-align: center;
+    color: #e6f8ff;
+    font-size: 1.8rem;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+.skill-map-section p {
+    text-align: center;
+    color: rgba(230, 248, 255, 0.8);
+    font-size: 0.95rem;
+    margin: 0 0 2rem 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#skill-map-container {
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#skill-map-container svg {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* ===================================
+   SVG ELEMENTS
+   =================================== */
+
+.skill-map-line {
+    pointer-events: none;
+}
+
+.skill-map-node {
+    stroke: none;
+    filter: drop-shadow(0 0 8px rgba(0, 234, 255, 0.3));
+}
+
+.skill-map-node:hover {
+    filter: drop-shadow(0 0 16px rgba(0, 234, 255, 0.6));
+}
+
+/* ===================================
+   TOOLTIPS
+   =================================== */
+
+.skill-map-tooltip {
+    animation: tooltipFadeIn 0.3s ease forwards;
+}
+
+.skill-map-tooltip strong {
+    display: block;
+    color: #00eaff;
+    margin-bottom: 4px;
+}
+
+.skill-map-tooltip p {
+    margin: 4px 0 0 0;
+    opacity: 0.9;
+}
+
+.skill-map-tooltip-expanded {
+    min-width: 160px;
+}
+
+/* ===================================
+   ANIMATIONS
+   =================================== */
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes tooltipFadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+@keyframes confettiBurst {
+    to {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) rotate(360deg);
+    }
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+@media (max-width: 768px) {
+    .skill-map-section {
+        padding: 2rem 1rem;
+        margin: 2rem auto;
+    }
+
+    .skill-map-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .skill-map-section p {
+        font-size: 0.9rem;
+    }
+
+    #skill-map-container {
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 600px) {
+    .skill-map-section {
+        padding: 1.5rem 1rem;
+        margin: 1.5rem auto;
+    }
+
+    .skill-map-section h2 {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .skill-map-section p {
+        font-size: 0.85rem;
+        margin-bottom: 1.5rem;
+    }
+
+    #skill-map-container {
+        min-height: 350px;
+    }
+
+    .skill-map-tooltip {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+}
+
+/* ===================================
+   DARK MODE / ACCESSIBILITY
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .skill-map-node,
+    .skill-map-line,
+    .skill-map-tooltip {
+        transition: none;
+        animation: none;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .skill-map-section {
+        background: rgba(0, 234, 255, 0.03);
+        border-color: rgba(0, 234, 255, 0.15);
+    }
+}

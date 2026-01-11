@@ -113,6 +113,22 @@
     box-shadow: 0 4px 12px rgba(94, 255, 161, 0.2);
 }
 
+/* Home CTA specific prominence for Contact button */
+.cta-buttons .btn-secondary {
+    border-width: 2px;
+    background: rgba(94, 255, 161, 0.12);
+    box-shadow: 0 6px 20px rgba(94, 255, 161, 0.2);
+}
+.cta-buttons .btn-secondary:hover {
+    background: var(--secondary-color);
+    color: var(--bg-primary);
+    box-shadow: 0 8px 24px rgba(94, 255, 161, 0.3);
+}
+.cta-buttons .btn-secondary:focus-visible {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 3px;
+}
+
 /* Outline button - transparent with border */
 .btn-outline {
     background: transparent;

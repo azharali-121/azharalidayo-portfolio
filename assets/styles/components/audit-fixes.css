@@ -1,0 +1,474 @@
+/**
+ * Comprehensive Audit Fixes
+ * Addresses accessibility, responsiveness, and UX issues from portfolio audit
+ */
+
+/* ===================================
+   SKIP TO MAIN CONTENT LINK
+   =================================== */
+
+.skip-to-main {
+    position: absolute;
+    left: -9999px;
+    z-index: 9999;
+    padding: 1em 1.5em;
+    background-color: var(--primary-color);
+    color: var(--bg-primary);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 234, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.skip-to-main:focus {
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+/* ===================================
+   HAMBURGER MENU STATE STYLING
+   =================================== */
+
+/* Add visible open/close state for hamburger */
+.nav-toggle {
+    position: relative;
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+    display: none; /* Hide on desktop by default */
+}
+
+/* Show only on mobile */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+    }
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+    border-color: rgba(0, 234, 255, 0.3);
+    background: rgba(0, 234, 255, 0.05);
+}
+
+.nav-toggle.active {
+    border-color: rgba(0, 234, 255, 0.5);
+    background: rgba(0, 234, 255, 0.1);
+}
+
+.nav-toggle.active .bar {
+    background: var(--secondary-color);
+    box-shadow: 0 0 8px rgba(94, 255, 161, 0.6);
+}
+
+/* ===================================
+   BUTTON HOVER IMPROVEMENTS
+   =================================== */
+
+/* Add scale transform to all buttons for better feedback */
+.btn,
+.attack-btn,
+.footer-action-btn,
+.verify-btn,
+.cta-buttons .btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover,
+.attack-btn:hover,
+.footer-action-btn:hover,
+.verify-btn:hover,
+.cta-buttons .btn:hover {
+    transform: scale(1.05) translateY(-2px);
+}
+
+.btn:active,
+.attack-btn:active,
+.footer-action-btn:active,
+.verify-btn:active {
+    transform: scale(0.98) translateY(0);
+}
+
+/* ===================================
+   ACTIVE NAV LINK UNDERLINE
+   =================================== */
+
+/* Ensure active link underline is clearly visible */
+.nav-link.active {
+    position: relative;
+}
+
+.nav-link.active::before {
+    transform: scaleX(1) !important;
+    height: 3px !important;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 0 10px rgba(0, 234, 255, 0.6);
+}
+
+/* ===================================
+   HERO TITLE RESPONSIVE WRAPPING
+   =================================== */
+
+/* Fix hero title wrapping on tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero-title {
+        font-size: clamp(2.5rem, 5vw, 3rem);
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+}
+
+/* Ensure spans in hero title wrap naturally */
+.hero-title span {
+    display: inline;
+    white-space: normal;
+}
+
+/* ===================================
+   FORCE SINGLE COLUMN GRIDS ON MOBILE
+   =================================== */
+
+/* Projects grid - force single column ≤768px */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem;
+    }
+}
+
+/* Skills grid - force single column ≤600px */
+@media (max-width: 600px) {
+    .skills-grid,
+    .skills-container {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+    
+    .skill-card {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+}
+
+/* ===================================
+   FOOTER SOCIAL ICONS - TOUCH TARGETS
+   =================================== */
+
+/* Ensure footer social icons are 44x44px minimum */
+.footer__social a {
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.footer__social a:hover {
+    transform: scale(1.15) translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .footer__social {
+        gap: 1rem;
+        padding: 0.5rem 0;
+    }
+    
+    .footer__social a {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        min-height: 48px;
+    }
+}
+
+/* ===================================
+   PROJECT CARD IMAGE ASPECT RATIO
+   =================================== */
+
+/* Enforce consistent 16:9 aspect ratio */
+.project-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    overflow: hidden;
+    background: rgba(16, 22, 38, 0.8);
+}
+
+.project-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Projects notice: subtle, dark, cyan-accent */
+.projects-info {
+    margin: 1rem 0 1.5rem;
+    padding: 0.85rem 1rem;
+    color: #e6f8ff;
+    background: rgba(10, 14, 22, 0.6);
+    border: 1px solid rgba(0, 234, 255, 0.28);
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+}
+
+/* Card consistency and spacing */
+.project-card {
+    border: 1px solid rgba(0, 234, 255, 0.16);
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+
+.project-content {
+    padding-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .projects-info {
+        margin: 0.75rem 0 1.25rem;
+        padding: 0.8rem 0.95rem;
+    }
+    .project-card {
+        border-radius: 10px;
+    }
+}
+
+/* ===================================
+   EDUCATION TIMELINE ALIGNMENT
+   =================================== */
+
+/* Fix timeline vertical alignment across browsers */
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    position: relative;
+}
+
+.timeline-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    margin-top: 0;
+}
+
+.timeline-content {
+    flex: 1;
+    padding-top: 0;
+}
+
+/* ===================================
+   LOADER OPTIMIZATIONS
+   =================================== */
+
+/* Prevent loader from blocking content */
+.boot-loader {
+    pointer-events: none;
+}
+
+.boot-loader.hidden {
+    animation: fadeOut 0.4s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Skip loader button - Note: Primary styles in boot-loader.css */
+/* Additional animation for skip button appearance */
+.skip-loader-btn {
+    opacity: 0;
+    animation: skipBtnFadeIn 0.4s ease-in 2s forwards;
+}
+
+@keyframes skipBtnFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hide skip button once loader is hidden */
+.boot-loader.hidden + .skip-loader-btn {
+    display: none;
+}
+
+/* ===================================
+   PREFERS REDUCED MOTION
+   =================================== */
+
+/* Disable heavy animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    /* Keep essential UI feedback */
+    .btn,
+    .nav-link,
+    .footer__social a,
+    .project-card {
+        transition-duration: 0.1s !important;
+    }
+    
+    /* Disable background animations */
+    .hero-particles,
+    #vanta-bg,
+    .footer::before {
+        animation: none !important;
+    }
+    
+    /* Disable boot loader animations */
+    .boot-loader {
+        display: none !important;
+    }
+}
+
+/* ===================================
+   CERTIFICATE VERIFICATION LINKS
+   =================================== */
+
+/* Ensure verify buttons have consistent styling */
+.verify-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    min-height: 40px;
+    transition: all 0.3s ease;
+}
+
+.verify-btn i {
+    font-size: 0.9em;
+}
+
+/* ===================================
+   MOBILE NAVIGATION KEYBOARD ACCESS
+   =================================== */
+
+/* Ensure mobile menu is properly accessible */
+.nav-menu {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ===================================
+   SECURITY LAB PROGRESS BAR
+   =================================== */
+
+/* Update progress bar dynamically via JavaScript */
+.progress-bar[role="progressbar"] {
+    position: relative;
+}
+
+/* Progress fill updates via JavaScript setting width */
+.progress-fill {
+    transition: width 0.3s ease;
+}
+
+/* ===================================
+   FORM BUTTON ACCESSIBILITY
+   =================================== */
+
+/* Ensure all icon-only buttons have proper labels */
+button[aria-label],
+a[aria-label] {
+    position: relative;
+}
+
+/* Add focus indicators for accessibility */
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0, 234, 255, 0.2);
+}
+
+/* ===================================
+   TABLET-SPECIFIC FIXES
+   =================================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Adjust container padding for tablets */
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    
+    /* Ensure two-column grid on tablets */
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    /* Hero content layout */
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+}
+
+/* ===================================
+   LAZY LOADING IMAGE FADE-IN
+   =================================== */
+
+/* Smooth fade-in for lazy-loaded images */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+img[loading="lazy"].loaded,
+img[loading="lazy"]:not([src=""]) {
+    opacity: 1;
+}
+
+/* ===================================
+   HIGH CONTRAST MODE SUPPORT
+   =================================== */
+
+@media (prefers-contrast: high) {
+    .nav-link::before,
+    .nav-link.active::before {
+        height: 3px;
+    }
+    
+    .footer__social a,
+    .btn {
+        border-width: 2px;
+    }
+}

@@ -6,6 +6,7 @@
 /* Base Styles */
 @import url('./base/reset.css');
 @import url('./base/variables.css');
+@import url('./base/global-layout-spacing.css');
 @import url('./base/typography.css');
 @import url('./base/responsive.css');
 @import url('./base/dark-responsive.css');
@@ -41,3 +42,5 @@
 @import url('./components/glitch-text.css');
 @import url('./components/fab-message.css');
 @import url('./components/coming-soon-modal.css');
+@import url('./components/profile-section.css');
+@import url('./components/mobile-ux-fixes.css');

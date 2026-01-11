@@ -1,0 +1,450 @@
+/**
+ * Global Layout Spacing System
+ * Provides consistent outer breathing space across all viewports
+ * Mobile-first approach with safe area support
+ */
+
+/* ===== GLOBAL BOX MODEL ===== */
+
+html {
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+/* ===== BODY WRAPPER ===== */
+
+body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== GLOBAL CONTAINER SYSTEM ===== */
+
+/* Base container with responsive padding */
+.container {
+    width: 100%;
+    max-width: var(--container-max, 1280px);
+    margin-inline: auto;
+    padding-inline: calc(1rem + env(safe-area-inset-left, 0px));
+    padding-inline-end: calc(1rem + env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
+}
+
+/* Mobile Small: 16px padding (320-480px) */
+@media (max-width: 480px) {
+    .container {
+        padding-inline: calc(1rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(1rem + env(safe-area-inset-right, 0px));
+        max-width: 100%;
+    }
+}
+
+/* Mobile Large: 20px padding (481-600px) */
+@media (min-width: 481px) and (max-width: 600px) {
+    .container {
+        padding-inline: calc(1.25rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(1.25rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+/* Small tablets: 24px padding (601-768px) */
+@media (min-width: 601px) and (max-width: 768px) {
+    .container {
+        padding-inline: calc(1.5rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(1.5rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+/* Tablets and small desktop: 32px padding (769-1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding-inline: calc(2rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(2rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+/* Desktop: 48px padding (≥1025px) */
+@media (min-width: 1025px) {
+    .container {
+        padding-inline: calc(3rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(3rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+/* ===== SECTION SPACING ===== */
+
+/* Ensure sections never touch screen edges */
+section {
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: calc(1rem + env(safe-area-inset-left, 0px));
+    padding-inline-end: calc(1rem + env(safe-area-inset-right, 0px));
+}
+
+@media (min-width: 481px) and (max-width: 600px) {
+    section {
+        padding-inline: calc(1.25rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(1.25rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    section {
+        padding-inline: calc(1.5rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(1.5rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    section {
+        padding-inline: calc(2rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(2rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+@media (min-width: 1025px) {
+    section {
+        padding-inline: calc(2.5rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(2.5rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+/* ===== HERO SECTION SPACING ===== */
+
+.hero {
+    padding-top: 5.5rem; /* Space below fixed navbar */
+    padding-bottom: 3rem;
+    padding-inline: calc(1rem + env(safe-area-inset-left, 0px));
+    padding-inline-end: calc(1rem + env(safe-area-inset-right, 0px));
+    min-height: 100vh; /* Prevent layout shift after loader */
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding-top: 5rem;
+        padding-bottom: 2.5rem;
+        min-height: 100vh;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 600px) {
+    .hero {
+        padding-top: 5.25rem;
+        padding-inline: calc(1.25rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(1.25rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    .hero {
+        padding-inline: calc(1.5rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(1.5rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+        padding-inline: calc(2rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(2rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+@media (min-width: 1025px) {
+    .hero {
+        padding-top: 6.5rem;
+        padding-bottom: 4.5rem;
+        padding-inline: calc(2.5rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(2.5rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+/* Hero container - constrained with breathing room */
+.hero-container {
+    max-width: var(--container-max, 1280px);
+    margin-inline: auto;
+    padding-inline: 0; /* Hero already has padding */
+    box-sizing: border-box;
+}
+
+/* ===== NAVBAR SPACING ===== */
+
+.navbar {
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: calc(1rem + env(safe-area-inset-left, 0px));
+    padding-inline-end: calc(1rem + env(safe-area-inset-right, 0px));
+}
+
+.nav-container {
+    max-width: var(--container-max, 1280px);
+    margin-inline: auto;
+    padding-inline: 0; /* Navbar already has padding */
+    box-sizing: border-box;
+}
+
+@media (min-width: 769px) {
+    .navbar {
+        padding-inline: calc(2rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(2rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+/* ===== FOOTER SPACING ===== */
+
+.footer {
+    width: 100%;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    padding-inline: calc(1rem + env(safe-area-inset-left, 0px));
+    padding-inline-end: calc(1rem + env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding-top: 2.5rem;
+        padding-bottom: 1.5rem;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .footer {
+        padding-inline: calc(1.5rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(1.5rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+@media (min-width: 769px) {
+    .footer {
+        padding-top: 4rem;
+        padding-bottom: 2.5rem;
+        padding-inline: calc(2rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(2rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+.footer__container {
+    max-width: var(--container-max, 1280px);
+    margin-inline: auto;
+    padding-inline: 0; /* Footer already has padding */
+    box-sizing: border-box;
+}
+
+/* ===== FOOTER COPYRIGHT SPACING ===== */
+
+.footer__copyright {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+    padding-inline: calc(0.5rem + env(safe-area-inset-left, 0px));
+    padding-inline-end: calc(0.5rem + env(safe-area-inset-right, 0px));
+}
+
+@media (max-width: 480px) {
+    .footer__copyright {
+        padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+/* ===== CONTENT AREAS ===== */
+
+/* About section content */
+.about-content {
+    max-width: 100%;
+    margin-inline: auto;
+}
+
+/* Projects section */
+.projects-grid,
+.card-grid {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 0; /* Parent section handles padding */
+}
+
+/* Skills section */
+.skills-grid {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 0;
+}
+
+/* ===== PREVENT HORIZONTAL OVERFLOW ===== */
+
+/* Images and media */
+img,
+video,
+iframe,
+embed,
+object {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Pre-formatted text */
+pre,
+code {
+    max-width: 100%;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+
+/* Tables */
+table {
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
+/* Cards and containers */
+.card,
+.project-card,
+.service-card,
+.skill-card {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* ===== MOBILE SAFE AREAS (iOS notch support) ===== */
+
+/* Top safe area for fixed navbar */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .navbar {
+        padding-top: max(1rem, env(safe-area-inset-top));
+    }
+}
+
+/* Bottom safe area for footer and floating elements */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .footer {
+        padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    }
+    
+    .fab-message {
+        bottom: max(1.5rem, calc(1.5rem + env(safe-area-inset-bottom)));
+    }
+}
+
+/* ===== VERTICAL RHYTHM ===== */
+
+/* Consistent vertical spacing between sections */
+section + section {
+    margin-top: 0;
+}
+
+/* Ensure hero doesn't touch navbar */
+.hero {
+    margin-top: 0;
+}
+
+/* Add breathing room after hero */
+.hero + section {
+    padding-top: 4rem;
+}
+
+@media (max-width: 768px) {
+    .hero + section {
+        padding-top: 3rem;
+    }
+}
+
+/* ===== FULL-WIDTH BACKGROUNDS ===== */
+
+/* Allow backgrounds to be full-width while content is constrained */
+.hero::before,
+.footer::before,
+section::before {
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Remove padding for specific full-width elements */
+.full-width {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-inline: 0;
+}
+
+/* Centered content with max-width */
+.centered-content {
+    max-width: min(100%, 1280px);
+    margin-inline: auto;
+}
+
+/* Constrained readable content width */
+.readable-width {
+    max-width: min(100%, 65ch);
+    margin-inline: auto;
+}
+
+/* ===== GRID AND FLEX LAYOUTS ===== */
+
+/* Ensure grid and flex don't cause overflow */
+.grid,
+.flex {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Grid gaps respect screen size */
+.grid {
+    gap: clamp(1rem, 3vw, 2rem);
+}
+
+@media (max-width: 480px) {
+    .grid {
+        gap: 1rem;
+    }
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+
+/* Very small screens (≤360px) */
+@media (max-width: 360px) {
+    .container,
+    section,
+    .hero,
+    .footer {
+        padding-inline: calc(0.875rem + env(safe-area-inset-left, 0px));
+        padding-inline-end: calc(0.875rem + env(safe-area-inset-right, 0px));
+    }
+}
+
+/* Large desktop (≥1440px) - prevent excessive margins */
+@media (min-width: 1440px) {
+    .container,
+    .hero-container,
+    .footer__container {
+        max-width: 1400px;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+    body,
+    section,
+    .container {
+        padding-inline: 1cm;
+    }
+}

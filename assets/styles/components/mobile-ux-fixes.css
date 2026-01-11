@@ -1,0 +1,665 @@
+/**
+ * Mobile-First UX Fixes
+ * Comprehensive responsive fixes for mobile, tablet, and desktop
+ * Baseline: 360-390px mobile viewport
+ */
+
+/* ===== ACCESSIBILITY UTILITIES ===== */
+
+/* Screen reader only class */
+.sr-only,
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Skip to main content - hidden by default, visible on focus */
+.skip-to-main {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 9999;
+    padding: 1rem 1.5rem;
+    background-color: var(--primary-color);
+    color: var(--bg-primary);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+.skip-to-main:focus {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 1rem;
+}
+
+/* ===== NAVIGATION FIXES ===== */
+
+/* Ensure navbar doesn't cause horizontal scroll */
+.navbar {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.nav-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: 0; /* Navbar already has padding from global layout */
+}
+
+/* Logo section - prevent duplication */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0; /* Allow flex shrinking */
+}
+
+.logo-text {
+    white-space: nowrap;
+}
+
+/* Mobile navigation improvements */
+@media (max-width: 768px) {
+    /* Ensure logo scales on very small screens */
+    .logo-img {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .logo-text {
+        font-size: 1.1rem;
+    }
+    
+    /* Hamburger menu - ensure proper tap target */
+    .nav-toggle {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+/* ===== HERO SECTION FIXES ===== */
+
+.hero {
+    min-height: auto;
+}
+
+.hero-container {
+    max-width: 100%;
+}
+
+.hero-content {
+    gap: 2rem;
+}
+
+/* Hero headline - natural wrapping */
+.hero-title {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Hero tagline - responsive stacking */
+.professional-tagline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    margin-bottom: 1.5rem;
+}
+
+.tagline-highlight {
+    white-space: nowrap;
+}
+
+.tagline-separator {
+    color: var(--primary-color);
+    opacity: 0.5;
+}
+
+/* Stack taglines vertically on mobile */
+@media (max-width: 480px) {
+    .professional-tagline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .tagline-separator {
+        display: none;
+    }
+}
+
+/* Hero description - constrain width */
+.hero-description {
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: clamp(0.95rem, 2vw, 1.125rem);
+}
+
+@media (max-width: 768px) {
+    .hero-description {
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* CTA Buttons - proper spacing and stacking with accessibility */
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Ensure minimum 44x44px touch targets on all devices */
+.hero-buttons .btn {
+    min-height: 44px;
+    min-width: 120px;
+    padding: 0.875rem 1.75rem;
+}
+
+@media (max-width: 480px) {
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem; /* 12px vertical spacing between buttons */
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+        min-height: 48px; /* Larger touch target on mobile */
+    }
+}
+
+/* Resume button - icon and text alignment */
+.btn-resume {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.btn-resume i {
+    font-size: 1em;
+}
+
+.btn-resume span {
+    display: inline;
+}
+
+/* ===== TERMINAL BLOCK FIXES ===== */
+
+.hacker-terminal-container {
+    margin: 2rem 0;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+#hacker-terminal {
+    min-height: 150px;
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    padding: 1rem;
+    word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    #hacker-terminal {
+        max-height: 200px;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hacker-terminal-container {
+        margin: 1.5rem 0;
+    }
+    
+    #hacker-terminal {
+        max-height: 180px;
+        font-size: 0.875rem;
+        line-height: 1.8;
+    }
+}
+
+/* ===== PARAGRAPH READABILITY ===== */
+
+.hero-text p,
+.footer__section p,
+.about-section p {
+    max-width: 65ch;
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .hero-text p,
+    .footer__section p,
+    .about-section p {
+        max-width: 100%;
+        line-height: 1.8;
+    }
+}
+
+/* ===== FOOTER FIXES ===== */
+
+.footer__container {
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Footer logo section */
+.footer__logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.footer__logo img {
+    height: 40px;
+    width: 40px;
+}
+
+.footer-brand-name {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+    font-weight: 700;
+}
+
+/* Social icons - better spacing and tap targets */
+.footer__social {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.footer__social a {
+    min-width: 44px;
+    min-height: 44px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+@media (max-width: 480px) {
+    .footer__social {
+        gap: 1.25rem;
+    }
+    
+    .footer__social a {
+        width: 52px;
+        height: 52px;
+        font-size: 1.4rem;
+    }
+}
+
+/* Quick Links - improved spacing */
+.footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .footer__links {
+        gap: 1.25rem;
+    }
+}
+
+.footer__links a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+/* Technical Focus vs Quick Links - visual differentiation */
+.footer__section:nth-child(3) h3 {
+    color: var(--secondary-color);
+}
+
+.footer__section:nth-child(3) .footer__links a i {
+    color: var(--secondary-color);
+}
+
+.footer__section:nth-child(3) h3::after {
+    background: linear-gradient(90deg, var(--secondary-color), transparent);
+}
+
+/* Footer copyright - prevent awkward wrapping */
+.footer__copyright {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 234, 255, 0.1);
+    text-align: center;
+}
+
+.footer__copyright-text {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.footer__copyright-text #current-year {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Footer actions - clear button styling */
+.footer__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0;
+}
+
+.footer-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    min-height: 44px;
+    min-width: 44px;
+    background: rgba(0, 234, 255, 0.1);
+    border: 1px solid rgba(0, 234, 255, 0.3);
+    border-radius: 6px;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.footer-action-btn:hover {
+    background: rgba(0, 234, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 234, 255, 0.3);
+}
+
+.footer-action-btn i {
+    font-size: 1rem;
+}
+
+/* System state toggle button (dynamically added via JS) */
+.system-status-indicator,
+.system-state-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    min-height: 44px;
+    min-width: 44px;
+    background: rgba(94, 255, 161, 0.1);
+    border: 1px solid rgba(94, 255, 161, 0.3);
+    border-radius: 6px;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.system-status-indicator:hover,
+.system-state-toggle:hover {
+    background: rgba(94, 255, 161, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(94, 255, 161, 0.3);
+}
+
+.system-status-indicator i,
+.system-state-toggle i {
+    font-size: 1rem;
+}
+
+/* When system state toggle is in footer (via JS insertion) */
+.footer__copyright-text .system-state-toggle,
+.footer__copyright-text .system-status-indicator,
+.footer__copyright-text .in-footer {
+    margin-left: 1rem;
+    vertical-align: middle;
+}
+
+@media (max-width: 480px) {
+    .footer__copyright-text {
+        flex-direction: column;
+        gap: 0.25rem;
+        font-size: 0.85rem;
+    }
+    
+    .footer__actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+    }
+    
+    .footer-action-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.85rem;
+        padding: 0.875rem 1rem;
+    }
+}
+
+/* ===== FLOATING ACTION BUTTON FIXES ===== */
+
+.fab-message {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .fab-message {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 56px;
+        height: 56px;
+    }
+}
+
+@media (max-width: 480px) {
+    .fab-message {
+        bottom: 1rem;
+        right: 1rem;
+        width: 52px;
+        height: 52px;
+    }
+}
+
+/* Ensure FAB doesn't overlap with footer on small screens */
+@media (max-height: 600px) {
+    .fab-message {
+        bottom: 1rem;
+    }
+}
+
+/* ===== HEADING HIERARCHY ===== */
+
+h1 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    line-height: 1.4;
+    margin-bottom: 0.875rem;
+}
+
+h4 {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+}
+
+/* Ensure visual hierarchy */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+h1 {
+    font-weight: 800;
+}
+
+h2 {
+    font-weight: 700;
+}
+
+h3 {
+    font-weight: 600;
+}
+
+/* ===== PREVENT HORIZONTAL SCROLL ===== */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ===== TOUCH IMPROVEMENTS ===== */
+
+/* Minimum tap target size for all interactive elements */
+button,
+a,
+input,
+textarea,
+select {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Exception for inline text links */
+p a,
+li a:not(.btn) {
+    min-height: auto;
+    min-width: auto;
+}
+
+/* ===== MOBILE-SPECIFIC IMPROVEMENTS ===== */
+
+@media (max-width: 480px) {
+    /* Reduce overall padding for tiny screens */
+    .hero {
+        padding: 4rem 0.75rem 2rem;
+    }
+    
+    .heBetter spacing for sections */
+    section {
+        padding-block: 2
+@media (max-width: 390px) {
+    .hero-title {
+        font-size: 1.75rem;
+    }
+    
+    .professional-tagline {
+        font-size: 0.95rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9rem;
+    }
+    
+    .footer__social a {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* ===== TABLET ADJUSTMENTS ===== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero-container {
+        padding: 0 2rem;
+    }
+    
+    .footer__container {
+        padding: 0 2rem;
+    }
+}
+
+/* ===== DESKTOP ENHANCEMENTS ===== */
+
+@media (min-width: 1025px) {
+    .hero {
+        padding: 6rem 2rem 4rem;
+    }
+    
+    .hero-buttons {
+        gap: 1.5rem;
+    }
+    
+    /* Tablet-specific adjustments if needed */
