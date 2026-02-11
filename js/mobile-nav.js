@@ -6,15 +6,25 @@
 (function() {
     'use strict';
 
-    // DOM Elements
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    if (!navToggle || !navMenu) {
-        // Mobile nav elements not found - disabled
-        return;
-    }
+    function initMobileNav() {
+        // DOM Elements
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        if (!navToggle || !navMenu) {
+            // Mobile nav elements not found - disabled
+            return;
+        }
+
+        // Ensure toggle button is not treated as a submit button
+        if (!navToggle.getAttribute('type')) {
+            navToggle.setAttribute('type', 'button');
+        }
+
+        // Set initial ARIA state for accessibility
+        navToggle.setAttribute('aria-expanded', 'false');
+        navMenu.setAttribute('aria-hidden', 'true');
 
     /**
      * Toggle mobile menu
@@ -32,7 +42,12 @@
         navMenu.setAttribute('aria-hidden', isActive);
         navLinks.forEach(link => {
             link.tabIndex = !isActive ? 0 : -1;
+            // Ensure pointer events work on nav links
+            link.style.pointerEvents = !isActive ? 'auto' : 'auto';
         });
+        
+        // Enable pointer events on nav menu when active
+        navMenu.style.pointerEvents = !isActive ? 'auto' : 'auto';
         
         // Prevent body scroll when menu is open
         document.body.style.overflow = !isActive ? 'hidden' : '';
@@ -50,7 +65,12 @@
         navMenu.setAttribute('aria-hidden', 'true');
         navLinks.forEach(link => {
             link.tabIndex = -1;
+            // Ensure pointer events always work
+            link.style.pointerEvents = 'auto';
         });
+        
+        // Keep pointer events enabled on nav menu
+        navMenu.style.pointerEvents = 'auto';
         
         document.body.style.overflow = '';
     }
@@ -81,50 +101,69 @@
         });
     }
 
-    // Toggle menu on hamburger click
-    navToggle.addEventListener('click', toggleMenu);
-    
-    // Handle keyboard activation (Enter/Space)
-    navToggle.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleMenu();
-        }
-    });
+        // Toggle menu on hamburger click
+        navToggle.addEventListener('click', toggleMenu);
 
-    // Handle nav link clicks - update active state and close menu
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            // Remove active class from all links
-            navLinks.forEach(l => l.classList.remove('active'));
-            
-            // Add active class to clicked link (unless it's a download link)
-            if (!link.hasAttribute('download')) {
-                link.classList.add('active');
+        // Handle keyboard activation (Enter/Space)
+        navToggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleMenu();
             }
-            
-            // Close mobile menu
-            closeMenu();
         });
-    });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        const isClickInside = navMenu.contains(e.target) || navToggle.contains(e.target);
-        if (!isClickInside && navMenu.classList.contains('active')) {
-            closeMenu();
+        // Handle nav link clicks - update active state and close menu
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Remove active class from all links
+                navLinks.forEach(l => l.classList.remove('active'));
+
+                // Add active class to clicked link (unless it's a download link)
+                if (!link.hasAttribute('download')) {
+                    link.classList.add('active');
+                }
+
+                // Close mobile menu
+                closeMenu();
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const isClickInside = navMenu.contains(e.target) || navToggle.contains(e.target);
+            if (!isClickInside && navMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        // Navbar scroll state
+        const navbar = document.querySelector('.navbar');
+        if (navbar) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
         }
-    });
 
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-            closeMenu();
-        }
-    });
+        // Set active link on page load
+        setActiveLink();
+    }
 
-    // Set active link on page load
-    setActiveLink();
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileNav);
+    } else {
+        initMobileNav();
+    }
 
     // Production: Console logging disabled
 })();

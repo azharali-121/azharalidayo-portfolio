@@ -138,6 +138,12 @@
     height: 21px;
     cursor: pointer;
     z-index: 901; /* Slightly above nav-menu (900) for accessibility */
+    background: transparent;
+    border: none;
+    padding: 8px 4px;
+    pointer-events: auto;
+    min-height: 44px;
+    min-width: 44px;
 }
 
 .nav-toggle .bar {
@@ -178,16 +184,19 @@
         z-index: 900; /* Reduced from 998 to ensure forms/buttons remain accessible */
         box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
         border-left: 1px solid rgba(224, 230, 245, 0.08);
+        pointer-events: auto; /* Ensure menu is always clickable when active */
     }
     
     .nav-menu.active {
         right: 0;
+        pointer-events: auto;
     }
     
     .nav-link {
         display: block;
         padding: 0.8rem 0;
         font-size: 1.1rem;
+        pointer-events: auto; /* Ensure links are always clickable */
     }
     
     .nav-link:hover,

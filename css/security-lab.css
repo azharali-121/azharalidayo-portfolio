@@ -35,8 +35,10 @@
     z-index: 999 !important; /* Match main.min.css */
     background: transparent;
     border: none;
-    padding: 0;
-    position: relative;
+    padding: 8px 4px;
+    pointer-events: auto;
+    min-height: 44px;
+    min-width: 44px;
 }
 
 .nav-toggle .bar {
@@ -106,10 +108,12 @@
         /* Hardware acceleration */
         will-change: transform;
         transform: translateZ(0);
+        pointer-events: auto; /* Ensure menu is always clickable */
     }
     
     .navbar .nav-menu.active {
         right: 0;
+        pointer-events: auto;
     }
     
     .navbar .nav-menu li {
@@ -136,6 +140,7 @@
         padding: 0.75rem 1.5rem;
         display: block;
         transition: all 0.3s ease;
+        pointer-events: auto; /* Ensure links are always clickable */
     }
     
     .navbar .nav-link:hover,
